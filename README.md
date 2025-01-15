@@ -34,6 +34,13 @@ Welcome to Vantas Developer Hub, the official hub for all the resources you need
 
 - [Documentation]( https://developer.vanta.com/docs/vanta-api-overview)
 
+## Common Properties
+
+- [Portal](https://developer.vanta.com/docs/vanta-api-overview)
+- [PostmanCollection](https://developer.vanta.com/docs/vanta-postman-setup)
+- [Authentication](https://developer.vanta.com/docs/api-access-setup)
+- [FAQ](https://developer.vanta.com/docs/faq)
+
 ## Maintainers
 
 **FN:** Kin Lane
