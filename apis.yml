@@ -3,8 +3,7 @@ url: https://raw.githubusercontent.com/api-search/vanta/refs/heads/main/apis.yml
 apis:
   - aid: vanta:vanta
     name: Vanta
-    tags:
-      - API
+    tags: []
     humanURL: ' https://developer.vanta.com/docs/vanta-api-overview'
     properties:
       - url: ' https://developer.vanta.com/docs/vanta-api-overview'
@@ -19,8 +18,8 @@ apis:
       applications.
 name: Vanta
 tags:
-  - Privacy
   - Cybersecurity
+  - Privacy
   - Security
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
