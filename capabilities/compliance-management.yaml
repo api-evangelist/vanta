@@ -1,0 +1,380 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vanta Compliance Management"
+  description: >-
+    Unified compliance management workflow combining Vanta's vulnerability tracking,
+    control monitoring, framework oversight, and vendor security reviews. Designed for
+    compliance managers and security engineers managing SOC 2, ISO 27001, HIPAA, PCI DSS,
+    and GDPR programs.
+  tags:
+    - Vanta
+    - Compliance
+    - Cybersecurity
+    - Governance
+    - Risk Management
+    - SOC 2
+    - ISO 27001
+    - HIPAA
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VANTA_ACCESS_TOKEN: VANTA_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - import: vanta
+      location: ./shared/vanta-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vanta-compliance-api
+      description: "Unified REST API for Vanta compliance management workflows."
+      resources:
+        - path: /v1/frameworks
+          name: frameworks
+          description: "Compliance framework status and management"
+          operations:
+            - method: GET
+              name: list-frameworks
+              description: "List all configured compliance frameworks and their readiness"
+              call: "vanta.list-frameworks"
+              with:
+                pageSize: "rest.pageSize"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/controls
+          name: controls
+          description: "Compliance controls oversight"
+          operations:
+            - method: GET
+              name: list-controls
+              description: "Query controls with status and framework filters"
+              call: "vanta.list-controls"
+              with:
+                frameworkId: "rest.frameworkId"
+                status: "rest.status"
+                pageSize: "rest.pageSize"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tests
+          name: tests
+          description: "Automated compliance test results"
+          operations:
+            - method: GET
+              name: list-tests
+              description: "Query automated test results for compliance evidence"
+              call: "vanta.list-tests"
+              with:
+                status: "rest.status"
+                frameworkId: "rest.frameworkId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/vulnerabilities
+          name: vulnerabilities
+          description: "Vulnerability tracking and remediation management"
+          operations:
+            - method: GET
+              name: list-vulnerabilities
+              description: "List vulnerabilities with severity and SLA filters"
+              call: "vanta.list-vulnerabilities"
+              with:
+                severity: "rest.severity"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/vendors
+          name: vendors
+          description: "Third-party vendor security reviews"
+          operations:
+            - method: GET
+              name: list-vendors
+              description: "List vendors and security review status"
+              call: "vanta.list-vendors"
+              with:
+                riskLevel: "rest.riskLevel"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-vendor
+              description: "Add a new vendor for security review"
+              call: "vanta.create-vendor"
+              with:
+                name: "rest.name"
+                url: "rest.url"
+                riskLevel: "rest.riskLevel"
+                description: "rest.description"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/vendors/{id}
+          name: vendor-detail
+          description: "Individual vendor management"
+          operations:
+            - method: GET
+              name: get-vendor
+              description: "Get vendor details and security review status"
+              call: "vanta.get-vendor"
+              with:
+                vendorId: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PATCH
+              name: update-vendor
+              description: "Update vendor risk level and review status"
+              call: "vanta.update-vendor"
+              with:
+                vendorId: "rest.id"
+                riskLevel: "rest.riskLevel"
+                reviewStatus: "rest.reviewStatus"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/documents
+          name: documents
+          description: "Compliance evidence document management"
+          operations:
+            - method: GET
+              name: list-documents
+              description: "List compliance evidence documents"
+              call: "vanta.list-documents"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: upload-document
+              description: "Upload compliance evidence document"
+              call: "vanta.upload-document"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/people
+          name: people
+          description: "Personnel security task tracking"
+          operations:
+            - method: GET
+              name: list-people
+              description: "List people with security task and training status"
+              call: "vanta.list-people"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/computers
+          name: computers
+          description: "Endpoint device compliance monitoring"
+          operations:
+            - method: GET
+              name: list-computers
+              description: "List monitored computers and compliance status"
+              call: "vanta.list-computers"
+              with:
+                complianceStatus: "rest.complianceStatus"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/integrations
+          name: integrations
+          description: "Integration status monitoring"
+          operations:
+            - method: GET
+              name: list-integrations
+              description: "List configured integrations and connection status"
+              call: "vanta.list-integrations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vanta-compliance-mcp
+      transport: http
+      description: "MCP server for AI-assisted compliance management and security posture monitoring."
+      tools:
+        - name: list-frameworks
+          description: "List compliance frameworks (SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR) and their readiness status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-frameworks"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-controls
+          description: "Query compliance controls with optional framework and status filters to identify gaps"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-controls"
+          with:
+            frameworkId: "tools.frameworkId"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-failing-controls
+          description: "Get all FAILING controls to prioritize remediation efforts"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-controls"
+          with:
+            status: "FAILING"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-tests
+          description: "Query automated compliance test results to identify evidence gaps"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-tests"
+          with:
+            status: "tools.status"
+            frameworkId: "tools.frameworkId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-vulnerabilities
+          description: "List security vulnerabilities with severity and remediation status filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-vulnerabilities"
+          with:
+            severity: "tools.severity"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-critical-vulnerabilities
+          description: "Get all CRITICAL severity open vulnerabilities for immediate remediation"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-vulnerabilities"
+          with:
+            severity: "CRITICAL"
+            status: "OPEN"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-vendors
+          description: "Query third-party vendors and their security review status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-vendors"
+          with:
+            riskLevel: "tools.riskLevel"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-vendor
+          description: "Add a new third-party vendor to Vanta for security review tracking"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "vanta.create-vendor"
+          with:
+            name: "tools.name"
+            url: "tools.url"
+            riskLevel: "tools.riskLevel"
+            description: "tools.description"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-vendor
+          description: "Get detailed information about a specific vendor's security review"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.get-vendor"
+          with:
+            vendorId: "tools.vendorId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: update-vendor-review
+          description: "Update a vendor's risk level or review status after security assessment"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "vanta.update-vendor"
+          with:
+            vendorId: "tools.vendorId"
+            riskLevel: "tools.riskLevel"
+            reviewStatus: "tools.reviewStatus"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-people
+          description: "List personnel with security training completion and overdue task status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-people"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-non-compliant-computers
+          description: "List endpoint devices that are failing compliance checks"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-computers"
+          with:
+            complianceStatus: "NON_COMPLIANT"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-integrations
+          description: "List all configured integrations and their connection health"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-integrations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-documents
+          description: "List compliance evidence documents uploaded to Vanta"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vanta.list-documents"
+          outputParameters:
+            - type: object
+              mapping: "$."

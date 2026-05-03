@@ -1,0 +1,16 @@
+{
+  "name": "Vendor",
+  "description": "Third-party vendor security review in Vanta",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique identifier" },
+    { "name": "name", "type": "string", "required": true, "description": "Vendor company name" },
+    { "name": "url", "type": "uri", "required": false, "description": "Vendor website" },
+    { "name": "riskLevel", "type": "enum", "required": true, "values": ["CRITICAL", "HIGH", "MEDIUM", "LOW"], "description": "Inherent risk level" },
+    { "name": "residualRiskLevel", "type": "enum", "required": false, "values": ["CRITICAL", "HIGH", "MEDIUM", "LOW"], "description": "Residual risk level" },
+    { "name": "reviewStatus", "type": "enum", "required": true, "values": ["NOT_STARTED", "IN_PROGRESS", "APPROVED", "REJECTED"], "description": "Review status" },
+    { "name": "hasContract", "type": "boolean", "required": true, "description": "Contract exists" },
+    { "name": "hasDpa", "type": "boolean", "required": true, "description": "DPA exists" },
+    { "name": "createdAt", "type": "date-time", "required": true, "description": "Added timestamp" },
+    { "name": "nextReviewDate", "type": "date", "required": false, "description": "Next review date" }
+  ]
+}

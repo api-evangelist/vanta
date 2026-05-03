@@ -1,0 +1,139 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "vanta": "https://api.vanta.com/v1/",
+
+    "Vulnerability": {
+      "@id": "vanta:Vulnerability",
+      "@type": "@id"
+    },
+    "Control": {
+      "@id": "vanta:Control",
+      "@type": "@id"
+    },
+    "Framework": {
+      "@id": "vanta:Framework",
+      "@type": "@id"
+    },
+    "Vendor": {
+      "@id": "vanta:Vendor",
+      "@type": "@id"
+    },
+    "Person": {
+      "@id": "vanta:Person",
+      "@type": "@id",
+      "@context": "https://schema.org/Person"
+    },
+    "Computer": {
+      "@id": "vanta:Computer",
+      "@type": "@id"
+    },
+
+    "id": "@id",
+    "title": "schema:name",
+    "description": "schema:description",
+    "name": "schema:name",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "discoveredAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "remediatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "nextReviewDate": {
+      "@id": "schema:expires",
+      "@type": "xsd:date"
+    },
+
+    "severity": "vanta:severity",
+    "status": "vanta:status",
+    "cvssScore": "vanta:cvssScore",
+    "cveId": "vanta:cveId",
+    "remediationSlaDate": {
+      "@id": "vanta:remediationSlaDate",
+      "@type": "xsd:dateTime"
+    },
+    "affectedResources": {
+      "@id": "vanta:affectedResources",
+      "@container": "@list"
+    },
+
+    "riskLevel": "vanta:riskLevel",
+    "residualRiskLevel": "vanta:residualRiskLevel",
+    "reviewStatus": "vanta:reviewStatus",
+    "hasContract": {
+      "@id": "vanta:hasContract",
+      "@type": "xsd:boolean"
+    },
+    "hasDpa": {
+      "@id": "vanta:hasDpa",
+      "@type": "xsd:boolean"
+    },
+
+    "frameworkId": {
+      "@id": "vanta:framework",
+      "@type": "@id"
+    },
+    "ownerId": {
+      "@id": "schema:accountablePerson",
+      "@type": "@id"
+    },
+    "testCount": {
+      "@id": "vanta:testCount",
+      "@type": "xsd:integer"
+    },
+    "passingTestCount": {
+      "@id": "vanta:passingTestCount",
+      "@type": "xsd:integer"
+    },
+
+    "employmentStatus": "vanta:employmentStatus",
+    "securityTasksOverdue": {
+      "@id": "vanta:securityTasksOverdue",
+      "@type": "xsd:integer"
+    },
+    "trainingCompleted": {
+      "@id": "vanta:trainingCompleted",
+      "@type": "xsd:boolean"
+    },
+    "backgroundCheckCompleted": {
+      "@id": "vanta:backgroundCheckCompleted",
+      "@type": "xsd:boolean"
+    },
+
+    "hostname": "vanta:hostname",
+    "osName": "vanta:osName",
+    "osVersion": "vanta:osVersion",
+    "screenlockEnabled": {
+      "@id": "vanta:screenlockEnabled",
+      "@type": "xsd:boolean"
+    },
+    "diskEncryptionEnabled": {
+      "@id": "vanta:diskEncryptionEnabled",
+      "@type": "xsd:boolean"
+    },
+    "antivirusInstalled": {
+      "@id": "vanta:antivirusInstalled",
+      "@type": "xsd:boolean"
+    },
+    "passwordManagerInstalled": {
+      "@id": "vanta:passwordManagerInstalled",
+      "@type": "xsd:boolean"
+    },
+    "isCompliant": {
+      "@id": "vanta:isCompliant",
+      "@type": "xsd:boolean"
+    }
+  }
+}

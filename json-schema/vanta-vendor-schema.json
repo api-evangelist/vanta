@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vanta/main/json-schema/vanta-vendor-schema.json",
+  "title": "Vanta Vendor",
+  "description": "A third-party vendor tracked in the Vanta compliance platform for security review",
+  "type": "object",
+  "required": ["id", "name", "riskLevel", "reviewStatus"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique vendor identifier assigned by Vanta"
+    },
+    "name": {
+      "type": "string",
+      "description": "Vendor company name"
+    },
+    "url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Vendor website URL"
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+      "description": "Inherent risk level based on data access and criticality"
+    },
+    "residualRiskLevel": {
+      "type": ["string", "null"],
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", null],
+      "description": "Residual risk level after security controls are applied"
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": ["NOT_STARTED", "IN_PROGRESS", "APPROVED", "REJECTED"],
+      "description": "Current security review status"
+    },
+    "hasContract": {
+      "type": "boolean",
+      "description": "Whether a signed contract exists with this vendor"
+    },
+    "hasDpa": {
+      "type": "boolean",
+      "description": "Whether a Data Processing Agreement (DPA) exists"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this vendor was added to Vanta"
+    },
+    "nextReviewDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of the next scheduled security review"
+    }
+  },
+  "additionalProperties": false
+}

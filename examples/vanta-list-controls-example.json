@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.vanta.com/v1/controls",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    },
+    "queryParameters": {
+      "frameworkId": "soc2_type2",
+      "status": "FAILING",
+      "pageSize": 5
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "ctrl_01HZ4K2X8QA7BN3CONTROL1",
+          "name": "Access Control Policy",
+          "description": "The organization has implemented access control policies that restrict access to systems and data based on business need and least privilege principles.",
+          "status": "FAILING",
+          "frameworkId": "soc2_type2",
+          "ownerId": "usr_01HZ4K2X8QA7BN3OWNER1",
+          "testCount": 4,
+          "passingTestCount": 2
+        },
+        {
+          "id": "ctrl_01HZ4K2X8QA7BN3CONTROL2",
+          "name": "Vulnerability Management",
+          "description": "The organization identifies, tracks, and remediates security vulnerabilities in a timely manner according to defined SLAs.",
+          "status": "FAILING",
+          "frameworkId": "soc2_type2",
+          "ownerId": "usr_01HZ4K2X8QA7BN3OWNER2",
+          "testCount": 6,
+          "passingTestCount": 3
+        }
+      ],
+      "pageInfo": {
+        "pageSize": 5,
+        "nextPageCursor": "cursor_abc123",
+        "hasNextPage": true
+      }
+    }
+  }
+}

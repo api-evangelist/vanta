@@ -1,0 +1,93 @@
+extends: spectral:oas
+rules:
+  vanta-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"
+
+  vanta-operation-ids-present:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  vanta-paths-versioned:
+    description: All data paths must be versioned with /v1/ prefix
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\/v1\\/"
+
+  vanta-pagination-page-size:
+    description: List endpoints must support pageSize query parameter
+    severity: warn
+    given: "$.paths[*].get.parameters[?(@.name=='pageSize')]"
+    then:
+      field: schema.maximum
+      function: defined
+
+  vanta-responses-have-content:
+    description: Successful responses must define a content schema
+    severity: warn
+    given: "$.paths[*][*].responses.200"
+    then:
+      field: content
+      function: truthy
+
+  vanta-auth-documented:
+    description: All operations should document their security requirements
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  vanta-error-responses-defined:
+    description: All operations must define 401 Unauthorized response
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  vanta-request-body-for-post:
+    description: POST operations must have a request body
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  vanta-tags-singular-or-plural-consistent:
+    description: Operation tags must match defined tag list
+    severity: warn
+    given: "$.paths[*][*].tags[*]"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - Authentication
+          - Users
+          - Vulnerabilities
+          - Controls
+          - Tests
+          - Documents
+          - Vendors
+          - Resources
+          - Integrations
+
+  vanta-path-params-in-path:
+    description: Path parameters must be defined in the path segment
+    severity: error
+    given: "$.paths[*][*].parameters[?(@.in=='path')]"
+    then:
+      field: required
+      function: truthy

@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.vanta.com/v1/computers",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    },
+    "queryParameters": {
+      "complianceStatus": "NON_COMPLIANT",
+      "pageSize": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "cmp_01HZ4K2X8QA7BN3COMP1",
+          "hostname": "mbp-john-doe.local",
+          "osName": "macOS",
+          "osVersion": "14.4.1",
+          "userId": "usr_01HZ4K2X8QA7BN3USR1",
+          "screenlockEnabled": true,
+          "diskEncryptionEnabled": false,
+          "antivirusInstalled": true,
+          "passwordManagerInstalled": false,
+          "isCompliant": false,
+          "lastCheckedAt": "2026-05-03T06:00:00Z"
+        },
+        {
+          "id": "cmp_01HZ4K2X8QA7BN3COMP2",
+          "hostname": "win11-jane-smith.corp",
+          "osName": "Windows",
+          "osVersion": "11 23H2",
+          "userId": "usr_01HZ4K2X8QA7BN3USR2",
+          "screenlockEnabled": true,
+          "diskEncryptionEnabled": true,
+          "antivirusInstalled": false,
+          "passwordManagerInstalled": true,
+          "isCompliant": false,
+          "lastCheckedAt": "2026-05-03T07:30:00Z"
+        }
+      ],
+      "pageInfo": {
+        "pageSize": 10,
+        "nextPageCursor": null,
+        "hasNextPage": false
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+vocabulary:
+  name: Vanta Compliance Vocabulary
+  description: >-
+    Domain vocabulary for the Vanta trust management and compliance automation platform.
+    Covers security compliance frameworks, vulnerability management, control oversight,
+    vendor risk management, and personnel security.
+  version: "2026-05"
+  domain: Cybersecurity Compliance
+  tags:
+    - Compliance
+    - Cybersecurity
+    - Security
+    - Governance
+    - Risk Management
+
+terms:
+  - term: Framework
+    definition: >-
+      A security compliance standard that organizations certify against, such as SOC 2,
+      ISO 27001, HIPAA, PCI DSS, or GDPR. Frameworks consist of controls that must
+      be implemented and continuously monitored.
+    related:
+      - Control
+      - Audit
+      - Certification
+
+  - term: Control
+    definition: >-
+      A specific security requirement within a compliance framework. Controls describe
+      what security practice must be in place (e.g., access control policy, encryption
+      at rest). Vanta automates testing of controls via integrations.
+    related:
+      - Framework
+      - Test
+      - Evidence
+
+  - term: Test
+    definition: >-
+      An automated check that verifies a control is implemented correctly. Tests run
+      continuously against integrated systems and return PASS, FAIL, DISABLED, or NA status.
+    related:
+      - Control
+      - Evidence
+
+  - term: Evidence
+    definition: >-
+      Documentation proving a control is in place. Evidence can be automatically collected
+      by Vanta integrations or manually uploaded as documents. Auditors review evidence
+      during compliance audits.
+    related:
+      - Control
+      - Document
+      - Audit
+
+  - term: Vulnerability
+    definition: >-
+      A security weakness in software, configuration, or infrastructure that could be
+      exploited. Vanta tracks vulnerabilities discovered by integrated scanners, assigns
+      severity levels, and monitors SLA-based remediation deadlines.
+    related:
+      - Severity
+      - CVE
+      - Remediation
+      - SLA
+
+  - term: Severity
+    definition: >-
+      Classification of a vulnerability's potential impact: CRITICAL, HIGH, MEDIUM,
+      LOW, or INFORMATIONAL. Typically derived from CVSS scoring.
+    values:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFORMATIONAL
+
+  - term: CVE
+    definition: >-
+      Common Vulnerabilities and Exposures — the industry-standard identifier for publicly
+      known security vulnerabilities (e.g., CVE-2024-0727). Vanta links tracked
+      vulnerabilities to their CVE identifiers where applicable.
+    abbreviation: Common Vulnerabilities and Exposures
+
+  - term: CVSS
+    definition: >-
+      Common Vulnerability Scoring System — a numeric score (0-10) measuring vulnerability
+      severity. CVSS 7.0-8.9 = High, 9.0-10.0 = Critical.
+    abbreviation: Common Vulnerability Scoring System
+
+  - term: SLA
+    definition: >-
+      Service Level Agreement — a remediation deadline by which a vulnerability must be
+      addressed. Vanta tracks SLA compliance and sends alerts for approaching deadlines.
+    abbreviation: Service Level Agreement
+
+  - term: Vendor
+    definition: >-
+      A third-party company that provides software or services to an organization.
+      Vanta tracks vendor risk levels, security review status, contract existence,
+      and Data Processing Agreements (DPAs) for compliance purposes.
+    related:
+      - Risk Level
+      - Security Review
+      - DPA
+
+  - term: Risk Level
+    definition: >-
+      Classification of a vendor's inherent risk based on data access, criticality,
+      and potential impact: CRITICAL, HIGH, MEDIUM, or LOW.
+    values:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+
+  - term: DPA
+    definition: >-
+      Data Processing Agreement — a contract between a data controller and data processor
+      required under GDPR and similar regulations. Vanta tracks whether DPAs exist
+      with each vendor that processes personal data.
+    abbreviation: Data Processing Agreement
+
+  - term: Audit
+    definition: >-
+      A formal examination of an organization's security controls by an independent
+      auditor. Vanta automates evidence collection and provides auditor access to
+      compliance data through the Auditor API.
+    related:
+      - Framework
+      - Evidence
+      - Auditor
+
+  - term: SOC 2
+    definition: >-
+      System and Organization Controls 2 — an auditing procedure developed by the AICPA
+      for service organizations. SOC 2 Type I assesses controls at a point in time;
+      Type II assesses effectiveness over a period (typically 6-12 months).
+    abbreviation: System and Organization Controls 2
+
+  - term: ISO 27001
+    definition: >-
+      International standard for information security management systems (ISMS). Requires
+      organizations to implement and maintain a comprehensive set of security controls
+      and undergo annual audits for certification.
+
+  - term: HIPAA
+    definition: >-
+      Health Insurance Portability and Accountability Act — US regulation governing
+      the privacy and security of protected health information (PHI). Requires
+      covered entities and business associates to implement specific safeguards.
+    abbreviation: Health Insurance Portability and Accountability Act
+
+  - term: PCI DSS
+    definition: >-
+      Payment Card Industry Data Security Standard — a set of security standards
+      required for organizations that handle credit card data. Enforced by the
+      major card brands (Visa, Mastercard, Amex, Discover).
+    abbreviation: Payment Card Industry Data Security Standard
+
+  - term: GDPR
+    definition: >-
+      General Data Protection Regulation — EU regulation governing personal data
+      privacy and protection. Requires documented controls, DPAs with processors,
+      breach notification within 72 hours, and data subject rights management.
+    abbreviation: General Data Protection Regulation
+
+  - term: Personnel
+    definition: >-
+      Employees and contractors whose security posture Vanta monitors. Vanta tracks
+      security training completion, background check status, security task completion,
+      and offboarding for personnel in scope.
+    related:
+      - Security Training
+      - Background Check
+
+  - term: Connector
+    definition: >-
+      A Vanta integration that pushes external data (vulnerabilities, resources, users)
+      into Vanta from systems not natively supported. Connectors use the Vanta API
+      to extend compliance monitoring to custom tools and workflows.
+    related:
+      - Integration
+
+  - term: Integration
+    definition: >-
+      A native connection between Vanta and a third-party tool (GitHub, AWS, GCP, Jira,
+      Okta, etc.) that automatically collects compliance evidence. Integrations run
+      continuously to keep compliance status up to date.
+    related:
+      - Connector
+
+  - term: Scope
+    definition: >-
+      The set of systems, people, and resources included in a compliance program.
+      Vanta allows organizations to define scope at the integration and resource level
+      to focus compliance monitoring on relevant assets.
+    related:
+      - Framework
+      - Resource
+
+  - term: Auditor API
+    definition: >-
+      A specialized Vanta API that gives external audit firms programmatic access to
+      a customer's compliance data including controls, evidence, vulnerabilities,
+      people, and vendors during an audit engagement.
+    related:
+      - Audit
+
+  - term: Trust Report
+    definition: >-
+      A public or private report generated by Vanta showing an organization's
+      compliance posture, certifications, and security controls. Used for vendor
+      security reviews and customer trust inquiries.

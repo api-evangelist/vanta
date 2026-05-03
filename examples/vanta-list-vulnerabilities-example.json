@@ -1,0 +1,58 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.vanta.com/v1/vulnerabilities",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    },
+    "queryParameters": {
+      "severity": "HIGH",
+      "status": "OPEN",
+      "pageSize": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "vuln_01HZ4K2X8QA7BN3WXYZA",
+          "title": "OpenSSL CVE-2024-0727 — PKCS12 NULL Pointer Dereference",
+          "description": "Processing a maliciously formatted PKCS12 file may lead OpenSSL to crash leading to a potential Denial of Service attack. This allows an attacker to crash the process if they can supply a maliciously crafted PKCS12 file.",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "cvssScore": 7.5,
+          "cveId": "CVE-2024-0727",
+          "remediationSlaDate": "2026-05-31T00:00:00Z",
+          "discoveredAt": "2026-04-15T10:32:00Z",
+          "remediatedAt": null,
+          "affectedResources": [
+            "res_01HZ4K2X8QA7BN3WXAB1",
+            "res_01HZ4K2X8QA7BN3WXAB2"
+          ]
+        },
+        {
+          "id": "vuln_01HZ4K2X8QA7BN3WXYZB",
+          "title": "Node.js HTTP2 Memory Exhaustion CVE-2024-21538",
+          "description": "Cross-site WebSocket hijacking vulnerability in Node.js http2 allows an attacker to cause memory exhaustion via crafted HTTP/2 requests.",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "cvssScore": 7.8,
+          "cveId": "CVE-2024-21538",
+          "remediationSlaDate": "2026-05-25T00:00:00Z",
+          "discoveredAt": "2026-04-10T08:15:00Z",
+          "remediatedAt": null,
+          "affectedResources": [
+            "res_01HZ4K2X8QA7BN3WXAB3"
+          ]
+        }
+      ],
+      "pageInfo": {
+        "pageSize": 10,
+        "nextPageCursor": null,
+        "hasNextPage": false
+      }
+    }
+  }
+}

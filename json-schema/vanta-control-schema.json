@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vanta/main/json-schema/vanta-control-schema.json",
+  "title": "Vanta Control",
+  "description": "A compliance control within a security framework tracked by Vanta",
+  "type": "object",
+  "required": ["id", "name", "status", "frameworkId"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique control identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Control name (e.g., Access Control Policy)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Control requirements and description"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PASSING", "FAILING", "NEEDS_ATTENTION", "NOT_APPLICABLE"],
+      "description": "Current control status based on automated test results"
+    },
+    "frameworkId": {
+      "type": "string",
+      "description": "Compliance framework this control belongs to (e.g., soc2_type2)"
+    },
+    "ownerId": {
+      "type": ["string", "null"],
+      "description": "User ID of the assigned control owner"
+    },
+    "testCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of automated tests for this control"
+    },
+    "passingTestCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of currently passing tests"
+    }
+  },
+  "additionalProperties": false
+}

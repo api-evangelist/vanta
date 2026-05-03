@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.vanta.com/v1/vendors",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "name": "Stripe, Inc.",
+      "url": "https://stripe.com",
+      "riskLevel": "HIGH",
+      "description": "Payment processing provider handling credit card transactions and PII. Used for subscription billing in production."
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "vnd_01HZ4K2X8QA7BN3VENDOR1",
+      "name": "Stripe, Inc.",
+      "url": "https://stripe.com",
+      "riskLevel": "HIGH",
+      "residualRiskLevel": null,
+      "reviewStatus": "NOT_STARTED",
+      "hasContract": false,
+      "hasDpa": false,
+      "createdAt": "2026-05-03T12:00:00Z",
+      "nextReviewDate": "2027-05-03"
+    }
+  }
+}
