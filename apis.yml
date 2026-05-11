@@ -111,7 +111,7 @@ common:
   - name: Control Set
     url: https://github.com/VantaInc/vanta-control-set
     type: Schema
-  - name: GitHub Integration
+  - name: GitHub
     url: https://www.vanta.com/integrations/github
     type: Integration
   - name: April 2026 Updates
