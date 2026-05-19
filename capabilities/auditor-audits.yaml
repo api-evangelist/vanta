@@ -1,0 +1,972 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Conduct an audit — Audits
+  description: 'Conduct an audit — Audits. 15 operations. Lead operation: List audits. Self-contained Naftiko capability covering
+    one Vanta business surface.'
+  tags:
+  - Vanta
+  - Audits
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: auditor-audits
+    baseUri: https://api.vanta.com/v1
+    description: Conduct an audit — Audits business capability. Self-contained, no shared references.
+    resources:
+    - name: audits
+      path: /audits
+      operations:
+      - name: listaudits
+        method: GET
+        description: List audits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: changedSinceDate
+          in: query
+          type: string
+          description: Includes all audits that have changed since changedSinceDate.
+        - name: isActiveAudit
+          in: query
+          type: boolean
+          description: Includes only audits with no audit report uploaded
+    - name: audits-auditId-comments
+      path: /audits/{auditId}/comments
+      operations:
+      - name: listauditcomments
+        method: GET
+        description: List audit comments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: changedSinceDate
+          in: query
+          type: string
+          description: Includes all comments that have changed since changedSinceDate.
+    - name: audits-auditId-controls
+      path: /audits/{auditId}/controls
+      operations:
+      - name: listauditcontrols
+        method: GET
+        description: List audit controls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+    - name: audits-auditId-controls-custom-controls
+      path: /audits/{auditId}/controls/custom-controls
+      operations:
+      - name: createcustomcontrol
+        method: POST
+        description: Create a custom control for an audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: audits-auditId-evidence
+      path: /audits/{auditId}/evidence
+      operations:
+      - name: listauditevidence
+        method: GET
+        description: List audit evidence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: changedSinceDate
+          in: query
+          type: string
+          description: Includes all audit evidence that have changed since changedSinceDate.
+    - name: audits-auditId-evidence-custom-evidence-requests
+      path: /audits/{auditId}/evidence/custom-evidence-requests
+      operations:
+      - name: createcustomevidencerequest
+        method: POST
+        description: Create a custom evidence request for an audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: audits-auditId-evidence-auditEvidenceId
+      path: /audits/{auditId}/evidence/{auditEvidenceId}
+      operations:
+      - name: updateauditevidence
+        method: PATCH
+        description: Update audit evidence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: auditEvidenceId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: audits-auditId-evidence-auditEvidenceId-comments
+      path: /audits/{auditId}/evidence/{auditEvidenceId}/comments
+      operations:
+      - name: createcommentforauditevidence
+        method: POST
+        description: Create a comment for audit evidence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: auditEvidenceId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: audits-auditId-evidence-auditEvidenceId-urls
+      path: /audits/{auditId}/evidence/{auditEvidenceId}/urls
+      operations:
+      - name: listauditevidenceurls
+        method: GET
+        description: List audit evidence url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: auditEvidenceId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+    - name: audits-auditId-monitored-computers
+      path: /audits/{auditId}/monitored-computers
+      operations:
+      - name: listmonitoredcomputersinauditscope
+        method: GET
+        description: List monitored computers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: complianceStatusFilterMatchesAny
+          in: query
+          type: array
+          description: Filters for monitored computers matching any status declared in the filter.
+    - name: audits-auditId-people
+      path: /audits/{auditId}/people
+      operations:
+      - name: listpeopleinauditscope
+        method: GET
+        description: List of people who are in scope for this audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: tasksSummaryStatusMatchesAny
+          in: query
+          type: array
+          description: Filter individuals by those whose tasksSummary status is any of the provided values.
+        - name: taskTypeMatchesAny
+          in: query
+          type: array
+          description: Requires taskStatusMatchesAny. Includes all people for whom any of the provided taskType values in
+            taskTypeMatchesAny
+        - name: taskStatusMatchesAny
+          in: query
+          type: array
+          description: Requires taskTypeMatchesAny. Includes all people for whom any of the provided taskType values in taskTypeMatchesAny
+    - name: audits-auditId-vendors
+      path: /audits/{auditId}/vendors
+      operations:
+      - name: listvendorsinauditscope
+        method: GET
+        description: List of vendors who are in scope for this audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+    - name: audits-auditId-vulnerabilities
+      path: /audits/{auditId}/vulnerabilities
+      operations:
+      - name: listvulnerabilities
+        method: GET
+        description: List vulnerabilities within the scope of a given audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: Filter vulnerabilities by search query
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: isDeactivated
+          in: query
+          type: boolean
+          description: Filter vulnerabilities by deactivation status.
+        - name: externalVulnerabilityId
+          in: query
+          type: string
+          description: Filter vulnerabilities based on a specific external ID.
+        - name: isFixAvailable
+          in: query
+          type: boolean
+          description: Filter vulnerabilities that have an available fix.
+        - name: packageIdentifier
+          in: query
+          type: string
+          description: Filter vulnerabilities that are from a specific package.
+        - name: slaDeadlineAfterDate
+          in: query
+          type: string
+          description: Filter vulnerabilities with a fix due after a specific timestamp
+        - name: slaDeadlineBeforeDate
+          in: query
+          type: string
+          description: Filter vulnerabilities with a fix due before a specific timestamp
+        - name: severity
+          in: query
+          type: string
+          description: Filter vulnerabilities by severity.
+        - name: integrationId
+          in: query
+          type: string
+          description: Filter vulnerabilities by the vulnerability scanner that detected them.
+        - name: includeVulnerabilitiesWithoutSlas
+          in: query
+          type: boolean
+          description: Filter vulnerabilities without an SLA due date.
+        - name: vulnerableAssetId
+          in: query
+          type: string
+          description: Filter vulnerabilities by a specific asset ID.
+    - name: audits-auditId-vulnerability-remediations
+      path: /audits/{auditId}/vulnerability-remediations
+      operations:
+      - name: listvulnerabilityremediationsinauditscope
+        method: GET
+        description: List vulnerability remediations that are in scope for this audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: integrationId
+          in: query
+          type: string
+          description: Filter vulnerability remediations based on a specific scanner integration.
+        - name: severity
+          in: query
+          type: string
+          description: Filter vulnerability remediations by severity.
+        - name: isRemediatedOnTime
+          in: query
+          type: boolean
+          description: Filter vulnerability remediations by remediation status.
+        - name: remediatedAfterDate
+          in: query
+          type: string
+          description: Filter vulnerability remediations that occurred after a specific timestamp.
+        - name: remediatedBeforeDate
+          in: query
+          type: string
+          description: Filter vulnerability remediations that occurred before a specific timestamp.
+    - name: audits-auditId-vulnerable-assets
+      path: /audits/{auditId}/vulnerable-assets
+      operations:
+      - name: getvulnerableassets
+        method: GET
+        description: List assets associated with vulnerabilities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auditId
+          in: path
+          type: string
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: Filter vulnerable assets by search query.
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageCursor
+          in: query
+          type: string
+        - name: integrationId
+          in: query
+          type: string
+          description: Filter vulnerable assets by specific vulnerability scanner.
+        - name: assetType
+          in: query
+          type: string
+          description: Filter vulnerable assets by asset type.
+        - name: assetExternalAccountId
+          in: query
+          type: string
+          description: Filter vulnerable assets by...
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: auditor-audits-rest
+    port: 8080
+    description: REST adapter for Conduct an audit — Audits. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/audits
+      name: audits
+      description: REST surface for audits.
+      operations:
+      - method: GET
+        name: listaudits
+        description: List audits
+        call: auditor-audits.listaudits
+        with:
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          changedSinceDate: rest.changedSinceDate
+          isActiveAudit: rest.isActiveAudit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/comments
+      name: audits-auditid-comments
+      description: REST surface for audits-auditId-comments.
+      operations:
+      - method: GET
+        name: listauditcomments
+        description: List audit comments
+        call: auditor-audits.listauditcomments
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          changedSinceDate: rest.changedSinceDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/controls
+      name: audits-auditid-controls
+      description: REST surface for audits-auditId-controls.
+      operations:
+      - method: GET
+        name: listauditcontrols
+        description: List audit controls
+        call: auditor-audits.listauditcontrols
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/controls/custom-controls
+      name: audits-auditid-controls-custom-controls
+      description: REST surface for audits-auditId-controls-custom-controls.
+      operations:
+      - method: POST
+        name: createcustomcontrol
+        description: Create a custom control for an audit
+        call: auditor-audits.createcustomcontrol
+        with:
+          auditId: rest.auditId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/evidence
+      name: audits-auditid-evidence
+      description: REST surface for audits-auditId-evidence.
+      operations:
+      - method: GET
+        name: listauditevidence
+        description: List audit evidence
+        call: auditor-audits.listauditevidence
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          changedSinceDate: rest.changedSinceDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/evidence/custom-evidence-requests
+      name: audits-auditid-evidence-custom-evidence-requests
+      description: REST surface for audits-auditId-evidence-custom-evidence-requests.
+      operations:
+      - method: POST
+        name: createcustomevidencerequest
+        description: Create a custom evidence request for an audit
+        call: auditor-audits.createcustomevidencerequest
+        with:
+          auditId: rest.auditId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/evidence/{auditevidenceid}
+      name: audits-auditid-evidence-auditevidenceid
+      description: REST surface for audits-auditId-evidence-auditEvidenceId.
+      operations:
+      - method: PATCH
+        name: updateauditevidence
+        description: Update audit evidence
+        call: auditor-audits.updateauditevidence
+        with:
+          auditId: rest.auditId
+          auditEvidenceId: rest.auditEvidenceId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/evidence/{auditevidenceid}/comments
+      name: audits-auditid-evidence-auditevidenceid-comments
+      description: REST surface for audits-auditId-evidence-auditEvidenceId-comments.
+      operations:
+      - method: POST
+        name: createcommentforauditevidence
+        description: Create a comment for audit evidence
+        call: auditor-audits.createcommentforauditevidence
+        with:
+          auditId: rest.auditId
+          auditEvidenceId: rest.auditEvidenceId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/evidence/{auditevidenceid}/urls
+      name: audits-auditid-evidence-auditevidenceid-urls
+      description: REST surface for audits-auditId-evidence-auditEvidenceId-urls.
+      operations:
+      - method: GET
+        name: listauditevidenceurls
+        description: List audit evidence url
+        call: auditor-audits.listauditevidenceurls
+        with:
+          auditId: rest.auditId
+          auditEvidenceId: rest.auditEvidenceId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/monitored-computers
+      name: audits-auditid-monitored-computers
+      description: REST surface for audits-auditId-monitored-computers.
+      operations:
+      - method: GET
+        name: listmonitoredcomputersinauditscope
+        description: List monitored computers
+        call: auditor-audits.listmonitoredcomputersinauditscope
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          complianceStatusFilterMatchesAny: rest.complianceStatusFilterMatchesAny
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/people
+      name: audits-auditid-people
+      description: REST surface for audits-auditId-people.
+      operations:
+      - method: GET
+        name: listpeopleinauditscope
+        description: List of people who are in scope for this audit
+        call: auditor-audits.listpeopleinauditscope
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          tasksSummaryStatusMatchesAny: rest.tasksSummaryStatusMatchesAny
+          taskTypeMatchesAny: rest.taskTypeMatchesAny
+          taskStatusMatchesAny: rest.taskStatusMatchesAny
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/vendors
+      name: audits-auditid-vendors
+      description: REST surface for audits-auditId-vendors.
+      operations:
+      - method: GET
+        name: listvendorsinauditscope
+        description: List of vendors who are in scope for this audit
+        call: auditor-audits.listvendorsinauditscope
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/vulnerabilities
+      name: audits-auditid-vulnerabilities
+      description: REST surface for audits-auditId-vulnerabilities.
+      operations:
+      - method: GET
+        name: listvulnerabilities
+        description: List vulnerabilities within the scope of a given audit
+        call: auditor-audits.listvulnerabilities
+        with:
+          auditId: rest.auditId
+          query: rest.query
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          isDeactivated: rest.isDeactivated
+          externalVulnerabilityId: rest.externalVulnerabilityId
+          isFixAvailable: rest.isFixAvailable
+          packageIdentifier: rest.packageIdentifier
+          slaDeadlineAfterDate: rest.slaDeadlineAfterDate
+          slaDeadlineBeforeDate: rest.slaDeadlineBeforeDate
+          severity: rest.severity
+          integrationId: rest.integrationId
+          includeVulnerabilitiesWithoutSlas: rest.includeVulnerabilitiesWithoutSlas
+          vulnerableAssetId: rest.vulnerableAssetId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/vulnerability-remediations
+      name: audits-auditid-vulnerability-remediations
+      description: REST surface for audits-auditId-vulnerability-remediations.
+      operations:
+      - method: GET
+        name: listvulnerabilityremediationsinauditscope
+        description: List vulnerability remediations that are in scope for this audit
+        call: auditor-audits.listvulnerabilityremediationsinauditscope
+        with:
+          auditId: rest.auditId
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          integrationId: rest.integrationId
+          severity: rest.severity
+          isRemediatedOnTime: rest.isRemediatedOnTime
+          remediatedAfterDate: rest.remediatedAfterDate
+          remediatedBeforeDate: rest.remediatedBeforeDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audits/{auditid}/vulnerable-assets
+      name: audits-auditid-vulnerable-assets
+      description: REST surface for audits-auditId-vulnerable-assets.
+      operations:
+      - method: GET
+        name: getvulnerableassets
+        description: List assets associated with vulnerabilities
+        call: auditor-audits.getvulnerableassets
+        with:
+          auditId: rest.auditId
+          query: rest.query
+          pageSize: rest.pageSize
+          pageCursor: rest.pageCursor
+          integrationId: rest.integrationId
+          assetType: rest.assetType
+          assetExternalAccountId: rest.assetExternalAccountId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: auditor-audits-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Conduct an audit — Audits. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-audits
+      description: List audits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listaudits
+      with:
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        changedSinceDate: tools.changedSinceDate
+        isActiveAudit: tools.isActiveAudit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-audit-comments
+      description: List audit comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listauditcomments
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        changedSinceDate: tools.changedSinceDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-audit-controls
+      description: List audit controls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listauditcontrols
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-control-audit
+      description: Create a custom control for an audit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: auditor-audits.createcustomcontrol
+      with:
+        auditId: tools.auditId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-audit-evidence
+      description: List audit evidence
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listauditevidence
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        changedSinceDate: tools.changedSinceDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-evidence-request-audit
+      description: Create a custom evidence request for an audit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: auditor-audits.createcustomevidencerequest
+      with:
+        auditId: tools.auditId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-audit-evidence
+      description: Update audit evidence
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: auditor-audits.updateauditevidence
+      with:
+        auditId: tools.auditId
+        auditEvidenceId: tools.auditEvidenceId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-comment-audit-evidence
+      description: Create a comment for audit evidence
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: auditor-audits.createcommentforauditevidence
+      with:
+        auditId: tools.auditId
+        auditEvidenceId: tools.auditEvidenceId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-audit-evidence-url
+      description: List audit evidence url
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listauditevidenceurls
+      with:
+        auditId: tools.auditId
+        auditEvidenceId: tools.auditEvidenceId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-monitored-computers
+      description: List monitored computers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listmonitoredcomputersinauditscope
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        complianceStatusFilterMatchesAny: tools.complianceStatusFilterMatchesAny
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-people-who-are-scope
+      description: List of people who are in scope for this audit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listpeopleinauditscope
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        tasksSummaryStatusMatchesAny: tools.tasksSummaryStatusMatchesAny
+        taskTypeMatchesAny: tools.taskTypeMatchesAny
+        taskStatusMatchesAny: tools.taskStatusMatchesAny
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-vendors-who-are-scope
+      description: List of vendors who are in scope for this audit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listvendorsinauditscope
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-vulnerabilities-within-scope-given
+      description: List vulnerabilities within the scope of a given audit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listvulnerabilities
+      with:
+        auditId: tools.auditId
+        query: tools.query
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        isDeactivated: tools.isDeactivated
+        externalVulnerabilityId: tools.externalVulnerabilityId
+        isFixAvailable: tools.isFixAvailable
+        packageIdentifier: tools.packageIdentifier
+        slaDeadlineAfterDate: tools.slaDeadlineAfterDate
+        slaDeadlineBeforeDate: tools.slaDeadlineBeforeDate
+        severity: tools.severity
+        integrationId: tools.integrationId
+        includeVulnerabilitiesWithoutSlas: tools.includeVulnerabilitiesWithoutSlas
+        vulnerableAssetId: tools.vulnerableAssetId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-vulnerability-remediations-that-are
+      description: List vulnerability remediations that are in scope for this audit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.listvulnerabilityremediationsinauditscope
+      with:
+        auditId: tools.auditId
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        integrationId: tools.integrationId
+        severity: tools.severity
+        isRemediatedOnTime: tools.isRemediatedOnTime
+        remediatedAfterDate: tools.remediatedAfterDate
+        remediatedBeforeDate: tools.remediatedBeforeDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-assets-associated-vulnerabilities
+      description: List assets associated with vulnerabilities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: auditor-audits.getvulnerableassets
+      with:
+        auditId: tools.auditId
+        query: tools.query
+        pageSize: tools.pageSize
+        pageCursor: tools.pageCursor
+        integrationId: tools.integrationId
+        assetType: tools.assetType
+        assetExternalAccountId: tools.assetExternalAccountId
+      outputParameters:
+      - type: object
+        mapping: $.

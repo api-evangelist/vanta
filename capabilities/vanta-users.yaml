@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vanta API — Users
+  description: 'Vanta API — Users. 2 operations. Lead operation: List People. Self-contained Naftiko capability covering one
+    Vanta business surface.'
+  tags:
+  - Vanta
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vanta-users
+    baseUri: https://api.vanta.com
+    description: Vanta API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-people
+      path: /v1/people
+      operations:
+      - name: listpeople
+        method: GET
+        description: List People
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-users
+      path: /v1/users
+      operations:
+      - name: listusers
+        method: GET
+        description: List Active Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: vanta-users-rest
+    port: 8080
+    description: REST adapter for Vanta API — Users. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v1/people
+      name: v1-people
+      description: REST surface for v1-people.
+      operations:
+      - method: GET
+        name: listpeople
+        description: List People
+        call: vanta-users.listpeople
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/users
+      name: v1-users
+      description: REST surface for v1-users.
+      operations:
+      - method: GET
+        name: listusers
+        description: List Active Users
+        call: vanta-users.listusers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vanta-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vanta API — Users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-people
+      description: List People
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-users.listpeople
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-active-users
+      description: List Active Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-users.listusers
+      outputParameters:
+      - type: object
+        mapping: $.

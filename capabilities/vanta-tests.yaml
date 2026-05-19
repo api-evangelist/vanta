@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vanta API — Tests
+  description: 'Vanta API — Tests. 1 operations. Lead operation: List Tests. Self-contained Naftiko capability covering one
+    Vanta business surface.'
+  tags:
+  - Vanta
+  - Tests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vanta-tests
+    baseUri: https://api.vanta.com
+    description: Vanta API — Tests business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-tests
+      path: /v1/tests
+      operations:
+      - name: listtests
+        method: GET
+        description: List Tests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter tests by status
+        - name: frameworkId
+          in: query
+          type: string
+          description: Filter tests by framework
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: vanta-tests-rest
+    port: 8080
+    description: REST adapter for Vanta API — Tests. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v1/tests
+      name: v1-tests
+      description: REST surface for v1-tests.
+      operations:
+      - method: GET
+        name: listtests
+        description: List Tests
+        call: vanta-tests.listtests
+        with:
+          status: rest.status
+          frameworkId: rest.frameworkId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vanta-tests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vanta API — Tests. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-tests
+      description: List Tests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-tests.listtests
+      with:
+        status: tools.status
+        frameworkId: tools.frameworkId
+      outputParameters:
+      - type: object
+        mapping: $.

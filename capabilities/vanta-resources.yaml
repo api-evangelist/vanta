@@ -1,0 +1,120 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vanta API — Resources
+  description: 'Vanta API — Resources. 2 operations. Lead operation: List Monitored Computers. Self-contained Naftiko capability
+    covering one Vanta business surface.'
+  tags:
+  - Vanta
+  - Resources
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vanta-resources
+    baseUri: https://api.vanta.com
+    description: Vanta API — Resources business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-computers
+      path: /v1/computers
+      operations:
+      - name: listcomputers
+        method: GET
+        description: List Monitored Computers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: complianceStatus
+          in: query
+          type: string
+          description: Filter computers by compliance status
+    - name: v1-resources
+      path: /v1/resources
+      operations:
+      - name: listresources
+        method: GET
+        description: List Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceType
+          in: query
+          type: string
+          description: Filter by resource type (e.g., Computer, Repository, CloudResource)
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: vanta-resources-rest
+    port: 8080
+    description: REST adapter for Vanta API — Resources. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/computers
+      name: v1-computers
+      description: REST surface for v1-computers.
+      operations:
+      - method: GET
+        name: listcomputers
+        description: List Monitored Computers
+        call: vanta-resources.listcomputers
+        with:
+          complianceStatus: rest.complianceStatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/resources
+      name: v1-resources
+      description: REST surface for v1-resources.
+      operations:
+      - method: GET
+        name: listresources
+        description: List Resources
+        call: vanta-resources.listresources
+        with:
+          resourceType: rest.resourceType
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vanta-resources-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vanta API — Resources. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-monitored-computers
+      description: List Monitored Computers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-resources.listcomputers
+      with:
+        complianceStatus: tools.complianceStatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-resources
+      description: List Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-resources.listresources
+      with:
+        resourceType: tools.resourceType
+      outputParameters:
+      - type: object
+        mapping: $.

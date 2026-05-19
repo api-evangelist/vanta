@@ -1,0 +1,198 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vanta API — Vendors
+  description: 'Vanta API — Vendors. 4 operations. Lead operation: List Vendors. Self-contained Naftiko capability covering
+    one Vanta business surface.'
+  tags:
+  - Vanta
+  - Vendors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vanta-vendors
+    baseUri: https://api.vanta.com
+    description: Vanta API — Vendors business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-vendors
+      path: /v1/vendors
+      operations:
+      - name: listvendors
+        method: GET
+        description: List Vendors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: riskLevel
+          in: query
+          type: string
+          description: Filter vendors by risk level
+      - name: createvendor
+        method: POST
+        description: Create Vendor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-vendors-vendorId
+      path: /v1/vendors/{vendorId}
+      operations:
+      - name: getvendor
+        method: GET
+        description: Get Vendor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vendorId
+          in: path
+          type: string
+          description: Unique identifier for the vendor
+          required: true
+      - name: updatevendor
+        method: PATCH
+        description: Update Vendor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vendorId
+          in: path
+          type: string
+          description: Unique identifier for the vendor
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: vanta-vendors-rest
+    port: 8080
+    description: REST adapter for Vanta API — Vendors. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v1/vendors
+      name: v1-vendors
+      description: REST surface for v1-vendors.
+      operations:
+      - method: GET
+        name: listvendors
+        description: List Vendors
+        call: vanta-vendors.listvendors
+        with:
+          riskLevel: rest.riskLevel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createvendor
+        description: Create Vendor
+        call: vanta-vendors.createvendor
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/vendors/{vendorid}
+      name: v1-vendors-vendorid
+      description: REST surface for v1-vendors-vendorId.
+      operations:
+      - method: GET
+        name: getvendor
+        description: Get Vendor
+        call: vanta-vendors.getvendor
+        with:
+          vendorId: rest.vendorId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatevendor
+        description: Update Vendor
+        call: vanta-vendors.updatevendor
+        with:
+          vendorId: rest.vendorId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vanta-vendors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vanta API — Vendors. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-vendors
+      description: List Vendors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-vendors.listvendors
+      with:
+        riskLevel: tools.riskLevel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-vendor
+      description: Create Vendor
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: vanta-vendors.createvendor
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vendor
+      description: Get Vendor
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-vendors.getvendor
+      with:
+        vendorId: tools.vendorId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-vendor
+      description: Update Vendor
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: vanta-vendors.updatevendor
+      with:
+        vendorId: tools.vendorId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

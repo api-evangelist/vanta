@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vanta API — Controls
+  description: 'Vanta API — Controls. 2 operations. Lead operation: List Controls. Self-contained Naftiko capability covering
+    one Vanta business surface.'
+  tags:
+  - Vanta
+  - Controls
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTA_API_KEY: VANTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vanta-controls
+    baseUri: https://api.vanta.com
+    description: Vanta API — Controls business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-controls
+      path: /v1/controls
+      operations:
+      - name: listcontrols
+        method: GET
+        description: List Controls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: frameworkId
+          in: query
+          type: string
+          description: Filter controls by framework identifier
+        - name: status
+          in: query
+          type: string
+          description: Filter by control status
+    - name: v1-frameworks
+      path: /v1/frameworks
+      operations:
+      - name: listframeworks
+        method: GET
+        description: List Frameworks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: vanta-controls-rest
+    port: 8080
+    description: REST adapter for Vanta API — Controls. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/v1/controls
+      name: v1-controls
+      description: REST surface for v1-controls.
+      operations:
+      - method: GET
+        name: listcontrols
+        description: List Controls
+        call: vanta-controls.listcontrols
+        with:
+          frameworkId: rest.frameworkId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/frameworks
+      name: v1-frameworks
+      description: REST surface for v1-frameworks.
+      operations:
+      - method: GET
+        name: listframeworks
+        description: List Frameworks
+        call: vanta-controls.listframeworks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vanta-controls-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vanta API — Controls. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-controls
+      description: List Controls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-controls.listcontrols
+      with:
+        frameworkId: tools.frameworkId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-frameworks
+      description: List Frameworks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vanta-controls.listframeworks
+      outputParameters:
+      - type: object
+        mapping: $.
