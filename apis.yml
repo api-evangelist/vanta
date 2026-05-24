@@ -138,3 +138,5 @@ common:
   - name: Auditor OpenAPI Spec
     url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml
     type: OpenAPI
+  - type: LLMsTxt
+    url: https://developer.vanta.com/llms.txt
