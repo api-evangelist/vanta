@@ -2,12 +2,20 @@
   "repo": "vanta",
   "feeds": [
     {
+      "source": "https://www.vanta.com/resources/rss.xml",
+      "feed_url": "https://www.vanta.com/resources/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.vanta.com/resources/introducing-vantas-connectors-api",
       "feed_url": "https://www.vanta.com/resources/rss.xml",
-      "title": "Blog | Vanta",
-      "saved": 44
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 54,
-  "fetched": "2026-05-17T20:48:52Z"
+  "post_count": 69,
+  "fetched": "2026-06-01T23:35:02Z"
 }
