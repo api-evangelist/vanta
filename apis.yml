@@ -12,9 +12,11 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-14'
 modified: '2026-05-19'
-description: Vanta is a trust management platform that automates security compliance for frameworks including SOC 2, ISO 27001,
-  HIPAA, PCI DSS, and GDPR. The Vanta API enables organizations to programmatically manage their compliance posture, automate
-  security monitoring, manage vulnerabilities, track controls, manage vendors, and integrate with existing tools and workflows.
+description: >-
+  Vanta is a trust management platform that automates security compliance for frameworks including SOC 2, ISO 27001,
+  HIPAA, PCI DSS, and GDPR. The Vanta API enables organizations to programmatically manage their compliance posture,
+  automate security monitoring, manage vulnerabilities, track controls, manage vendors, and integrate with existing
+  tools and workflows.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -23,63 +25,44 @@ apis:
   - aid: vanta:vanta-api
     name: Vanta API
     tags:
-    - Cybersecurity
-    - Compliance
-    - Security
-    - Governance
-    - Risk Management
+      - Cybersecurity
+      - Compliance
+      - Security
+      - Governance
+      - Risk Management
     humanURL: https://developer.vanta.com/docs/vanta-api-overview
     baseURL: https://api.vanta.com
     properties:
-    - url: https://developer.vanta.com/docs/vanta-api-overview
-      type: Documentation
-    - url: https://developer.vanta.com/docs/api-access-setup
-      type: Authentication
-    - url: https://developer.vanta.com/docs/faq
-      type: FAQ
-    - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-openapi.yml
-      type: OpenAPI
-    - type: NaftikoCapability
-      url: capabilities/vanta-authentication.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-controls.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-documents.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-integrations.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-resources.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-tests.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-users.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-vendors.yaml
-    - type: NaftikoCapability
-      url: capabilities/vanta-vulnerabilities.yaml
-    description: The Vanta REST API enables programmatic access to compliance, security monitoring, vulnerability management,
-      personnel management, vendor management, and custom integration capabilities. The API uses OAuth 2.0 authentication and
-      returns JSON responses. Rate limits range from 5 to 250 requests per minute depending on endpoint category.
+      - url: https://developer.vanta.com/docs/vanta-api-overview
+        type: Documentation
+      - url: https://developer.vanta.com/docs/api-access-setup
+        type: Authentication
+      - url: https://developer.vanta.com/docs/faq
+        type: FAQ
+      - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-openapi.yml
+        type: OpenAPI
+    description: >-
+      The Vanta REST API enables programmatic access to compliance, security monitoring, vulnerability management,
+      personnel management, vendor management, and custom integration capabilities. The API uses OAuth 2.0
+      authentication and returns JSON responses. Rate limits range from 5 to 250 requests per minute depending on
+      endpoint category.
   - aid: vanta:vanta-auditor-api
     name: Vanta Auditor API
     tags:
-    - Cybersecurity
-    - Compliance
-    - Audit
-    - Security
+      - Cybersecurity
+      - Compliance
+      - Audit
+      - Security
     humanURL: https://developer.vanta.com/docs/vanta-api-overview
     baseURL: https://api.vanta.com
     properties:
-    - url: https://developer.vanta.com/docs/vanta-api-overview
-      type: Documentation
-    - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml
-      type: OpenAPI
-    - type: NaftikoCapability
-      url: capabilities/auditor-auditors.yaml
-    - type: NaftikoCapability
-      url: capabilities/auditor-audits.yaml
-    description: The Vanta Auditor API provides external audit firms programmatic access to customer compliance data. Auditors
-      can query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit
+      - url: https://developer.vanta.com/docs/vanta-api-overview
+        type: Documentation
+      - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml
+        type: OpenAPI
+    description: >-
+      The Vanta Auditor API provides external audit firms programmatic access to customer compliance data. Auditors can
+      query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit
       engagements.
 common:
   - type: LinkedIn

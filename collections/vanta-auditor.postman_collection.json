@@ -1,0 +1,2400 @@
+{
+  "item": [
+    {
+      "id": "3891a896-4f6c-465a-aa22-5966c9eabb7d",
+      "name": "Audits",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "929cc862-b050-4650-aa64-0423769fd691",
+          "name": "List audits",
+          "request": {
+            "name": "List audits",
+            "description": {
+              "content": "Returns a paginated list of audits scoped to the audit firm.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "changedSinceDate",
+                  "value": "<dateTime>",
+                  "description": "Includes all audits that have changed since changedSinceDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "isActiveAudit",
+                  "value": "<boolean>",
+                  "description": "Includes only audits with no audit report uploaded"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4c892f18-21c2-4922-bda6-7be3c01caacc",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changedSinceDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "isActiveAudit",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"65fc81a3359c8508c9af880f\",\n        \"customerOrganizationName\": \"corporation.com\",\n        \"customerDisplayName\": \"Corporation Company\",\n        \"customerOrganizationId\": \"65fc81a3359c8508c9af880f\",\n        \"auditStartDate\": \"2024-03-07T21:25:56.000Z\",\n        \"auditEndDate\": \"2024-03-14T21:25:56.000Z\",\n        \"earlyAccessStartsAt\": \"2024-03-07T21:25:56.000Z\",\n        \"framework\": \"SOC 2 Type II\",\n        \"allowAuditorEmails\": [\n          \"sam@auditor.com\"\n        ],\n        \"allowAllAuditors\": true,\n        \"deletionDate\": \"2024-03-07T21:25:56.000Z\",\n        \"creationDate\": \"2024-03-07T21:25:56.000Z\",\n        \"modificationDate\": \"2024-03-07T21:25:56.000Z\",\n        \"completionDate\": \"2024-03-07T21:25:56.000Z\",\n        \"auditFocus\": \"EXTERNAL\"\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec3468af-450d-4553-8079-cdeb49a595ed",
+          "name": "List of vendors who are in scope for this audit",
+          "request": {
+            "name": "List of vendors who are in scope for this audit",
+            "description": {
+              "content": "Returns a list of vendors who are in scope for this audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c183a1e0-4333-4488-910e-1d2ae1c03b3a",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d8\",\n        \"name\": \"Vanta\",\n        \"websiteUrl\": \"https://www.vanta.com/\",\n        \"accountManagerName\": \"John Doe\",\n        \"accountManagerEmail\": \"john@doe.com\",\n        \"servicesProvided\": \"SaaS\",\n        \"additionalNotes\": \"Automate compliance and streamline security reviews with the leading trust management platform.\",\n        \"authDetails\": {\n          \"method\": \"O_AUTH\",\n          \"passwordMFA\": true,\n          \"passwordRequiresNumber\": true,\n          \"passwordRequiresSymbol\": true,\n          \"passwordMinimumLength\": 16\n        },\n        \"securityOwnerUserId\": \"6626afa6490ec920099773e7\",\n        \"businessOwnerUserId\": \"6626afb14c912f0a50e85619\",\n        \"contractStartDate\": \"2024-02-01T00:00:00.000Z\",\n        \"contractRenewalDate\": \"2025-02-01T00:00:00.000Z\",\n        \"contractTerminationDate\": null,\n        \"lastSecurityReviewCompletionDate\": \"2024-01-01T00:00:00.000Z\",\n        \"nextSecurityReviewDueDate\": \"2025-01-01T00:00:00.000Z\",\n        \"isVisibleToAuditors\": true,\n        \"isRiskAutoScored\": true,\n        \"category\": {\n          \"displayName\": \"cloudMonitoring\"\n        },\n        \"riskAttributeIds\": [\n          \"6626b0298acc44f8674390da\",\n          \"6626b02ea4cd9ba80d773c20\"\n        ],\n        \"status\": \"MANAGED\",\n        \"inherentRiskLevel\": \"HIGH\",\n        \"residualRiskLevel\": \"MEDIUM\",\n        \"vendorHeadquarters\": \"USA\",\n        \"contractAmount\": {\n          \"amount\": 1000000,\n          \"currency\": \"USD\"\n        },\n        \"customFields\": null\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"6696ea0595df50d5cd6ec3b7\",\n      \"endCursor\": \"6696ece48eb1f98ff3d927c6\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73b54bb1-e60c-49b9-b226-14e89912e70a",
+          "name": "List monitored computers",
+          "request": {
+            "name": "List monitored computers",
+            "description": {
+              "content": "Returns a list of computers monitored by an MDM (with an integration built\nby Vanta) or by the Vanta Agent. Currently this list does not include\nresources from partner or customer-built integrations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "monitored-computers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "complianceStatusFilterMatchesAny",
+                  "value": "<string>",
+                  "description": "Filters for monitored computers matching any status declared in the filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "complianceStatusFilterMatchesAny",
+                  "value": "<string>",
+                  "description": "Filters for monitored computers matching any status declared in the filter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8e811a07-4b81-42ea-a8e7-1cb6ef250858",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "monitored-computers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "complianceStatusFilterMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "complianceStatusFilterMatchesAny",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"5f2c939a52855e725c8d5823\",\n        \"integrationId\": \"vantaAgent\",\n        \"serialNumber\": \"FVFGPGV2Q6L5\",\n        \"udid\": \"280FF071-1D7A-5752-BD3A-1A68937CD187\",\n        \"lastCheckDate\": \"2024-03-07T18:46:05.944Z\",\n        \"screenlock\": {\n          \"outcome\": \"FAIL\"\n        },\n        \"diskEncryption\": {\n          \"outcome\": \"FAIL\"\n        },\n        \"passwordManager\": {\n          \"outcome\": \"FAIL\"\n        },\n        \"antivirusInstallation\": {\n          \"outcome\": \"FAIL\"\n        },\n        \"operatingSystem\": {\n          \"type\": \"macOS\",\n          \"version\": \"13.2.1\"\n        },\n        \"owner\": {\n          \"id\": \"65e1efde08e8478f143a8ff9\",\n          \"emailAddress\": \"example-person@email.com\",\n          \"displayName\": \"Example Owner\"\n        }\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"5f2c939a52855e725c8d5823\",\n      \"endCursor\": \"5f2c939a52855e725c8d5823\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a009b769-5b83-4b39-9851-93f058e5f285",
+          "name": "List audit evidence url",
+          "request": {
+            "name": "List audit evidence url",
+            "description": {
+              "content": "Returns a paginated list of evidence urls for an audit. This endpoint should be called whenever an\nevidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "evidence",
+                ":auditEvidenceId",
+                "urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditEvidenceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77e86d25-c61c-424c-b639-def1e5d8f3b7",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "evidence",
+                    ":auditEvidenceId",
+                    "urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditEvidenceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"NjVmYzgxYTMzNTljODUwOGM5YWY4ODBm\",\n        \"url\": \"https://s3.amazonaws.com/audit-evidence/2022/audit.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=secret%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221104T140227Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b228dbec8c1008c80c162e1210e4503dceead1e4d4751b4d9787314fd6da4d55\",\n        \"filename\": \"example.jpg\",\n        \"isDownloadable\": true\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    },\n    \"totalCount\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "040d11aa-96ac-46c9-b7bb-7ee267106354",
+          "name": "List of people who are in scope for this audit",
+          "request": {
+            "name": "List of people who are in scope for this audit",
+            "description": {
+              "content": "Returns a list of people who are in scope for this audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "people"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tasksSummaryStatusMatchesAny",
+                  "value": "<string>",
+                  "description": "Filter individuals by those whose tasksSummary status is any of the provided values."
+                },
+                {
+                  "disabled": false,
+                  "key": "tasksSummaryStatusMatchesAny",
+                  "value": "<string>",
+                  "description": "Filter individuals by those whose tasksSummary status is any of the provided values."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskTypeMatchesAny",
+                  "value": "<string>",
+                  "description": "Requires taskStatusMatchesAny. Includes all people for whom any of the provided taskType values in taskTypeMatchesAny\nis any of the provided taskStatus values in taskStatusMatchesAny."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskTypeMatchesAny",
+                  "value": "<string>",
+                  "description": "Requires taskStatusMatchesAny. Includes all people for whom any of the provided taskType values in taskTypeMatchesAny\nis any of the provided taskStatus values in taskStatusMatchesAny."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskStatusMatchesAny",
+                  "value": "<string>",
+                  "description": "Requires taskTypeMatchesAny. Includes all people for whom any of the provided taskType values in taskTypeMatchesAny\nis any of the provided taskStatus values in taskStatusMatchesAny."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskStatusMatchesAny",
+                  "value": "<string>",
+                  "description": "Requires taskTypeMatchesAny. Includes all people for whom any of the provided taskType values in taskTypeMatchesAny\nis any of the provided taskStatus values in taskStatusMatchesAny."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5645230b-1a8a-46e9-a1e0-9eb36911e983",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tasksSummaryStatusMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tasksSummaryStatusMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskTypeMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskTypeMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatusMatchesAny",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatusMatchesAny",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"65e1efde08e8478f143a8ff9\",\n        \"emailAddress\": \"example-person@email.com\",\n        \"employment\": {\n          \"endDate\": null,\n          \"jobTitle\": \"Customer success manager\",\n          \"startDate\": \"2021-01-01T00:00:00.000Z\",\n          \"status\": \"CURRENT\"\n        },\n        \"leaveInfo\": null,\n        \"groupIds\": [\n          \"5f2c939a52855e725c8d5824\"\n        ],\n        \"name\": {\n          \"display\": \"Example Person\",\n          \"last\": \"Person\",\n          \"first\": \"Example\"\n        },\n        \"sources\": {\n          \"emailAddress\": {\n            \"integrationId\": \"gsuiteadmin\",\n            \"resourceId\": \"660c701d3d344e660b032306\",\n            \"type\": \"INTEGRATION\"\n          },\n          \"employment\": {\n            \"startDate\": {\n              \"integrationId\": \"gusto\",\n              \"resourceId\": \"660c70783d344e660b032323\",\n              \"type\": \"INTEGRATION\"\n            },\n            \"endDate\": {\n              \"integrationId\": \"gusto\",\n              \"resourceId\": \"660c70783d344e660b032323\",\n              \"type\": \"INTEGRATION\"\n            }\n          }\n        },\n        \"tasksSummary\": {\n          \"completionDate\": null,\n          \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n          \"status\": \"OVERDUE\",\n          \"details\": {\n            \"completeTrainings\": {\n              \"taskType\": \"COMPLETE_TRAININGS\",\n              \"status\": \"COMPLETE\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": \"2021-11-01T00:00:00.000Z\",\n              \"disabled\": {\n                \"date\": \"2021-11-01T00:00:00.000Z\",\n                \"reason\": \"Training Vanta tests have been disabled for this person\"\n              },\n              \"incompleteTrainings\": [\n                {\n                  \"name\": \"Security training 1\"\n                },\n                {\n                  \"name\": \"Security training 2\"\n                }\n              ],\n              \"completedTrainings\": [\n                {\n                  \"name\": \"Security training 3\"\n                },\n                {\n                  \"name\": \"Security training 4\"\n                }\n              ]\n            },\n            \"acceptPolicies\": {\n              \"taskType\": \"ACCEPT_POLICIES\",\n              \"status\": \"COMPLETE\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": \"2021-11-01T00:00:00.000Z\",\n              \"disabled\": null,\n              \"unacceptedPolicies\": [\n                {\n                  \"name\": \"Policy 1\"\n                },\n                {\n                  \"name\": \"Policy 2\"\n                }\n              ],\n              \"acceptedPolicies\": [\n                {\n                  \"name\": \"Policy 3\"\n                },\n                {\n                  \"name\": \"Policy 4\"\n                }\n              ]\n            },\n            \"completeCustomTasks\": {\n              \"taskType\": \"COMPLETE_CUSTOM_TASKS\",\n              \"status\": \"OVERDUE\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": \"2021-11-01T00:00:00.000Z\",\n              \"disabled\": {\n                \"date\": \"2021-11-01T00:00:00.000Z\",\n                \"reason\": \"Custom task Vanta tests have been disabled for this person\"\n              },\n              \"incompleteCustomTasks\": [\n                {\n                  \"name\": \"Custom task 1\"\n                },\n                {\n                  \"name\": \"Custom task 2\"\n                }\n              ],\n              \"completedCustomTasks\": [\n                {\n                  \"name\": \"Custom task 3\"\n                },\n                {\n                  \"name\": \"Custom task 4\"\n                }\n              ]\n            },\n            \"completeOffboardingCustomTasks\": {\n              \"taskType\": \"COMPLETE_CUSTOM_OFFBOARDING_TASKS\",\n              \"status\": \"COMPLETE\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": \"2021-11-01T00:00:00.000Z\",\n              \"disabled\": null,\n              \"incompleteCustomOffboardingTasks\": [],\n              \"completedCustomOffboardingTasks\": [\n                {\n                  \"name\": \"Custom offboarding task 1\"\n                },\n                {\n                  \"name\": \"Custom offboarding task 2\"\n                }\n              ]\n            },\n            \"installDeviceMonitoring\": {\n              \"taskType\": \"INSTALL_DEVICE_MONITORING\",\n              \"status\": \"DUE_SOON\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": null,\n              \"disabled\": null\n            },\n            \"completeBackgroundChecks\": {\n              \"taskType\": \"COMPLETE_BACKGROUND_CHECKS\",\n              \"status\": \"COMPLETE\",\n              \"dueDate\": \"2021-12-01T00:00:00.000Z\",\n              \"completionDate\": \"2021-11-01T00:00:00.000Z\",\n              \"disabled\": null\n            }\n          }\n        }\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"65e1efde08e8478f143a8ff9\",\n      \"endCursor\": \"65e1efde08e8478f143a8ff9\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ac4e640-b087-45e5-85b6-72319cdadded",
+          "name": "List vulnerability remediations that are in scope for this audit",
+          "request": {
+            "name": "List vulnerability remediations that are in scope for this audit",
+            "description": {
+              "content": "List all vulnerability remediations based on selected filters that are in scope for this audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "vulnerability-remediations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "integrationId",
+                  "value": "<string>",
+                  "description": "Filter vulnerability remediations based on a specific scanner integration."
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filter vulnerability remediations by severity.\nPossible values: CRITICAL, HIGH, MEDIUM, LOW."
+                },
+                {
+                  "disabled": false,
+                  "key": "isRemediatedOnTime",
+                  "value": "<boolean>",
+                  "description": "Filter vulnerability remediations by remediation status."
+                },
+                {
+                  "disabled": false,
+                  "key": "remediatedAfterDate",
+                  "value": "<dateTime>",
+                  "description": "Filter vulnerability remediations that occurred after a specific timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "remediatedBeforeDate",
+                  "value": "<dateTime>",
+                  "description": "Filter vulnerability remediations that occurred before a specific timestamp."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8fe7d249-3b2d-4d1b-8d87-e40a44ef4602",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "vulnerability-remediations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integrationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isRemediatedOnTime",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "remediatedAfterDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "remediatedBeforeDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"pageInfo\": {\n      \"hasNextPage\": true,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    },\n    \"data\": [\n      {\n        \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d9\",\n        \"vulnerabilityId\": \"a2f7e1b9d0c3f4e5a6c7b8d8\",\n        \"vulnerableAssetId\": \"a2f7e1b9d0c3f4e5a6c7b8d7\",\n        \"severity\": \"critical\",\n        \"detectedDate\": \"2021-01-01T00:00:00.000Z\",\n        \"slaDeadlineDate\": \"2021-03-01T00:00:00.000Z\",\n        \"remediationDate\": \"2021-02-01T00:00:00.000Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cd703f4-2726-46c7-a637-b2e5a7b88ba6",
+          "name": "List audit evidence",
+          "request": {
+            "name": "List audit evidence",
+            "description": {
+              "content": "Returns a paginated list of evidence for an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "evidence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "changedSinceDate",
+                  "value": "<dateTime>",
+                  "description": "Includes all audit evidence that have changed since changedSinceDate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "47dd5b69-b645-41e9-b8d8-ca0ac31ceb11",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "evidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changedSinceDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"65fc81a3359c8508c9af880f\",\n        \"externalId\": \"cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=\",\n        \"status\": \"Ready for audit\",\n        \"statusUpdatedDate\": \"2024-03-07T21:25:56.000Z\",\n        \"name\": \"Access Control Policy\",\n        \"deletionDate\": \"2024-03-07T21:25:56.000Z\",\n        \"creationDate\": \"2024-03-07T21:25:56.000Z\",\n        \"testStatus\": \"The test was passing during this period\",\n        \"evidenceType\": \"Policy\",\n        \"evidenceId\": \"access-control-policy\",\n        \"relatedControls\": [\n          {\n            \"name\": \"CRY-104\",\n            \"sectionNames\": [\n              \"Article 13\"\n            ]\n          }\n        ],\n        \"description\": \"example description of test\"\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e95b513-db71-4459-a875-0498b93eb902",
+          "name": "List audit comments",
+          "request": {
+            "name": "List audit comments",
+            "description": {
+              "content": "Returns a paginated list of comments for an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "changedSinceDate",
+                  "value": "<dateTime>",
+                  "description": "Includes all comments that have changed since changedSinceDate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "49d59d47-3e0c-4cae-a12e-7e201698b7dc",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "changedSinceDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"65fc81a3359c8508c9af880f\",\n        \"auditEvidenceId\": \"65fc81a3359c8508c9af880f\",\n        \"text\": \"Some comment\",\n        \"creationDate\": \"2024-03-07T21:25:56.000Z\",\n        \"modificationDate\": \"2024-03-07T21:25:56.000Z\",\n        \"deletionDate\": \"2024-03-07T21:25:56.000Z\",\n        \"email\": \"vlad@vantaroo.com\"\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4fb0c30-5e77-465e-a454-7708d07b9f01",
+          "name": "List audit controls",
+          "request": {
+            "name": "List audit controls",
+            "description": {
+              "content": "Returns a paginated list of controls for an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "controls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5cfcae98-743a-43e1-a798-db3668e065b7",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "controls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"data\": [\n      {\n        \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d9\",\n        \"externalId\": \"CRY-104\",\n        \"name\": \"Data encryption utilized\",\n        \"description\": \"Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.\",\n        \"source\": \"Vanta\",\n        \"domains\": [\n          \"CRYPTOGRAPHIC_PROTECTIONS\"\n        ],\n        \"owner\": {\n          \"id\": \"65e1efde08e8478f143a8ff9\",\n          \"emailAddress\": \"example-person@email.com\",\n          \"displayName\": \"Example Owner\"\n        },\n        \"framework\": \"soc2\",\n        \"role\": null,\n        \"customFields\": [],\n        \"sections\": [\n          {\n            \"framework\": \"HITRUST\",\n            \"name\": \"IPP\"\n          }\n        ]\n      }\n    ],\n    \"pageInfo\": {\n      \"hasNextPage\": false,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ba45790-b8d6-4d70-b0cf-55016773d417",
+          "name": "Create a comment for audit evidence",
+          "request": {
+            "name": "Create a comment for audit evidence",
+            "description": {
+              "content": "Create a comment in Vanta for a piece of evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "evidence",
+                ":auditEvidenceId",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditEvidenceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"email\": \"<string>\",\n  \"creationDate\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e387667-a443-4bc8-b615-ca5c6c9ded76",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "evidence",
+                    ":auditEvidenceId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditEvidenceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"email\": \"<string>\",\n  \"creationDate\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"65fc81a3359c8508c9af880f\",\n  \"auditEvidenceId\": \"65fc81a3359c8508c9af880f\",\n  \"text\": \"Some comment\",\n  \"creationDate\": \"2024-03-07T21:25:56.000Z\",\n  \"modificationDate\": \"2024-03-07T21:25:56.000Z\",\n  \"deletionDate\": \"2024-03-07T21:25:56.000Z\",\n  \"email\": \"vlad@vantaroo.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ffbfb93-4e05-4bd8-b0ed-fc6041b5bd4f",
+          "name": "Update audit evidence",
+          "request": {
+            "name": "Update audit evidence",
+            "description": {
+              "content": "Update audit evidence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "evidence",
+                ":auditEvidenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditEvidenceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statusUpdate\": {\n    \"auditorEmail\": \"<string>\",\n    \"stateTransition\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "685d79cc-7281-4aea-8390-88d67783793f",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "evidence",
+                    ":auditEvidenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditEvidenceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statusUpdate\": {\n    \"auditorEmail\": \"<string>\",\n    \"stateTransition\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"65fc81a3359c8508c9af880f\",\n  \"externalId\": \"cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=\",\n  \"status\": \"Ready for audit\",\n  \"statusUpdatedDate\": \"2024-03-07T21:25:56.000Z\",\n  \"name\": \"Access Control Policy\",\n  \"deletionDate\": \"2024-03-07T21:25:56.000Z\",\n  \"creationDate\": \"2024-03-07T21:25:56.000Z\",\n  \"testStatus\": \"The test was passing during this period\",\n  \"evidenceType\": \"Policy\",\n  \"evidenceId\": \"access-control-policy\",\n  \"relatedControls\": [\n    {\n      \"name\": \"CRY-104\",\n      \"sectionNames\": [\n        \"Article 13\"\n      ]\n    }\n  ],\n  \"description\": \"example description of test\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "186c53d1-60ca-4729-a6cb-802ed3fea5e3",
+          "name": "Create a custom evidence request for an audit",
+          "request": {
+            "name": "Create a custom evidence request for an audit",
+            "description": {
+              "content": "Create a custom evidence request for an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "evidence",
+                "custom-evidence-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"controlIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"cadence\": \"<string>\",\n  \"reminderWindow\": \"<string>\",\n  \"isRestricted\": \"<boolean>\",\n  \"auditorEmail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5b11b0fc-0b9e-4b33-a60d-a7a1772222a2",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "evidence",
+                    "custom-evidence-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"controlIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"cadence\": \"<string>\",\n  \"reminderWindow\": \"<string>\",\n  \"isRestricted\": \"<boolean>\",\n  \"auditorEmail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"65fc81a3359c8508c9af880f\",\n  \"controlIds\": [\n    \"1.1.2.a\"\n  ],\n  \"title\": \"Access Control Policy\",\n  \"description\": \"Description for Access Control Policy\",\n  \"cadence\": \"P6M\",\n  \"reminderWindow\": \"P6M\",\n  \"isRestricted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9a2ca4d-ee7d-4dfe-8fd7-31fbb60e581f",
+          "name": "Create a custom control for an audit",
+          "request": {
+            "name": "Create a custom control for an audit",
+            "description": {
+              "content": "Create a custom control for an audit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "controls",
+                "custom-controls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveDate\": \"<dateTime>\",\n  \"category\": \"<string>\",\n  \"sections\": [\n    {\n      \"frameworkId\": \"<string>\",\n      \"sectionId\": \"<string>\"\n    },\n    {\n      \"frameworkId\": \"<string>\",\n      \"sectionId\": \"<string>\"\n    }\n  ],\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e2fa74e-70ef-48bc-9b63-93879dd027c0",
+              "name": "Custom control created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "controls",
+                    "custom-controls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveDate\": \"<dateTime>\",\n  \"category\": \"<string>\",\n  \"sections\": [\n    {\n      \"frameworkId\": \"<string>\",\n      \"sectionId\": \"<string>\"\n    },\n    {\n      \"frameworkId\": \"<string>\",\n      \"sectionId\": \"<string>\"\n    }\n  ],\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d9\",\n  \"externalId\": \"CRY-104\",\n  \"name\": \"Data encryption utilized\",\n  \"description\": \"Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.\",\n  \"source\": \"Vanta\",\n  \"domains\": [\n    \"CRYPTOGRAPHIC_PROTECTIONS\"\n  ],\n  \"owner\": {\n    \"id\": \"65e1efde08e8478f143a8ff9\",\n    \"emailAddress\": \"example-person@email.com\",\n    \"displayName\": \"Example Owner\"\n  },\n  \"role\": \"CONTROLLER\",\n  \"customFields\": [\n    {\n      \"label\": \"Additional context\",\n      \"value\": \"This control is critical for GDPR compliance\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60d3062e-e10f-4a2b-b145-9cd09cfeb188",
+          "name": "List vulnerabilities within the scope of a given audit",
+          "request": {
+            "name": "List vulnerabilities within the scope of a given audit",
+            "description": {
+              "content": "List all vulnerabilities based on selected filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "vulnerabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities by search query"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "isDeactivated",
+                  "value": "<boolean>",
+                  "description": "Filter vulnerabilities by deactivation status."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalVulnerabilityId",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities based on a specific external ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "isFixAvailable",
+                  "value": "<boolean>",
+                  "description": "Filter vulnerabilities that have an available fix."
+                },
+                {
+                  "disabled": false,
+                  "key": "packageIdentifier",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities that are from a specific package."
+                },
+                {
+                  "disabled": false,
+                  "key": "slaDeadlineAfterDate",
+                  "value": "<dateTime>",
+                  "description": "Filter vulnerabilities with a fix due after a specific timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "slaDeadlineBeforeDate",
+                  "value": "<dateTime>",
+                  "description": "Filter vulnerabilities with a fix due before a specific timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities by severity.\nPossible values: CRITICAL, HIGH, MEDIUM, LOW."
+                },
+                {
+                  "disabled": false,
+                  "key": "integrationId",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities by the vulnerability scanner that detected them."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeVulnerabilitiesWithoutSlas",
+                  "value": "<boolean>",
+                  "description": "Filter vulnerabilities without an SLA due date."
+                },
+                {
+                  "disabled": false,
+                  "key": "vulnerableAssetId",
+                  "value": "<string>",
+                  "description": "Filter vulnerabilities by a specific asset ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4da4e376-029a-47b6-a69e-6d21193c1f25",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "vulnerabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isDeactivated",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "externalVulnerabilityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isFixAvailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "packageIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slaDeadlineAfterDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "slaDeadlineBeforeDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integrationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeVulnerabilitiesWithoutSlas",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "vulnerableAssetId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"pageInfo\": {\n      \"hasNextPage\": true,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    },\n    \"data\": [\n      {\n        \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d9\",\n        \"name\": \"CVE-2021-12345\",\n        \"description\": \"MariaDB before 10.6.2 allows an application crash because of mishandling of a pushdown from a HAVING clause to a WHERE clause.\",\n        \"integrationId\": \"Inspector\",\n        \"packageIdentifier\": \"package\",\n        \"vulnerabilityType\": \"COMMON\",\n        \"targetId\": \"targetId\",\n        \"firstDetectedDate\": \"2021-01-01T00:00:00.000Z\",\n        \"sourceDetectedDate\": \"2021-01-01T00:00:00.000Z\",\n        \"lastDetectedDate\": \"2021-01-01T00:00:00.000Z\",\n        \"severity\": \"CRITICAL\",\n        \"cvssSeverityScore\": 9.8,\n        \"scannerScore\": 100,\n        \"isFixable\": true,\n        \"remediateByDate\": \"2021-01-01T00:00:00.000Z\",\n        \"relatedVulns\": [\n          \"CVE-2021-12345\"\n        ],\n        \"relatedUrls\": [\n          \"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-12345\"\n        ],\n        \"externalURL\": \"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-12345\",\n        \"scanSource\": \"Not provided\",\n        \"deactivateMetadata\": {\n          \"deactivatedBy\": \"b2f7e1b9d0c3f4e5a6c7b123\",\n          \"deactivatedOnDate\": \"2021-01-01T00:00:00.000Z\",\n          \"deactivationReason\": \"fix is too hard to carry out\",\n          \"deactivatedUntilDate\": null,\n          \"isVulnDeactivatedIndefinitely\": true\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f454e3d-6fb7-43a8-81e6-7e2efbbfcc35",
+          "name": "List assets associated with vulnerabilities",
+          "request": {
+            "name": "List assets associated with vulnerabilities",
+            "description": {
+              "content": "List assets that Vanta monitors that are associated with vulnerabilities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audits",
+                ":auditId",
+                "vulnerable-assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Filter vulnerable assets by search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "integrationId",
+                  "value": "<string>",
+                  "description": "Filter vulnerable assets by specific vulnerability scanner."
+                },
+                {
+                  "disabled": false,
+                  "key": "assetType",
+                  "value": "<string>",
+                  "description": "Filter vulnerable assets by asset type.\nPossible values: CODE_REPOSITORY, CONTAINER_REPOSITORY, CONTAINER_REPOSITORY_IMAGE, MANIFEST_FILE, SERVER, SERVERLESS_FUNCTION, WORKSTATION."
+                },
+                {
+                  "disabled": false,
+                  "key": "assetExternalAccountId",
+                  "value": "<string>",
+                  "description": "Filter vulnerable assets by..."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "auditId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7e03cc9f-ef4a-4ce1-9245-6ca3515ce89d",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audits",
+                    ":auditId",
+                    "vulnerable-assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integrationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetExternalAccountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "auditId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"pageInfo\": {\n      \"hasNextPage\": true,\n      \"hasPreviousPage\": false,\n      \"startCursor\": \"YXJyYXljb25uZWN0aW9uOjA=\",\n      \"endCursor\": \"YXJyYXljb25uZWN0aW9uOjE=\"\n    },\n    \"data\": [\n      {\n        \"id\": \"a2f7e1b9d0c3f4e5a6c7b8d9\",\n        \"name\": \"CVE-2021-12345\",\n        \"assetType\": \"SERVER\",\n        \"hasBeenScanned\": true,\n        \"imageScanTag\": \"apac-production:latest\",\n        \"scanners\": [\n          {\n            \"resourceId\": \"6733c25f852819d3b8d97a86\",\n            \"integrationId\": \"qualys\",\n            \"imageDigest\": \"sha256:123456\",\n            \"imagePushedAtDate\": \"2021-01-01T00:00:00.000Z\",\n            \"imageTags\": [\n              \"candidate-1234567890\"\n            ],\n            \"assetTags\": [\n              {\n                \"key\": \"company-name\",\n                \"value\": \"vanta-llama\"\n              }\n            ],\n            \"parentAccountOrOrganization\": \"12345678-abcd-cdef-ab12-abcd1234bbbb\",\n            \"biosUuid\": \"123456\",\n            \"ipv4s\": [\n              \"12.12.123.123\"\n            ],\n            \"ipv6s\": null,\n            \"macAddresses\": [\n              \"1234AB987FED\"\n            ],\n            \"hostnames\": [\n              \"purple-llama\"\n            ],\n            \"fqdns\": [\n              \"purple-llama\"\n            ],\n            \"operatingSystems\": [\n              \"Windows11\"\n            ],\n            \"targetId\": \"12345678-abcd-cdef-ab12-abcd1234bbbc\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8f37ab0e-1d11-49de-b1d2-a1d7e7b2c19d",
+      "name": "Auditors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e44abf32-90b3-4ad5-9ea8-0af4064622a3",
+          "name": "Create an auditor",
+          "request": {
+            "name": "Create an auditor",
+            "description": {
+              "content": "Create an auditor in Vanta.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auditors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aacc45ae-d496-49af-ad97-dade1e3f5a0c",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auditors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"65fc81a3359c8508c9af880f\",\n  \"organizationId\": \"8c9af880f1a335965fc850c8\",\n  \"email\": \"testauditor@audit.com\",\n  \"givenName\": \"Sam\",\n  \"familyName\": \"Auditor\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ac034b7-af94-41d4-8621-1f52677a5172",
+    "name": "Conduct an audit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}
