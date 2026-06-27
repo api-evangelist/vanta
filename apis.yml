@@ -96,22 +96,22 @@ common:
     type: Product
   - name: Auditor SDK TypeScript
     url: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
-    type: SDK
+    type: SDKs
   - name: Auditor SDK Java
     url: https://github.com/VantaInc/vanta-auditor-api-sdk-java
-    type: SDK
+    type: SDKs
   - name: MCP Server
     url: https://github.com/VantaInc/vanta-mcp-server
-    type: SDK
+    type: SDKs
   - name: ESLint Plugin
     url: https://github.com/VantaInc/eslint-plugin-vanta
-    type: SDK
+    type: SDKs
   - name: Control Set
     url: https://github.com/VantaInc/vanta-control-set
     type: Schema
   - name: GitHub
     url: https://www.vanta.com/integrations/github
-    type: Integration
+    type: Integrations
   - name: April 2026 Updates
     url: https://www.vanta.com/resources/new-in-vanta-april-2026
     type: ChangeLog
@@ -121,5 +121,5 @@ common:
   - name: Auditor OpenAPI Spec
     url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml
     type: OpenAPI
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developer.vanta.com/llms.txt
