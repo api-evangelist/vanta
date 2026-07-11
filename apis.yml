@@ -65,6 +65,10 @@ apis:
       query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit
       engagements.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/vanta-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/vanta-domain-security.yml
   - type: Authentication
     url: authentication/vanta-authentication.yml
   - type: OAuthScopes

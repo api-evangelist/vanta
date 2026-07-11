@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vanta-auditor-openapi.yml, openapi/vanta-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oauth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.vanta.com/oauth/token
+    scopes: 4
+  description: Get an oauth token from the token url and use it as a bearer token to access
+    the Vanta API.
+  sources:
+  - openapi/vanta-auditor-openapi.yml
+  - openapi/vanta-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/vanta-auditor-openapi.yml
