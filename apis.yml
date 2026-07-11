@@ -65,6 +65,10 @@ apis:
       query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit
       engagements.
 common:
+  - type: Authentication
+    url: authentication/vanta-authentication.yml
+  - type: OAuthScopes
+    url: scopes/vanta-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/vanta-security
   - name: Developer Portal

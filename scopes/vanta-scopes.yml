@@ -1,0 +1,67 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vanta-auditor-openapi.yml, openapi/vanta-openapi.yml
+schemes:
+- name: oauth
+  source: openapi/vanta-auditor-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.vanta.com/oauth/token
+  description: Get an oauth token from the token url and use it as a bearer token to access
+    the Vanta API.
+- name: OAuth2
+  source: openapi/vanta-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.vanta.com/oauth/token
+scopes:
+- scope: auditor-api.audit:read
+  description: Grant read-only access to your audits
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-auditor-openapi.yml
+  - openapi/vanta-openapi.yml
+- scope: auditor-api.audit:write
+  description: Grant read-write access to your audits
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-auditor-openapi.yml
+- scope: auditor-api.auditor:read
+  description: Grant read-only access to your auditors
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-auditor-openapi.yml
+  - openapi/vanta-openapi.yml
+- scope: auditor-api.auditor:write
+  description: Grant read-write access to your auditors
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-auditor-openapi.yml
+- scope: connectors.self:read-resource
+  description: Read connector resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-openapi.yml
+- scope: connectors.self:write-resource
+  description: Write connector resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-openapi.yml
+- scope: vanta.read
+  description: Read access to Vanta data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-openapi.yml
+- scope: vanta.write
+  description: Write access to Vanta data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/vanta-openapi.yml
