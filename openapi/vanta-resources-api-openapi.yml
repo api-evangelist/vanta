@@ -1,0 +1,226 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Resources API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Resources
+  description: Monitored resource management and scoping
+paths:
+  /v1/resources:
+    get:
+      operationId: listResources
+      summary: List Resources
+      description: List all monitored resources in scope for compliance.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      - name: resourceType
+        in: query
+        schema:
+          type: string
+        description: Filter by resource type (e.g., Computer, Repository, CloudResource)
+      responses:
+        '200':
+          description: Paginated list of resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/computers:
+    get:
+      operationId: listComputers
+      summary: List Monitored Computers
+      description: List all monitored computers with compliance status including screenlock, encryption, antivirus, and password management status.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      - name: complianceStatus
+        in: query
+        schema:
+          type: string
+          enum:
+          - COMPLIANT
+          - NON_COMPLIANT
+        description: Filter computers by compliance status
+      responses:
+        '200':
+          description: Paginated list of monitored computers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  schemas:
+    ResourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Computer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique computer identifier
+        hostname:
+          type: string
+          description: Computer hostname
+        osName:
+          type: string
+          description: Operating system name
+        osVersion:
+          type: string
+          description: Operating system version
+        userId:
+          type: string
+          nullable: true
+          description: Assigned user ID
+        screenlockEnabled:
+          type: boolean
+          description: Whether screenlock is enabled
+        diskEncryptionEnabled:
+          type: boolean
+          description: Whether disk encryption is enabled
+        antivirusInstalled:
+          type: boolean
+          description: Whether antivirus software is installed
+        passwordManagerInstalled:
+          type: boolean
+          description: Whether password manager is installed
+        isCompliant:
+          type: boolean
+          description: Overall compliance status
+        lastCheckedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Last time compliance was checked
+    ComputerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Computer'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    Resource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique resource identifier
+        type:
+          type: string
+          description: Resource type (Computer, Repository, CloudResource, etc.)
+        name:
+          type: string
+          description: Resource name
+        ownerId:
+          type: string
+          nullable: true
+          description: User ID of the resource owner
+        inScope:
+          type: boolean
+          description: Whether this resource is in compliance scope
+        createdAt:
+          type: string
+          format: date-time
+          description: When this resource was first observed
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Users API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Users
+  description: User and personnel management
+paths:
+  /v1/users:
+    get:
+      operationId: listUsers
+      summary: List Active Users
+      description: Retrieve a paginated list of all active users in the organization.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of active users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/people:
+    get:
+      operationId: listPeople
+      summary: List People
+      description: Retrieve a paginated list of people in the organization including employment status, security task completion, and training status.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of people
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the person
+        email:
+          type: string
+          format: email
+          description: Person email address
+        displayName:
+          type: string
+          description: Person display name
+        employmentStatus:
+          type: string
+          enum:
+          - EMPLOYEE
+          - CONTRACTOR
+          - TERMINATED
+          description: Employment status
+        securityTasksOverdue:
+          type: integer
+          description: Number of overdue security tasks
+        trainingCompleted:
+          type: boolean
+          description: Whether security training has been completed
+        backgroundCheckCompleted:
+          type: boolean
+          description: Whether background check has been completed
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    PersonListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+        email:
+          type: string
+          format: email
+          description: User email address
+        displayName:
+          type: string
+          description: User display name
+        role:
+          type: string
+          description: User role in the organization
+        isActive:
+          type: boolean
+          description: Whether the user account is active
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when user was created
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

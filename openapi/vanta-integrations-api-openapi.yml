@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Integrations API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Integrations
+  description: Integration configuration and status management
+paths:
+  /v1/integrations:
+    get:
+      operationId: listIntegrations
+      summary: List Integrations
+      description: List all configured integrations and their connection status.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of integrations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/resources/custom:
+    post:
+      operationId: createCustomResource
+      summary: Create Custom Resource
+      description: Push custom resource data from non-integrated systems using custom resource schemas to extend Vanta's compliance monitoring.
+      tags:
+      - Integrations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomResourceRequest'
+      responses:
+        '201':
+          description: Custom resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomResource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CreateCustomResourceRequest:
+      type: object
+      required:
+      - resourceType
+      - resourceId
+      - data
+      properties:
+        resourceType:
+          type: string
+          description: Custom resource type identifier
+        resourceId:
+          type: string
+          description: Unique identifier for this resource instance
+        data:
+          type: object
+          additionalProperties: true
+          description: Resource-type-specific data fields
+        displayName:
+          type: string
+          description: Human-readable name for the resource
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique integration identifier
+        name:
+          type: string
+          description: Integration name
+        type:
+          type: string
+          description: Integration type (GitHub, AWS, GCP, Jira, etc.)
+        status:
+          type: string
+          enum:
+          - CONNECTED
+          - DISCONNECTED
+          - ERROR
+          description: Current connection status
+        lastSyncAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Last successful sync timestamp
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    CustomResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Vanta-generated resource identifier
+        resourceType:
+          type: string
+          description: Custom resource type
+        resourceId:
+          type: string
+          description: External resource identifier
+        displayName:
+          type: string
+          nullable: true
+          description: Human-readable resource name
+        data:
+          type: object
+          additionalProperties: true
+          description: Resource data fields
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    IntegrationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

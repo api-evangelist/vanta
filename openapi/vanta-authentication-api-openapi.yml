@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Authentication API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Authentication
+  description: OAuth 2.0 token management
+paths:
+  /oauth/token:
+    post:
+      operationId: getAccessToken
+      summary: Get Access Token
+      description: Obtain an OAuth 2.0 access token using client credentials. Use the returned access_token as a Bearer token in subsequent API requests.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  description: OAuth 2.0 grant type
+                client_id:
+                  type: string
+                  description: Your Vanta client ID
+                client_secret:
+                  type: string
+                  description: Your Vanta client secret
+                scope:
+                  type: string
+                  description: Space-separated list of OAuth scopes
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+      responses:
+        '200':
+          description: Access token response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: OAuth 2.0 access token for API requests
+        token_type:
+          type: string
+          description: Token type (Bearer)
+        expires_in:
+          type: integer
+          description: Token expiration time in seconds
+        scope:
+          type: string
+          description: Granted scopes
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

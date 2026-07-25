@@ -1,0 +1,333 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Vendors API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Vendors
+  description: Third-party vendor security review management
+paths:
+  /v1/vendors:
+    get:
+      operationId: listVendors
+      summary: List Vendors
+      description: Query and manage vendors and their security review information.
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      - name: riskLevel
+        in: query
+        schema:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+        description: Filter vendors by risk level
+      responses:
+        '200':
+          description: Paginated list of vendors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createVendor
+      summary: Create Vendor
+      description: Create a new vendor in Vanta for security review tracking.
+      tags:
+      - Vendors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVendorRequest'
+      responses:
+        '201':
+          description: Vendor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/vendors/{vendorId}:
+    get:
+      operationId: getVendor
+      summary: Get Vendor
+      description: Retrieve a specific vendor and its security review details.
+      tags:
+      - Vendors
+      parameters:
+      - name: vendorId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the vendor
+      responses:
+        '200':
+          description: Vendor details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    patch:
+      operationId: updateVendor
+      summary: Update Vendor
+      description: Update vendor information and security review details.
+      tags:
+      - Vendors
+      parameters:
+      - name: vendorId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the vendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVendorRequest'
+      responses:
+        '200':
+          description: Vendor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  schemas:
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique vendor identifier
+        name:
+          type: string
+          description: Vendor company name
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: Vendor website URL
+        riskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          description: Inherent risk level
+        residualRiskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          nullable: true
+          description: Residual risk level after controls
+        reviewStatus:
+          type: string
+          enum:
+          - NOT_STARTED
+          - IN_PROGRESS
+          - APPROVED
+          - REJECTED
+          description: Security review status
+        hasContract:
+          type: boolean
+          description: Whether a contract exists with the vendor
+        hasDpa:
+          type: boolean
+          description: Whether a Data Processing Agreement exists
+        createdAt:
+          type: string
+          format: date-time
+          description: When this vendor was added
+        nextReviewDate:
+          type: string
+          format: date
+          nullable: true
+          description: Date of next scheduled security review
+    VendorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    UpdateVendorRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Vendor company name
+        url:
+          type: string
+          format: uri
+          description: Vendor website URL
+        riskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          description: Inherent risk level
+        reviewStatus:
+          type: string
+          enum:
+          - NOT_STARTED
+          - IN_PROGRESS
+          - APPROVED
+          - REJECTED
+          description: Security review status
+    CreateVendorRequest:
+      type: object
+      required:
+      - name
+      - riskLevel
+      properties:
+        name:
+          type: string
+          description: Vendor company name
+        url:
+          type: string
+          format: uri
+          description: Vendor website URL
+        riskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          description: Inherent risk level
+        description:
+          type: string
+          description: Vendor description and use case
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

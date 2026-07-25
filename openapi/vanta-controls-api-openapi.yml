@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Controls API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Controls
+  description: Compliance controls and framework management
+paths:
+  /v1/controls:
+    get:
+      operationId: listControls
+      summary: List Controls
+      description: Query information about compliance controls including control language and statuses.
+      tags:
+      - Controls
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      - name: frameworkId
+        in: query
+        schema:
+          type: string
+        description: Filter controls by framework identifier
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - PASSING
+          - FAILING
+          - NEEDS_ATTENTION
+          - NOT_APPLICABLE
+        description: Filter by control status
+      responses:
+        '200':
+          description: Paginated list of controls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ControlListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/frameworks:
+    get:
+      operationId: listFrameworks
+      summary: List Frameworks
+      description: Query all compliance frameworks configured in the organization.
+      tags:
+      - Controls
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of frameworks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FrameworkListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Control:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique control identifier
+        name:
+          type: string
+          description: Control name
+        description:
+          type: string
+          description: Control description and requirements
+        status:
+          type: string
+          enum:
+          - PASSING
+          - FAILING
+          - NEEDS_ATTENTION
+          - NOT_APPLICABLE
+          description: Current control status
+        frameworkId:
+          type: string
+          description: Framework this control belongs to
+        ownerId:
+          type: string
+          nullable: true
+          description: User ID of the control owner
+        testCount:
+          type: integer
+          description: Number of tests associated with this control
+        passingTestCount:
+          type: integer
+          description: Number of passing tests
+    ControlListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Control'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    FrameworkListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Framework'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Framework:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique framework identifier
+        name:
+          type: string
+          description: Framework name (e.g., SOC 2, ISO 27001, HIPAA)
+        description:
+          type: string
+          description: Framework description
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+          - READY_FOR_AUDIT
+          - CERTIFIED
+          description: Overall framework readiness status
+        controlCount:
+          type: integer
+          description: Total number of controls in this framework
+        passingControlCount:
+          type: integer
+          description: Number of passing controls
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

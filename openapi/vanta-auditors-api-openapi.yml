@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Auditors
+paths:
+  /auditors:
+    post:
+      operationId: CreateAuditor
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Auditor'
+              examples:
+                Example 1:
+                  value:
+                    id: 65fc81a3359c8508c9af880f
+                    organizationId: 8c9af880f1a335965fc850c8
+                    email: testauditor@audit.com
+                    givenName: Sam
+                    familyName: Auditor
+      description: Create an auditor in Vanta.
+      summary: Create an auditor
+      tags:
+      - Auditors
+      security:
+      - bearerAuth: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAuditorInput'
+components:
+  schemas:
+    Auditor:
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+          description: The unique identifier for the organization.
+        email:
+          type: string
+          description: The email address of the auditor.
+        givenName:
+          type: string
+          description: The given name (first name) of the auditor.
+        familyName:
+          type: string
+          description: The family name (last name) of the auditor.
+      required:
+      - id
+      - organizationId
+      - email
+      - givenName
+      - familyName
+      type: object
+      additionalProperties: false
+    AddAuditorInput:
+      properties:
+        email:
+          type: string
+          description: Email of the new user.
+        givenName:
+          type: string
+          description: First name of the new user.
+        familyName:
+          type: string
+          description: Last name of the new user.
+      required:
+      - email
+      - givenName
+      - familyName
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer

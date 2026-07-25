@@ -1,0 +1,356 @@
+openapi: 3.0.0
+info:
+  title: Conduct an audit Auditors Vulnerabilities API
+  version: 1.0.0
+  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  termsOfService: https://www.vanta.com/terms
+  license:
+    name: UNLICENSED
+  contact:
+    name: API Support
+    url: https://help.vanta.com/
+    email: support@vanta.com
+servers:
+- url: https://api.vanta.com/v1
+tags:
+- name: Vulnerabilities
+  description: Vulnerability tracking and remediation management
+paths:
+  /v1/vulnerabilities:
+    get:
+      operationId: listVulnerabilities
+      summary: Get Vulnerabilities
+      description: List all vulnerabilities based on selected filters including severity and remediation status.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      - name: severity
+        in: query
+        schema:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          - INFORMATIONAL
+        description: Filter by vulnerability severity
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - OPEN
+          - REMEDIATED
+          - ACCEPTED
+        description: Filter by remediation status
+      responses:
+        '200':
+          description: Paginated list of vulnerabilities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VulnerabilityListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/resources/api_endpoint_vulnerability_connectors:
+    get:
+      operationId: listApiEndpointVulnerabilities
+      summary: List API Endpoint Vulnerabilities
+      description: List ApiEndpointVulnerabilityConnectors resources for the given application.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: resourceId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Vanta generated identifier for the given resource
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of API endpoint vulnerabilities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    put:
+      operationId: syncApiEndpointVulnerabilities
+      summary: Sync API Endpoint Vulnerabilities
+      description: Sync all ApiEndpointVulnerabilityConnectors resources for the given application.
+      tags:
+      - Vulnerabilities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiEndpointVulnerabilitySync'
+      responses:
+        '200':
+          description: Sync successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/resources/package_vulnerability_connectors:
+    get:
+      operationId: listPackageVulnerabilities
+      summary: List Package Vulnerabilities
+      description: List PackageVulnerabilityConnectors resources for the given application.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: resourceId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Vanta generated identifier for the given resource
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of package vulnerabilities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/resources/vulnerable_component:
+    get:
+      operationId: listVulnerableComponents
+      summary: List Vulnerable Components
+      description: List VulnerableComponent resources for the given application.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: resourceId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Vanta generated identifier for the given resource
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/pageCursor'
+      responses:
+        '200':
+          description: Paginated list of vulnerable components
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+  schemas:
+    Vulnerability:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique vulnerability identifier
+        title:
+          type: string
+          description: Vulnerability title
+        description:
+          type: string
+          description: Detailed vulnerability description
+        severity:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          - INFORMATIONAL
+          description: Vulnerability severity level
+        status:
+          type: string
+          enum:
+          - OPEN
+          - REMEDIATED
+          - ACCEPTED
+          description: Remediation status
+        cvssScore:
+          type: number
+          format: float
+          description: CVSS score (0-10)
+        cveId:
+          type: string
+          description: CVE identifier if applicable
+        remediationSlaDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: SLA deadline for remediation
+        discoveredAt:
+          type: string
+          format: date-time
+          description: When the vulnerability was discovered
+        remediatedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the vulnerability was remediated
+        affectedResources:
+          type: array
+          items:
+            type: string
+          description: List of affected resource IDs
+    ApiEndpointVulnerabilitySync:
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Vanta generated identifier for the resource
+        vulnerabilities:
+          type: array
+          items:
+            type: object
+            properties:
+              endpoint:
+                type: string
+                description: API endpoint path
+              method:
+                type: string
+                description: HTTP method
+              severity:
+                type: string
+                enum:
+                - CRITICAL
+                - HIGH
+                - MEDIUM
+                - LOW
+              description:
+                type: string
+                description: Vulnerability description
+      required:
+      - resourceId
+      - vulnerabilities
+    ConnectorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    SyncResponse:
+      type: object
+      properties:
+        synced:
+          type: integer
+          description: Number of records synced
+        message:
+          type: string
+          description: Sync result message
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    VulnerabilityListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
+      flows:
+        clientCredentials:
+          scopes:
+            auditor-api.audit:read: Grant read-only access to your audits
+            auditor-api.audit:write: Grant read-write access to your audits
+            auditor-api.auditor:read: Grant read-only access to your auditors
+            auditor-api.auditor:write: Grant read-write access to your auditors
+          tokenUrl: https://api.vanta.com/oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer
