@@ -8,7 +8,20 @@ tags:
   - Governance
   - Risk Management
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vanta.png
 access: 3rd-Party
 created: '2024-11-14'
 modified: '2026-05-19'
@@ -22,49 +35,185 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 apis:
-  - aid: vanta:vanta-api
-    name: Vanta API
-    tags:
-      - Cybersecurity
-      - Compliance
-      - Security
-      - Governance
-      - Risk Management
-    humanURL: https://developer.vanta.com/docs/vanta-api-overview
-    baseURL: https://api.vanta.com
-    properties:
-      - url: https://developer.vanta.com/docs/vanta-api-overview
-        type: Documentation
-      - url: https://developer.vanta.com/docs/api-access-setup
-        type: Authentication
-      - url: https://developer.vanta.com/docs/faq
-        type: FAQ
-      - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Vanta REST API enables programmatic access to compliance, security monitoring, vulnerability management,
-      personnel management, vendor management, and custom integration capabilities. The API uses OAuth 2.0
-      authentication and returns JSON responses. Rate limits range from 5 to 250 requests per minute depending on
-      endpoint category.
-  - aid: vanta:vanta-auditor-api
-    name: Vanta Auditor API
-    tags:
-      - Cybersecurity
-      - Compliance
-      - Audit
-      - Security
-    humanURL: https://developer.vanta.com/docs/vanta-api-overview
-    baseURL: https://api.vanta.com
-    properties:
-      - url: https://developer.vanta.com/docs/vanta-api-overview
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Vanta Auditor API provides external audit firms programmatic access to customer compliance data. Auditors can
-      query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit
-      engagements.
+- aid: vanta:vanta-auditors-api
+  name: Vanta Auditors API
+  description: The Auditors API from Vanta — 1 operation(s) for auditors.
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Auditors
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-auditors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-audits-api
+  name: Vanta Audits API
+  description: The Audits API from Vanta — 15 operation(s) for audits.
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Audits
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-audits-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-authentication-api
+  name: Vanta Authentication API
+  description: OAuth 2.0 token management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-controls-api
+  name: Vanta Controls API
+  description: Compliance controls and framework management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Controls
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-controls-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-documents-api
+  name: Vanta Documents API
+  description: Compliance evidence document management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-integrations-api
+  name: Vanta Integrations API
+  description: Integration configuration and status management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-resources-api
+  name: Vanta Resources API
+  description: Monitored resource management and scoping
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-resources-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-tests-api
+  name: Vanta Tests API
+  description: Automated test results and evidence
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Tests
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-tests-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-users-api
+  name: Vanta Users API
+  description: User and personnel management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-vendors-api
+  name: Vanta Vendors API
+  description: Third-party vendor security review management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
+- aid: vanta:vanta-vulnerabilities-api
+  name: Vanta Vulnerabilities API
+  description: Vulnerability tracking and remediation management
+  humanURL: https://developer.vanta.com/docs/vanta-api-overview
+  baseURL: https://api.vanta.com
+  tags:
+  - Vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/vanta-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vanta.com/docs/vanta-api-overview
+  - type: Authentication
+    url: https://developer.vanta.com/docs/api-access-setup
+  - type: FAQ
+    url: https://developer.vanta.com/docs/faq
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/vanta/overview
   - type: AgenticAccess
     url: agentic-access/vanta-agentic-access.yml
   - type: VulnerabilityDisclosure
