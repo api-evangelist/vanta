@@ -1,0 +1,1221 @@
+{
+  "info": {
+    "_postman_id": "98deb0f2-3aed-4721-a07b-9648b74cf1dd",
+    "name": "Conduct an audit Auditors Vulnerabilities API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:43.000Z",
+    "updatedAt": "2026-07-28T03:26:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-98deb0f2-3aed-4721-a07b-9648b74cf1dd"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "vulnerabilities",
+          "item": [
+            {
+              "name": "Get Vulnerabilities",
+              "id": "cee12af0-5a2d-4eb5-a076-cc1ecdf4ba85",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/vulnerabilities?pageSize=10&pageCursor=<string>&severity=MEDIUM&status=OPEN",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "vulnerabilities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by vulnerability severity",
+                      "key": "severity",
+                      "value": "MEDIUM"
+                    },
+                    {
+                      "description": "Filter by remediation status",
+                      "key": "status",
+                      "value": "OPEN"
+                    }
+                  ]
+                },
+                "description": "List all vulnerabilities based on selected filters including severity and remediation status."
+              },
+              "response": [
+                {
+                  "id": "6defd86b-8b0e-4a87-b640-b151c9e57057",
+                  "name": "Paginated list of vulnerabilities",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vulnerabilities?pageSize=10&pageCursor=<string>&severity=MEDIUM&status=OPEN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vulnerabilities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by vulnerability severity",
+                          "key": "severity",
+                          "value": "MEDIUM"
+                        },
+                        {
+                          "description": "Filter by remediation status",
+                          "key": "status",
+                          "value": "OPEN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"severity\": \"HIGH\",\n      \"status\": \"ACCEPTED\",\n      \"cvssScore\": \"<float>\",\n      \"cveId\": \"<string>\",\n      \"remediationSlaDate\": \"<dateTime>\",\n      \"discoveredAt\": \"<dateTime>\",\n      \"remediatedAt\": \"<dateTime>\",\n      \"affectedResources\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"severity\": \"HIGH\",\n      \"status\": \"OPEN\",\n      \"cvssScore\": \"<float>\",\n      \"cveId\": \"<string>\",\n      \"remediationSlaDate\": \"<dateTime>\",\n      \"discoveredAt\": \"<dateTime>\",\n      \"remediatedAt\": \"<dateTime>\",\n      \"affectedResources\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-6defd86b-8b0e-4a87-b640-b151c9e57057"
+                },
+                {
+                  "id": "1dc0971f-2207-4b51-826e-f2e2b10e5d67",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vulnerabilities?pageSize=10&pageCursor=<string>&severity=MEDIUM&status=OPEN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vulnerabilities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by vulnerability severity",
+                          "key": "severity",
+                          "value": "MEDIUM"
+                        },
+                        {
+                          "description": "Filter by remediation status",
+                          "key": "status",
+                          "value": "OPEN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-1dc0971f-2207-4b51-826e-f2e2b10e5d67"
+                },
+                {
+                  "id": "35df1302-ba59-4602-9ec1-ec59738bdefb",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vulnerabilities?pageSize=10&pageCursor=<string>&severity=MEDIUM&status=OPEN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vulnerabilities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by vulnerability severity",
+                          "key": "severity",
+                          "value": "MEDIUM"
+                        },
+                        {
+                          "description": "Filter by remediation status",
+                          "key": "status",
+                          "value": "OPEN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-35df1302-ba59-4602-9ec1-ec59738bdefb"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:44.000Z",
+              "updatedAt": "2026-07-28T03:26:44.000Z",
+              "uid": "35240-cee12af0-5a2d-4eb5-a076-cc1ecdf4ba85"
+            }
+          ],
+          "id": "537be920-fba5-48cb-8881-2e85eaef4a98",
+          "createdAt": "2026-07-28T03:26:44.000Z",
+          "updatedAt": "2026-07-28T03:26:44.000Z",
+          "uid": "35240-537be920-fba5-48cb-8881-2e85eaef4a98"
+        },
+        {
+          "name": "resources",
+          "item": [
+            {
+              "name": "api_endpoint_vulnerability_connectors",
+              "item": [
+                {
+                  "name": "List API Endpoint Vulnerabilities",
+                  "id": "ffe80c5e-45f8-4dbd-ada3-e15516b2c3c3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources",
+                        "api_endpoint_vulnerability_connectors"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Vanta generated identifier for the given resource",
+                          "key": "resourceId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List ApiEndpointVulnerabilityConnectors resources for the given application."
+                  },
+                  "response": [
+                    {
+                      "id": "cb072e8b-df78-494c-99ef-1c62ee83cafb",
+                      "name": "Paginated list of API endpoint vulnerabilities",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"aliquip_ba\": \"minim occaecat sunt incididunt commodo\",\n      \"Ut22b\": \"sit in conse\"\n    },\n    {\n      \"id_6da\": -37218971,\n      \"anim4\": true,\n      \"dolor1\": false\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-cb072e8b-df78-494c-99ef-1c62ee83cafb"
+                    },
+                    {
+                      "id": "88e41ba9-698f-4252-b85f-a5cea61c989e",
+                      "name": "Unauthorized \u2014 missing or invalid access token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-88e41ba9-698f-4252-b85f-a5cea61c989e"
+                    },
+                    {
+                      "id": "678e5c3a-a169-456b-ba00-e4baceb11426",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-678e5c3a-a169-456b-ba00-e4baceb11426"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-ffe80c5e-45f8-4dbd-ada3-e15516b2c3c3"
+                },
+                {
+                  "name": "Sync API Endpoint Vulnerabilities",
+                  "id": "c70f76e5-7c55-44f3-80fa-fdcb7e8228bf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resourceId\": \"<string>\",\n  \"vulnerabilities\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"MEDIUM\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"CRITICAL\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources",
+                        "api_endpoint_vulnerability_connectors"
+                      ]
+                    },
+                    "description": "Sync all ApiEndpointVulnerabilityConnectors resources for the given application."
+                  },
+                  "response": [
+                    {
+                      "id": "f41803ca-fd5f-41c7-b964-3f5e5e28971a",
+                      "name": "Sync successful",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceId\": \"<string>\",\n  \"vulnerabilities\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"MEDIUM\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"CRITICAL\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"synced\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-f41803ca-fd5f-41c7-b964-3f5e5e28971a"
+                    },
+                    {
+                      "id": "95757bd3-132d-45cb-9302-336454fdcb9d",
+                      "name": "Bad request \u2014 invalid parameters or request body",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceId\": \"<string>\",\n  \"vulnerabilities\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"MEDIUM\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"CRITICAL\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-95757bd3-132d-45cb-9302-336454fdcb9d"
+                    },
+                    {
+                      "id": "e3cc73b1-792e-4eef-8b57-a4e0559e99d9",
+                      "name": "Unauthorized \u2014 missing or invalid access token",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceId\": \"<string>\",\n  \"vulnerabilities\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"MEDIUM\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"CRITICAL\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-e3cc73b1-792e-4eef-8b57-a4e0559e99d9"
+                    },
+                    {
+                      "id": "048ff798-65f4-4ff8-8490-c5a34e1bcc98",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceId\": \"<string>\",\n  \"vulnerabilities\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"MEDIUM\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"method\": \"<string>\",\n      \"severity\": \"CRITICAL\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/api_endpoint_vulnerability_connectors",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "api_endpoint_vulnerability_connectors"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-048ff798-65f4-4ff8-8490-c5a34e1bcc98"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-c70f76e5-7c55-44f3-80fa-fdcb7e8228bf"
+                }
+              ],
+              "id": "b5c7fd4e-aad6-4b75-aabc-5d4f09b79d98",
+              "createdAt": "2026-07-28T03:26:44.000Z",
+              "updatedAt": "2026-07-28T03:26:44.000Z",
+              "uid": "35240-b5c7fd4e-aad6-4b75-aabc-5d4f09b79d98"
+            },
+            {
+              "name": "package_vulnerability_connectors",
+              "item": [
+                {
+                  "name": "List Package Vulnerabilities",
+                  "id": "efee0326-edfd-4638-b5b8-a5c3c4211495",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources/package_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources",
+                        "package_vulnerability_connectors"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Vanta generated identifier for the given resource",
+                          "key": "resourceId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List PackageVulnerabilityConnectors resources for the given application."
+                  },
+                  "response": [
+                    {
+                      "id": "d57d46ad-a9e7-4570-b2eb-d9be5897be02",
+                      "name": "Paginated list of package vulnerabilities",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/package_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "package_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"aliquip_ba\": \"minim occaecat sunt incididunt commodo\",\n      \"Ut22b\": \"sit in conse\"\n    },\n    {\n      \"id_6da\": -37218971,\n      \"anim4\": true,\n      \"dolor1\": false\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-d57d46ad-a9e7-4570-b2eb-d9be5897be02"
+                    },
+                    {
+                      "id": "c0cf49ca-9efd-4a43-b359-809a1ab871ee",
+                      "name": "Unauthorized \u2014 missing or invalid access token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/package_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "package_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-c0cf49ca-9efd-4a43-b359-809a1ab871ee"
+                    },
+                    {
+                      "id": "14a4add8-cfce-48ac-8b06-97458935fe51",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/package_vulnerability_connectors?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "package_vulnerability_connectors"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-14a4add8-cfce-48ac-8b06-97458935fe51"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-efee0326-edfd-4638-b5b8-a5c3c4211495"
+                }
+              ],
+              "id": "9aa05c86-ac92-4f68-afe3-eecdd1ed2df8",
+              "createdAt": "2026-07-28T03:26:44.000Z",
+              "updatedAt": "2026-07-28T03:26:44.000Z",
+              "uid": "35240-9aa05c86-ac92-4f68-afe3-eecdd1ed2df8"
+            },
+            {
+              "name": "vulnerable_component",
+              "item": [
+                {
+                  "name": "List Vulnerable Components",
+                  "id": "0616dace-6aac-460a-90e0-692c30107e18",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources/vulnerable_component?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources",
+                        "vulnerable_component"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Vanta generated identifier for the given resource",
+                          "key": "resourceId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List VulnerableComponent resources for the given application."
+                  },
+                  "response": [
+                    {
+                      "id": "798b498e-4e01-4e2c-b3a0-376cb5332e89",
+                      "name": "Paginated list of vulnerable components",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/vulnerable_component?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "vulnerable_component"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"aliquip_ba\": \"minim occaecat sunt incididunt commodo\",\n      \"Ut22b\": \"sit in conse\"\n    },\n    {\n      \"id_6da\": -37218971,\n      \"anim4\": true,\n      \"dolor1\": false\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-798b498e-4e01-4e2c-b3a0-376cb5332e89"
+                    },
+                    {
+                      "id": "3b19dc7f-22e1-4e33-928f-5f60e6233c59",
+                      "name": "Unauthorized \u2014 missing or invalid access token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/vulnerable_component?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "vulnerable_component"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-3b19dc7f-22e1-4e33-928f-5f60e6233c59"
+                    },
+                    {
+                      "id": "7dafe9e9-8294-4976-9503-af5fbeaa2b7c",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/vulnerable_component?resourceId=<string>&pageSize=10&pageCursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "vulnerable_component"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vanta generated identifier for the given resource",
+                              "key": "resourceId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of items to return per page (1-100)",
+                              "key": "pageSize",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                              "key": "pageCursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:44.000Z",
+                      "updatedAt": "2026-07-28T03:26:44.000Z",
+                      "uid": "35240-7dafe9e9-8294-4976-9503-af5fbeaa2b7c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:44.000Z",
+                  "updatedAt": "2026-07-28T03:26:44.000Z",
+                  "uid": "35240-0616dace-6aac-460a-90e0-692c30107e18"
+                }
+              ],
+              "id": "c8a53922-ab2e-4466-9b5f-8f77c7a953d0",
+              "createdAt": "2026-07-28T03:26:44.000Z",
+              "updatedAt": "2026-07-28T03:26:44.000Z",
+              "uid": "35240-c8a53922-ab2e-4466-9b5f-8f77c7a953d0"
+            }
+          ],
+          "id": "29505198-95dd-42ef-b7c1-b433274cac18",
+          "createdAt": "2026-07-28T03:26:44.000Z",
+          "updatedAt": "2026-07-28T03:26:44.000Z",
+          "uid": "35240-29505198-95dd-42ef-b7c1-b433274cac18"
+        }
+      ],
+      "id": "400e186d-b8da-407f-b9fc-198e19e7556c",
+      "createdAt": "2026-07-28T03:26:44.000Z",
+      "updatedAt": "2026-07-28T03:26:44.000Z",
+      "uid": "35240-400e186d-b8da-407f-b9fc-198e19e7556c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

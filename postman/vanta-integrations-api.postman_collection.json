@@ -1,0 +1,509 @@
+{
+  "info": {
+    "_postman_id": "07de15fc-3795-481c-bac4-57d36bdd2175",
+    "name": "Conduct an audit Auditors Integrations API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:39.000Z",
+    "updatedAt": "2026-07-28T03:26:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07de15fc-3795-481c-bac4-57d36bdd2175"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "integrations",
+          "item": [
+            {
+              "name": "List Integrations",
+              "id": "67afbb36-63db-4761-b74a-858bc82c275b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/integrations?pageSize=10&pageCursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "integrations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "List all configured integrations and their connection status."
+              },
+              "response": [
+                {
+                  "id": "6abf2583-4862-4f43-9e3d-84799b030a4d",
+                  "name": "Paginated list of integrations",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/integrations?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "integrations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"status\": \"DISCONNECTED\",\n      \"lastSyncAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"status\": \"ERROR\",\n      \"lastSyncAt\": \"<dateTime>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:39.000Z",
+                  "updatedAt": "2026-07-28T03:26:39.000Z",
+                  "uid": "35240-6abf2583-4862-4f43-9e3d-84799b030a4d"
+                },
+                {
+                  "id": "854c49ae-c7e1-48f8-9743-2fe17a0cd5be",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/integrations?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "integrations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:39.000Z",
+                  "updatedAt": "2026-07-28T03:26:39.000Z",
+                  "uid": "35240-854c49ae-c7e1-48f8-9743-2fe17a0cd5be"
+                },
+                {
+                  "id": "8a6ea27b-945e-48b0-9819-8dcaaa62829c",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/integrations?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "integrations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:39.000Z",
+                  "updatedAt": "2026-07-28T03:26:39.000Z",
+                  "uid": "35240-8a6ea27b-945e-48b0-9819-8dcaaa62829c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:39.000Z",
+              "updatedAt": "2026-07-28T03:26:39.000Z",
+              "uid": "35240-67afbb36-63db-4761-b74a-858bc82c275b"
+            }
+          ],
+          "id": "c90c86b9-09cc-48f4-967d-f32aa3a55ac2",
+          "createdAt": "2026-07-28T03:26:39.000Z",
+          "updatedAt": "2026-07-28T03:26:39.000Z",
+          "uid": "35240-c90c86b9-09cc-48f4-967d-f32aa3a55ac2"
+        },
+        {
+          "name": "resources",
+          "item": [
+            {
+              "name": "custom",
+              "item": [
+                {
+                  "name": "Create Custom Resource",
+                  "id": "0cb00a95-8908-46d7-8213-7e04643f8046",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"est9\": -5654602.776257709\n  },\n  \"displayName\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources",
+                        "custom"
+                      ]
+                    },
+                    "description": "Push custom resource data from non-integrated systems using custom resource schemas to extend Vanta's compliance monitoring."
+                  },
+                  "response": [
+                    {
+                      "id": "0f37cb39-747c-4ce3-9a65-a6e52c9310d0",
+                      "name": "Custom resource created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"est9\": -5654602.776257709\n  },\n  \"displayName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/custom",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "custom"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"data\": {\n    \"deserunt1\": false,\n    \"pariatur_7f5\": \"pariatur Duis non\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:26:39.000Z",
+                      "updatedAt": "2026-07-28T03:26:39.000Z",
+                      "uid": "35240-0f37cb39-747c-4ce3-9a65-a6e52c9310d0"
+                    },
+                    {
+                      "id": "10f8215c-494f-43e8-bb17-753a7bdb0628",
+                      "name": "Bad request \u2014 invalid parameters or request body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"est9\": -5654602.776257709\n  },\n  \"displayName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/custom",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "custom"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:39.000Z",
+                      "updatedAt": "2026-07-28T03:26:39.000Z",
+                      "uid": "35240-10f8215c-494f-43e8-bb17-753a7bdb0628"
+                    },
+                    {
+                      "id": "3610f0d1-5191-4713-951d-9ba3bd664dd2",
+                      "name": "Unauthorized \u2014 missing or invalid access token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"est9\": -5654602.776257709\n  },\n  \"displayName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/custom",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "custom"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:39.000Z",
+                      "updatedAt": "2026-07-28T03:26:39.000Z",
+                      "uid": "35240-3610f0d1-5191-4713-951d-9ba3bd664dd2"
+                    },
+                    {
+                      "id": "126b13ef-4962-4575-9b6c-f009ac0b91c0",
+                      "name": "Rate limit exceeded",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"est9\": -5654602.776257709\n  },\n  \"displayName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/resources/custom",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "resources",
+                            "custom"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:26:39.000Z",
+                      "updatedAt": "2026-07-28T03:26:39.000Z",
+                      "uid": "35240-126b13ef-4962-4575-9b6c-f009ac0b91c0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:26:39.000Z",
+                  "updatedAt": "2026-07-28T03:26:39.000Z",
+                  "uid": "35240-0cb00a95-8908-46d7-8213-7e04643f8046"
+                }
+              ],
+              "id": "3bc55318-735c-4bf2-a0c5-d4485e72f3f8",
+              "createdAt": "2026-07-28T03:26:39.000Z",
+              "updatedAt": "2026-07-28T03:26:39.000Z",
+              "uid": "35240-3bc55318-735c-4bf2-a0c5-d4485e72f3f8"
+            }
+          ],
+          "id": "fd094c55-b055-4f44-855d-527109bfb2bb",
+          "createdAt": "2026-07-28T03:26:39.000Z",
+          "updatedAt": "2026-07-28T03:26:39.000Z",
+          "uid": "35240-fd094c55-b055-4f44-855d-527109bfb2bb"
+        }
+      ],
+      "id": "2237d1d8-e28e-4493-9676-7f3ffd034743",
+      "createdAt": "2026-07-28T03:26:39.000Z",
+      "updatedAt": "2026-07-28T03:26:39.000Z",
+      "uid": "35240-2237d1d8-e28e-4493-9676-7f3ffd034743"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  "info": {
+    "_postman_id": "f5812b09-ba7e-4367-8169-533a9518276f",
+    "name": "Conduct an audit Auditors Documents API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:38.000Z",
+    "updatedAt": "2026-07-28T03:26:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f5812b09-ba7e-4367-8169-533a9518276f"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "documents",
+          "item": [
+            {
+              "name": "List Documents",
+              "id": "ac4dc1d7-765f-4012-b8a6-e024e973146f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/documents?pageSize=10&pageCursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve compliance evidence documents uploaded to Vanta."
+              },
+              "response": [
+                {
+                  "id": "72e6d339-92a5-4633-9604-67e5643e05d3",
+                  "name": "Paginated list of documents",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"uploadedAt\": \"<dateTime>\",\n      \"uploadedBy\": \"<string>\",\n      \"downloadUrl\": \"<uri>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"mimeType\": \"<string>\",\n      \"sizeBytes\": \"<integer>\",\n      \"uploadedAt\": \"<dateTime>\",\n      \"uploadedBy\": \"<string>\",\n      \"downloadUrl\": \"<uri>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-72e6d339-92a5-4633-9604-67e5643e05d3"
+                },
+                {
+                  "id": "67288e00-137e-4858-99a5-0be38a8fb9fb",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-67288e00-137e-4858-99a5-0be38a8fb9fb"
+                },
+                {
+                  "id": "28bcdf1a-e80c-404c-908b-f76630336f1b",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-28bcdf1a-e80c-404c-908b-f76630336f1b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:38.000Z",
+              "updatedAt": "2026-07-28T03:26:38.000Z",
+              "uid": "35240-ac4dc1d7-765f-4012-b8a6-e024e973146f"
+            },
+            {
+              "name": "Upload Document",
+              "id": "b061545f-073d-4dde-813a-872fbee8b7fb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) The document file to upload",
+                      "key": "file",
+                      "type": "file",
+                      "value": null
+                    },
+                    {
+                      "description": "(Required) Name of the document",
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "Description of the document",
+                      "key": "description",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "documents"
+                  ]
+                },
+                "description": "Upload a compliance evidence document to Vanta."
+              },
+              "response": [
+                {
+                  "id": "e39ffd25-d7ec-4f4f-b5ad-eeb6dadd32c5",
+                  "name": "Document uploaded successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The document file to upload",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) Name of the document",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Description of the document",
+                          "key": "description",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mimeType\": \"<string>\",\n  \"sizeBytes\": \"<integer>\",\n  \"uploadedAt\": \"<dateTime>\",\n  \"uploadedBy\": \"<string>\",\n  \"downloadUrl\": \"<uri>\"\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-e39ffd25-d7ec-4f4f-b5ad-eeb6dadd32c5"
+                },
+                {
+                  "id": "c0ca1580-ccda-491e-bb7f-377713996cc0",
+                  "name": "Bad request \u2014 invalid parameters or request body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The document file to upload",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) Name of the document",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Description of the document",
+                          "key": "description",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-c0ca1580-ccda-491e-bb7f-377713996cc0"
+                },
+                {
+                  "id": "223fceae-5017-4bd9-bfef-8a3b18f8f394",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The document file to upload",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) Name of the document",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Description of the document",
+                          "key": "description",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-223fceae-5017-4bd9-bfef-8a3b18f8f394"
+                },
+                {
+                  "id": "addd9d9c-2fea-4e1d-acd4-0fc24307ceb5",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The document file to upload",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) Name of the document",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "Description of the document",
+                          "key": "description",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-addd9d9c-2fea-4e1d-acd4-0fc24307ceb5"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:38.000Z",
+              "updatedAt": "2026-07-28T03:26:38.000Z",
+              "uid": "35240-b061545f-073d-4dde-813a-872fbee8b7fb"
+            }
+          ],
+          "id": "893d0184-3c36-47ea-9c6d-22e223cc9795",
+          "createdAt": "2026-07-28T03:26:38.000Z",
+          "updatedAt": "2026-07-28T03:26:38.000Z",
+          "uid": "35240-893d0184-3c36-47ea-9c6d-22e223cc9795"
+        }
+      ],
+      "id": "c8fb997c-77b4-431b-918d-212eaf66efcc",
+      "createdAt": "2026-07-28T03:26:38.000Z",
+      "updatedAt": "2026-07-28T03:26:38.000Z",
+      "uid": "35240-c8fb997c-77b4-431b-918d-212eaf66efcc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "629bbc07-eb0f-47f8-9c1a-109d3500716a",
+    "name": "Conduct an audit Auditors API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:34.000Z",
+    "updatedAt": "2026-07-28T03:26:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-629bbc07-eb0f-47f8-9c1a-109d3500716a"
+  },
+  "item": [
+    {
+      "name": "auditors",
+      "item": [
+        {
+          "name": "Create an auditor",
+          "id": "57346c03-4677-4c4c-b244-3c5010baee77",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auditors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditors"
+              ]
+            },
+            "description": "Create an auditor in Vanta."
+          },
+          "response": [
+            {
+              "id": "5da12dad-1c21-4451-a6bc-0f46f901aba9",
+              "name": "Ok",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auditors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auditors"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:26:35.000Z",
+              "updatedAt": "2026-07-28T03:26:35.000Z",
+              "uid": "35240-5da12dad-1c21-4451-a6bc-0f46f901aba9"
+            }
+          ],
+          "createdAt": "2026-07-28T03:26:35.000Z",
+          "updatedAt": "2026-07-28T03:26:35.000Z",
+          "uid": "35240-57346c03-4677-4c4c-b244-3c5010baee77"
+        }
+      ],
+      "id": "ecc56a5b-af25-4191-bb9b-2fe6e80e901f",
+      "createdAt": "2026-07-28T03:26:35.000Z",
+      "updatedAt": "2026-07-28T03:26:35.000Z",
+      "uid": "35240-ecc56a5b-af25-4191-bb9b-2fe6e80e901f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "4584c4bf-5a16-4254-8602-8df2a55b2874",
+    "name": "Conduct an audit Auditors Authentication API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:36.000Z",
+    "updatedAt": "2026-07-28T03:26:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4584c4bf-5a16-4254-8602-8df2a55b2874"
+  },
+  "item": [
+    {
+      "name": "oauth",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "Get Access Token",
+              "id": "6087dd18-fac1-48a3-8e2f-f6aa4273655d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) OAuth 2.0 grant type",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "description": "(Required) Your Vanta client ID",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Your Vanta client secret",
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Space-separated list of OAuth scopes",
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "token"
+                  ]
+                },
+                "description": "Obtain an OAuth 2.0 access token using client credentials. Use the returned access_token as a Bearer token in subsequent API requests."
+              },
+              "response": [
+                {
+                  "id": "313c1ae2-ccc7-43cb-855d-847b37eea434",
+                  "name": "Access token response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth 2.0 grant type",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client ID",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client secret",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Space-separated list of OAuth scopes",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"scope\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:26:37.000Z",
+                  "updatedAt": "2026-07-28T03:26:37.000Z",
+                  "uid": "35240-313c1ae2-ccc7-43cb-855d-847b37eea434"
+                },
+                {
+                  "id": "972b83f3-4cb3-4709-898b-0cff337c6189",
+                  "name": "Bad request \u2014 invalid parameters or request body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth 2.0 grant type",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client ID",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client secret",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Space-separated list of OAuth scopes",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:37.000Z",
+                  "updatedAt": "2026-07-28T03:26:37.000Z",
+                  "uid": "35240-972b83f3-4cb3-4709-898b-0cff337c6189"
+                },
+                {
+                  "id": "d2a1c823-f9b9-49b9-96c5-5942f6abdb4b",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth 2.0 grant type",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client ID",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Your Vanta client secret",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Space-separated list of OAuth scopes",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:37.000Z",
+                  "updatedAt": "2026-07-28T03:26:37.000Z",
+                  "uid": "35240-d2a1c823-f9b9-49b9-96c5-5942f6abdb4b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:37.000Z",
+              "updatedAt": "2026-07-28T03:26:37.000Z",
+              "uid": "35240-6087dd18-fac1-48a3-8e2f-f6aa4273655d"
+            }
+          ],
+          "id": "b4b6eb0f-ab87-46a9-b897-89c689a1da99",
+          "createdAt": "2026-07-28T03:26:37.000Z",
+          "updatedAt": "2026-07-28T03:26:37.000Z",
+          "uid": "35240-b4b6eb0f-ab87-46a9-b897-89c689a1da99"
+        }
+      ],
+      "id": "74df2cb0-90b8-4721-8634-d37c410070e6",
+      "createdAt": "2026-07-28T03:26:37.000Z",
+      "updatedAt": "2026-07-28T03:26:37.000Z",
+      "uid": "35240-74df2cb0-90b8-4721-8634-d37c410070e6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

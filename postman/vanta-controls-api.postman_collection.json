@@ -1,0 +1,475 @@
+{
+  "info": {
+    "_postman_id": "3efa101b-102b-4692-8d1e-e450fb8eae3a",
+    "name": "Conduct an audit Auditors Controls API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:37.000Z",
+    "updatedAt": "2026-07-28T03:26:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3efa101b-102b-4692-8d1e-e450fb8eae3a"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "controls",
+          "item": [
+            {
+              "name": "List Controls",
+              "id": "7e9732ea-ddda-48b5-bdb6-9940bd6acaa6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/controls?pageSize=10&pageCursor=<string>&frameworkId=<string>&status=NEEDS_ATTENTION",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "controls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter controls by framework identifier",
+                      "key": "frameworkId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by control status",
+                      "key": "status",
+                      "value": "NEEDS_ATTENTION"
+                    }
+                  ]
+                },
+                "description": "Query information about compliance controls including control language and statuses."
+              },
+              "response": [
+                {
+                  "id": "9c34afa8-48bb-4631-ac42-58138022771f",
+                  "name": "Paginated list of controls",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/controls?pageSize=10&pageCursor=<string>&frameworkId=<string>&status=NEEDS_ATTENTION",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "controls"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter controls by framework identifier",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by control status",
+                          "key": "status",
+                          "value": "NEEDS_ATTENTION"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"FAILING\",\n      \"frameworkId\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"testCount\": \"<integer>\",\n      \"passingTestCount\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"PASSING\",\n      \"frameworkId\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"testCount\": \"<integer>\",\n      \"passingTestCount\": \"<integer>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-9c34afa8-48bb-4631-ac42-58138022771f"
+                },
+                {
+                  "id": "e894942b-9a21-4c35-824a-b5a92841d326",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/controls?pageSize=10&pageCursor=<string>&frameworkId=<string>&status=NEEDS_ATTENTION",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "controls"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter controls by framework identifier",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by control status",
+                          "key": "status",
+                          "value": "NEEDS_ATTENTION"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-e894942b-9a21-4c35-824a-b5a92841d326"
+                },
+                {
+                  "id": "2f33f057-a67c-499b-8b89-c755743ce7b0",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/controls?pageSize=10&pageCursor=<string>&frameworkId=<string>&status=NEEDS_ATTENTION",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "controls"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter controls by framework identifier",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by control status",
+                          "key": "status",
+                          "value": "NEEDS_ATTENTION"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-2f33f057-a67c-499b-8b89-c755743ce7b0"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:37.000Z",
+              "updatedAt": "2026-07-28T03:26:37.000Z",
+              "uid": "35240-7e9732ea-ddda-48b5-bdb6-9940bd6acaa6"
+            }
+          ],
+          "id": "6a7ab65c-1bd6-4ca8-a7c0-6bace26bb000",
+          "createdAt": "2026-07-28T03:26:37.000Z",
+          "updatedAt": "2026-07-28T03:26:37.000Z",
+          "uid": "35240-6a7ab65c-1bd6-4ca8-a7c0-6bace26bb000"
+        },
+        {
+          "name": "frameworks",
+          "item": [
+            {
+              "name": "List Frameworks",
+              "id": "6b412ba7-6728-4596-a8ea-cc66286eb932",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/frameworks?pageSize=10&pageCursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "frameworks"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Query all compliance frameworks configured in the organization."
+              },
+              "response": [
+                {
+                  "id": "0a7bf15d-e290-4926-b21e-bef43c92d026",
+                  "name": "Paginated list of frameworks",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/frameworks?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "frameworks"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"CERTIFIED\",\n      \"controlCount\": \"<integer>\",\n      \"passingControlCount\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"IN_PROGRESS\",\n      \"controlCount\": \"<integer>\",\n      \"passingControlCount\": \"<integer>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-0a7bf15d-e290-4926-b21e-bef43c92d026"
+                },
+                {
+                  "id": "a3af7a1f-11a1-48a1-a596-4db067f03a17",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/frameworks?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "frameworks"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-a3af7a1f-11a1-48a1-a596-4db067f03a17"
+                },
+                {
+                  "id": "c95b0767-593d-45e6-a5e7-0a3eba2b7f30",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/frameworks?pageSize=10&pageCursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "frameworks"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:38.000Z",
+                  "updatedAt": "2026-07-28T03:26:38.000Z",
+                  "uid": "35240-c95b0767-593d-45e6-a5e7-0a3eba2b7f30"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:37.000Z",
+              "updatedAt": "2026-07-28T03:26:37.000Z",
+              "uid": "35240-6b412ba7-6728-4596-a8ea-cc66286eb932"
+            }
+          ],
+          "id": "73ab305b-9ec6-4fa9-9b65-63e6cff8f35a",
+          "createdAt": "2026-07-28T03:26:37.000Z",
+          "updatedAt": "2026-07-28T03:26:37.000Z",
+          "uid": "35240-73ab305b-9ec6-4fa9-9b65-63e6cff8f35a"
+        }
+      ],
+      "id": "721c5138-da71-437d-b961-6b2ec2643b9a",
+      "createdAt": "2026-07-28T03:26:37.000Z",
+      "updatedAt": "2026-07-28T03:26:37.000Z",
+      "uid": "35240-721c5138-da71-437d-b961-6b2ec2643b9a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

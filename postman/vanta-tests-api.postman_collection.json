@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "36ac366b-e5ca-4781-bf26-9de9ae042e93",
+    "name": "Conduct an audit Auditors Tests API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:40.000Z",
+    "updatedAt": "2026-07-28T03:26:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-36ac366b-e5ca-4781-bf26-9de9ae042e93"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tests",
+          "item": [
+            {
+              "name": "List Tests",
+              "id": "7043f1b5-d09f-4b0f-94dc-3b3e962bbc2d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/tests?pageSize=10&pageCursor=<string>&status=NA&frameworkId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "tests"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter tests by status",
+                      "key": "status",
+                      "value": "NA"
+                    },
+                    {
+                      "description": "Filter tests by framework",
+                      "key": "frameworkId",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Query and filter test results for compliance frameworks."
+              },
+              "response": [
+                {
+                  "id": "f67fa026-27ac-4f55-a898-6af28f7f8129",
+                  "name": "Paginated list of tests",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/tests?pageSize=10&pageCursor=<string>&status=NA&frameworkId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "tests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter tests by status",
+                          "key": "status",
+                          "value": "NA"
+                        },
+                        {
+                          "description": "Filter tests by framework",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"PASS\",\n      \"controlId\": \"<string>\",\n      \"frameworkId\": \"<string>\",\n      \"lastRunAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"NA\",\n      \"controlId\": \"<string>\",\n      \"frameworkId\": \"<string>\",\n      \"lastRunAt\": \"<dateTime>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:41.000Z",
+                  "updatedAt": "2026-07-28T03:26:41.000Z",
+                  "uid": "35240-f67fa026-27ac-4f55-a898-6af28f7f8129"
+                },
+                {
+                  "id": "16262167-29a1-4015-becb-cf20d87313ff",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/tests?pageSize=10&pageCursor=<string>&status=NA&frameworkId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "tests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter tests by status",
+                          "key": "status",
+                          "value": "NA"
+                        },
+                        {
+                          "description": "Filter tests by framework",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:41.000Z",
+                  "updatedAt": "2026-07-28T03:26:41.000Z",
+                  "uid": "35240-16262167-29a1-4015-becb-cf20d87313ff"
+                },
+                {
+                  "id": "7ec548ef-b349-4da2-a7b7-41f9c47458e5",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/tests?pageSize=10&pageCursor=<string>&status=NA&frameworkId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "tests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter tests by status",
+                          "key": "status",
+                          "value": "NA"
+                        },
+                        {
+                          "description": "Filter tests by framework",
+                          "key": "frameworkId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:41.000Z",
+                  "updatedAt": "2026-07-28T03:26:41.000Z",
+                  "uid": "35240-7ec548ef-b349-4da2-a7b7-41f9c47458e5"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:41.000Z",
+              "updatedAt": "2026-07-28T03:26:41.000Z",
+              "uid": "35240-7043f1b5-d09f-4b0f-94dc-3b3e962bbc2d"
+            }
+          ],
+          "id": "f80b7431-ff7a-44ff-a4ac-a47e19b2ea3a",
+          "createdAt": "2026-07-28T03:26:41.000Z",
+          "updatedAt": "2026-07-28T03:26:41.000Z",
+          "uid": "35240-f80b7431-ff7a-44ff-a4ac-a47e19b2ea3a"
+        }
+      ],
+      "id": "a87e1a69-7b0c-446f-a5be-024d46efda7c",
+      "createdAt": "2026-07-28T03:26:41.000Z",
+      "updatedAt": "2026-07-28T03:26:41.000Z",
+      "uid": "35240-a87e1a69-7b0c-446f-a5be-024d46efda7c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}

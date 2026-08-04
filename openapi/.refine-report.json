@@ -1,0 +1,34 @@
+{
+  "provider": "vanta",
+  "sources": [
+    "vanta-auditors-api-openapi.yml",
+    "vanta-audits-api-openapi.yml",
+    "vanta-authentication-api-openapi.yml",
+    "vanta-controls-api-openapi.yml",
+    "vanta-documents-api-openapi.yml",
+    "vanta-integrations-api-openapi.yml",
+    "vanta-resources-api-openapi.yml",
+    "vanta-tests-api-openapi.yml",
+    "vanta-users-api-openapi.yml",
+    "vanta-vendors-api-openapi.yml",
+    "vanta-vulnerabilities-api-openapi.yml"
+  ],
+  "outputs": [
+    "vanta-auditors-api-openapi.yml",
+    "vanta-audits-api-openapi.yml",
+    "vanta-authentication-api-openapi.yml",
+    "vanta-controls-api-openapi.yml",
+    "vanta-documents-api-openapi.yml",
+    "vanta-integrations-api-openapi.yml",
+    "vanta-resources-api-openapi.yml",
+    "vanta-tests-api-openapi.yml",
+    "vanta-users-api-openapi.yml",
+    "vanta-vendors-api-openapi.yml",
+    "vanta-vulnerabilities-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

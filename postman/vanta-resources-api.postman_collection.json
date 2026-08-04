@@ -1,0 +1,475 @@
+{
+  "info": {
+    "_postman_id": "2b89dcaf-1a09-4450-bfe6-6da875952229",
+    "name": "Conduct an audit Auditors Resources API",
+    "description": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:26:40.000Z",
+    "updatedAt": "2026-07-28T03:26:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b89dcaf-1a09-4450-bfe6-6da875952229"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "resources",
+          "item": [
+            {
+              "name": "List Resources",
+              "id": "d95fc277-e2d4-4886-a6cb-28f1284f5a0b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/resources?pageSize=10&pageCursor=<string>&resourceType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)",
+                      "key": "resourceType",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "List all monitored resources in scope for compliance."
+              },
+              "response": [
+                {
+                  "id": "920e7f85-44c4-463c-bd07-658e72be2b16",
+                  "name": "Paginated list of resources",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources?pageSize=10&pageCursor=<string>&resourceType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)",
+                          "key": "resourceType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"inScope\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"inScope\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-920e7f85-44c4-463c-bd07-658e72be2b16"
+                },
+                {
+                  "id": "09110998-76ca-478c-821a-7bd63e04764d",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources?pageSize=10&pageCursor=<string>&resourceType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)",
+                          "key": "resourceType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-09110998-76ca-478c-821a-7bd63e04764d"
+                },
+                {
+                  "id": "d6b1607f-f9b9-47e7-bfd3-9af613b4b178",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/resources?pageSize=10&pageCursor=<string>&resourceType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "resources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)",
+                          "key": "resourceType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-d6b1607f-f9b9-47e7-bfd3-9af613b4b178"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:40.000Z",
+              "updatedAt": "2026-07-28T03:26:40.000Z",
+              "uid": "35240-d95fc277-e2d4-4886-a6cb-28f1284f5a0b"
+            }
+          ],
+          "id": "47474a0b-fae6-44eb-9b85-ce498316634e",
+          "createdAt": "2026-07-28T03:26:40.000Z",
+          "updatedAt": "2026-07-28T03:26:40.000Z",
+          "uid": "35240-47474a0b-fae6-44eb-9b85-ce498316634e"
+        },
+        {
+          "name": "computers",
+          "item": [
+            {
+              "name": "List Monitored Computers",
+              "id": "2cb22ca5-cbe1-4708-b875-f17dad635cb6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/computers?pageSize=10&pageCursor=<string>&complianceStatus=COMPLIANT",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "computers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of items to return per page (1-100)",
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter computers by compliance status",
+                      "key": "complianceStatus",
+                      "value": "COMPLIANT"
+                    }
+                  ]
+                },
+                "description": "List all monitored computers with compliance status including screenlock, encryption, antivirus, and password management status."
+              },
+              "response": [
+                {
+                  "id": "a8050402-1abc-466f-b17f-5f339c0cbb83",
+                  "name": "Paginated list of monitored computers",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/computers?pageSize=10&pageCursor=<string>&complianceStatus=COMPLIANT",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "computers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter computers by compliance status",
+                          "key": "complianceStatus",
+                          "value": "COMPLIANT"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"hostname\": \"<string>\",\n      \"osName\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"screenlockEnabled\": \"<boolean>\",\n      \"diskEncryptionEnabled\": \"<boolean>\",\n      \"antivirusInstalled\": \"<boolean>\",\n      \"passwordManagerInstalled\": \"<boolean>\",\n      \"isCompliant\": \"<boolean>\",\n      \"lastCheckedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"hostname\": \"<string>\",\n      \"osName\": \"<string>\",\n      \"osVersion\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"screenlockEnabled\": \"<boolean>\",\n      \"diskEncryptionEnabled\": \"<boolean>\",\n      \"antivirusInstalled\": \"<boolean>\",\n      \"passwordManagerInstalled\": \"<boolean>\",\n      \"isCompliant\": \"<boolean>\",\n      \"lastCheckedAt\": \"<dateTime>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"nextPageCursor\": \"<string>\",\n    \"hasNextPage\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-a8050402-1abc-466f-b17f-5f339c0cbb83"
+                },
+                {
+                  "id": "ec6642e4-51d5-45a4-ac66-fbcef5520914",
+                  "name": "Unauthorized \u2014 missing or invalid access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/computers?pageSize=10&pageCursor=<string>&complianceStatus=COMPLIANT",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "computers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter computers by compliance status",
+                          "key": "complianceStatus",
+                          "value": "COMPLIANT"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-ec6642e4-51d5-45a4-ac66-fbcef5520914"
+                },
+                {
+                  "id": "ea34692c-3856-4e94-9b70-87faf6ccd171",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/computers?pageSize=10&pageCursor=<string>&complianceStatus=COMPLIANT",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "computers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of items to return per page (1-100)",
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Cursor for pagination \u2014 start from the item following this cursor",
+                          "key": "pageCursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter computers by compliance status",
+                          "key": "complianceStatus",
+                          "value": "COMPLIANT"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:26:40.000Z",
+                  "updatedAt": "2026-07-28T03:26:40.000Z",
+                  "uid": "35240-ea34692c-3856-4e94-9b70-87faf6ccd171"
+                }
+              ],
+              "createdAt": "2026-07-28T03:26:40.000Z",
+              "updatedAt": "2026-07-28T03:26:40.000Z",
+              "uid": "35240-2cb22ca5-cbe1-4708-b875-f17dad635cb6"
+            }
+          ],
+          "id": "21fad981-784f-4c14-840d-60689acfb6e3",
+          "createdAt": "2026-07-28T03:26:40.000Z",
+          "updatedAt": "2026-07-28T03:26:40.000Z",
+          "uid": "35240-21fad981-784f-4c14-840d-60689acfb6e3"
+        }
+      ],
+      "id": "fd53aada-8153-45d3-9c58-b662bdb27655",
+      "createdAt": "2026-07-28T03:26:40.000Z",
+      "updatedAt": "2026-07-28T03:26:40.000Z",
+      "uid": "35240-fd53aada-8153-45d3-9c58-b662bdb27655"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vanta.com/v1"
+    }
+  ]
+}
