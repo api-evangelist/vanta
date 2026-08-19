@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Active Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/users",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of all active users in the organization."
+        },
+        {
+          "info": {
+            "name": "List People",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/people",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of people in the organization including employment status, security task completion, and training status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

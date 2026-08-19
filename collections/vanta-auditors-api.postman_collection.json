@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "8b4fba74-7cf6-4269-a495-693ce9fa8183",
+      "name": "Auditors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e43bb87-6135-44c6-b8bb-2be712a629c0",
+          "name": "Create an auditor",
+          "request": {
+            "name": "Create an auditor",
+            "description": {
+              "content": "Create an auditor in Vanta.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auditors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d431e49e-a0bf-4960-818c-c3929c8688d9",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auditors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"familyName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"65fc81a3359c8508c9af880f\",\n  \"organizationId\": \"8c9af880f1a335965fc850c8\",\n  \"email\": \"testauditor@audit.com\",\n  \"givenName\": \"Sam\",\n  \"familyName\": \"Auditor\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "da349649-75d0-4af9-a15b-2e3040ceb1ab",
+    "name": "Conduct an audit Auditors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}

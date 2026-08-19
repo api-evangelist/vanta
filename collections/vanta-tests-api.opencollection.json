@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Tests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/tests",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tests by status"
+              },
+              {
+                "name": "frameworkId",
+                "value": "",
+                "type": "query",
+                "description": "Filter tests by framework"
+              }
+            ]
+          },
+          "docs": "Query and filter test results for compliance frameworks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

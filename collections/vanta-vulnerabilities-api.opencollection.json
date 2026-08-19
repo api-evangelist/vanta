@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Vulnerabilities API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/vulnerabilities",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by vulnerability severity"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by remediation status"
+              }
+            ]
+          },
+          "docs": "List all vulnerabilities based on selected filters including severity and remediation status."
+        },
+        {
+          "info": {
+            "name": "List API Endpoint Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/resources/api_endpoint_vulnerability_connectors",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "Vanta generated identifier for the given resource"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "List ApiEndpointVulnerabilityConnectors resources for the given application."
+        },
+        {
+          "info": {
+            "name": "Sync API Endpoint Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vanta.com/v1/v1/resources/api_endpoint_vulnerability_connectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sync all ApiEndpointVulnerabilityConnectors resources for the given application."
+        },
+        {
+          "info": {
+            "name": "List Package Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/resources/package_vulnerability_connectors",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "Vanta generated identifier for the given resource"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "List PackageVulnerabilityConnectors resources for the given application."
+        },
+        {
+          "info": {
+            "name": "List Vulnerable Components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/resources/vulnerable_component",
+            "params": [
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query",
+                "description": "Vanta generated identifier for the given resource"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "List VulnerableComponent resources for the given application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

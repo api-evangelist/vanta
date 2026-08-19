@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Integrations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/integrations",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "List all configured integrations and their connection status."
+        },
+        {
+          "info": {
+            "name": "Create Custom Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vanta.com/v1/v1/resources/custom",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push custom resource data from non-integrated systems using custom resource schemas to extend Vanta's compliance monitoring."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

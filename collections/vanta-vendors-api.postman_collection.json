@@ -1,0 +1,1007 @@
+{
+  "item": [
+    {
+      "id": "160d91b7-2bfe-49c7-9782-3e120eb976d1",
+      "name": "Vendors",
+      "description": {
+        "content": "Third-party vendor security review management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1efd26e9-45aa-4ea2-95e0-0d4e4b9d81af",
+          "name": "List Vendors",
+          "request": {
+            "name": "List Vendors",
+            "description": {
+              "content": "Query and manage vendors and their security review information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "riskLevel",
+                  "value": "<string>",
+                  "description": "Filter vendors by risk level"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fbf597d-5d55-45aa-9be4-b40b28bee021",
+              "name": "Paginated list of vendors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "riskLevel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"url\": \"https://iSXbmdx.noOpU,uhm1VJZSZ4zKGYTpTF2YAUr4Dv86fXsFm.NOHtxfmwCu\",\n      \"riskLevel\": \"CRITICAL\",\n      \"residualRiskLevel\": \"HIGH\",\n      \"reviewStatus\": \"REJECTED\",\n      \"hasContract\": false,\n      \"hasDpa\": true,\n      \"createdAt\": \"1971-03-20T15:34:57.348Z\",\n      \"nextReviewDate\": \"1981-04-15\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"url\": \"http://btQKGNwyZNYRGEcBJOOHXVgKFaJGff.ktqwvKxXY-F9HQe0cwFf94MUjyby5B7gkuS+Nzogu,E.GcMbAKCZJZN41uzNWAKfz5JgWOEwNIK\",\n      \"riskLevel\": \"HIGH\",\n      \"residualRiskLevel\": \"MEDIUM\",\n      \"reviewStatus\": \"APPROVED\",\n      \"hasContract\": false,\n      \"hasDpa\": false,\n      \"createdAt\": \"1980-12-13T18:56:07.168Z\",\n      \"nextReviewDate\": \"2006-08-18\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 2750,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d714158e-67cb-42a3-b0f9-6ebb9d5362c3",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "riskLevel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "750b88ea-c156-43b9-a238-3f13903d222b",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "riskLevel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80407e5c-329e-4c46-b769-196c0ffa9698",
+          "name": "Create Vendor",
+          "request": {
+            "name": "Create Vendor",
+            "description": {
+              "content": "Create a new vendor in Vanta for security review tracking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"riskLevel\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36157a35-47ea-4f57-aea1-d0b2d111fe8c",
+              "name": "Vendor created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"riskLevel\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"http://AMANrINxdk.oisndBtZsDUV9ldsLwjO\",\n  \"riskLevel\": \"CRITICAL\",\n  \"residualRiskLevel\": \"LOW\",\n  \"reviewStatus\": \"IN_PROGRESS\",\n  \"hasContract\": false,\n  \"hasDpa\": true,\n  \"createdAt\": \"2012-06-07T07:21:54.798Z\",\n  \"nextReviewDate\": \"1956-03-29\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "887e3b91-82ab-435d-a366-b00a49725cd6",
+              "name": "Bad request — invalid parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"riskLevel\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b1410bd-eb6b-467a-a57a-b2c93acf580c",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"riskLevel\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6eb4655-2e87-4ab3-840e-eb796e90b2b6",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"riskLevel\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fe0e0e5-061d-4ba5-8f37-d1b59c83a12b",
+          "name": "Get Vendor",
+          "request": {
+            "name": "Get Vendor",
+            "description": {
+              "content": "Retrieve a specific vendor and its security review details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vendors",
+                ":vendorId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vendorId",
+                  "description": "(Required) Unique identifier for the vendor"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab6ab63f-81e2-4812-83c6-9b221f6cb3cc",
+              "name": "Vendor details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"http://AMANrINxdk.oisndBtZsDUV9ldsLwjO\",\n  \"riskLevel\": \"CRITICAL\",\n  \"residualRiskLevel\": \"LOW\",\n  \"reviewStatus\": \"IN_PROGRESS\",\n  \"hasContract\": false,\n  \"hasDpa\": true,\n  \"createdAt\": \"2012-06-07T07:21:54.798Z\",\n  \"nextReviewDate\": \"1956-03-29\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7e50f59-e962-45eb-9b82-d077930e5643",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e21dd091-c3ed-407a-a5bc-14c78d78121c",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdb8b96e-c833-40d9-b254-ecdcbbfc63be",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13a65129-6fb9-4973-8100-2d56be2d4cae",
+          "name": "Update Vendor",
+          "request": {
+            "name": "Update Vendor",
+            "description": {
+              "content": "Update vendor information and security review details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vendors",
+                ":vendorId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vendorId",
+                  "description": "(Required) Unique identifier for the vendor"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f801ee57-9d6a-43cc-9904-f623e4568ddb",
+              "name": "Vendor updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"http://AMANrINxdk.oisndBtZsDUV9ldsLwjO\",\n  \"riskLevel\": \"CRITICAL\",\n  \"residualRiskLevel\": \"LOW\",\n  \"reviewStatus\": \"IN_PROGRESS\",\n  \"hasContract\": false,\n  \"hasDpa\": true,\n  \"createdAt\": \"2012-06-07T07:21:54.798Z\",\n  \"nextReviewDate\": \"1956-03-29\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d3f7167-e930-4df6-8a60-d14b8d6f7eae",
+              "name": "Bad request — invalid parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "730ad29d-eb51-4988-b2a8-265af341e29e",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f50b8bd-ad8c-4cdb-ac31-80348dd83dfe",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6234bc96-ba97-439c-b2dd-a211987fcc64",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vendors",
+                    ":vendorId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendorId",
+                      "description": "(Required) Unique identifier for the vendor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"riskLevel\": \"<string>\",\n  \"reviewStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c5e835b7-13ba-4eda-b122-f9f0bbf5eb6e",
+    "name": "Conduct an audit Auditors Vendors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}

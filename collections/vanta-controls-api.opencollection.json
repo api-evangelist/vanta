@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Controls API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Controls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Controls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/controls",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "frameworkId",
+                "value": "",
+                "type": "query",
+                "description": "Filter controls by framework identifier"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by control status"
+              }
+            ]
+          },
+          "docs": "Query information about compliance controls including control language and statuses."
+        },
+        {
+          "info": {
+            "name": "List Frameworks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/frameworks",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              }
+            ]
+          },
+          "docs": "Query all compliance frameworks configured in the organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

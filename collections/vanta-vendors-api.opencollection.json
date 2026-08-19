@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Vendors API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/vendors",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "riskLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter vendors by risk level"
+              }
+            ]
+          },
+          "docs": "Query and manage vendors and their security review information."
+        },
+        {
+          "info": {
+            "name": "Create Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vanta.com/v1/v1/vendors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new vendor in Vanta for security review tracking."
+        },
+        {
+          "info": {
+            "name": "Get Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/vendors/:vendorId",
+            "params": [
+              {
+                "name": "vendorId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the vendor"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific vendor and its security review details."
+        },
+        {
+          "info": {
+            "name": "Update Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.vanta.com/v1/v1/vendors/:vendorId",
+            "params": [
+              {
+                "name": "vendorId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the vendor"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update vendor information and security review details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

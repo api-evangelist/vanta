@@ -1,0 +1,400 @@
+{
+  "item": [
+    {
+      "id": "80277ca3-a6fc-4edd-83f7-ffea3ec23d99",
+      "name": "Users",
+      "description": {
+        "content": "User and personnel management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eaf063c1-d884-4e6e-8ab4-ba8eef1f3cfa",
+          "name": "List Active Users",
+          "request": {
+            "name": "List Active Users",
+            "description": {
+              "content": "Retrieve a paginated list of all active users in the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f861d721-2dd4-41a2-8232-61450c5c6ded",
+              "name": "Paginated list of active users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"NaM@llRVotfsrgUETZMv.fwwd\",\n      \"displayName\": \"string\",\n      \"role\": \"string\",\n      \"isActive\": true,\n      \"createdAt\": \"2015-09-30T01:33:19.105Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"SqaJqZ@SyyMtbecenYQZNpDhPAYqzsuufn.szn\",\n      \"displayName\": \"string\",\n      \"role\": \"string\",\n      \"isActive\": false,\n      \"createdAt\": \"2007-12-10T01:57:48.962Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 8433,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d9c68ac-6685-4f6f-9cdc-6708a1e2d8b4",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbc955c9-5355-48de-b97b-0ac6865d61a3",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92a96fb5-a4b5-4193-b31a-6479d939b2a5",
+          "name": "List People",
+          "request": {
+            "name": "List People",
+            "description": {
+              "content": "Retrieve a paginated list of people in the organization including employment status, security task completion, and training status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "people"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29eaaaaf-93a5-48d4-be86-c3b349314a57",
+              "name": "Paginated list of people",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"v62I0FGEVZyu@uBtueHFbrBrXDH.ijfe\",\n      \"displayName\": \"string\",\n      \"employmentStatus\": \"TERMINATED\",\n      \"securityTasksOverdue\": 2054,\n      \"trainingCompleted\": false,\n      \"backgroundCheckCompleted\": false\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"1ZAxkFG4uM0U@uEcTwaAceUVloieEjLTeHEpaIzkhMiRD.rd\",\n      \"displayName\": \"string\",\n      \"employmentStatus\": \"EMPLOYEE\",\n      \"securityTasksOverdue\": 2981,\n      \"trainingCompleted\": true,\n      \"backgroundCheckCompleted\": true\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 2110,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edd1e8f9-d571-49a5-bbba-a4520949e883",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eeb2d31-8bbe-4cc6-861a-41ec33e032bd",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "people"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d2282da0-62bc-49ea-97b7-057791a39719",
+    "name": "Conduct an audit Auditors Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,446 @@
+{
+  "item": [
+    {
+      "id": "77bb541b-2092-4cb7-a924-fec0793cf45b",
+      "name": "Integrations",
+      "description": {
+        "content": "Integration configuration and status management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aaa28fa-668c-456f-8923-618f0b35f461",
+          "name": "List Integrations",
+          "request": {
+            "name": "List Integrations",
+            "description": {
+              "content": "List all configured integrations and their connection status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33e25240-abd2-4b4e-8df2-b7e1e4dfcc3a",
+              "name": "Paginated list of integrations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"DISCONNECTED\",\n      \"lastSyncAt\": \"2006-10-16T01:51:08.988Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"CONNECTED\",\n      \"lastSyncAt\": \"1982-10-04T03:31:17.178Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 3025,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1212018b-ef72-4fa3-af65-42417e47d3e6",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "450ab0a5-437f-48fd-ab64-4bb52997a577",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41f7c7d9-36ac-4017-8538-d29cd31ebe64",
+          "name": "Create Custom Resource",
+          "request": {
+            "name": "Create Custom Resource",
+            "description": {
+              "content": "Push custom resource data from non-integrated systems using custom resource schemas to extend Vanta's compliance monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "resources",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 3030.730642511469\n  },\n  \"displayName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cdd6fecb-a9ee-4cb3-a455-314dc779b3a1",
+              "name": "Custom resource created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"key_0\": 9868\n  },\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"resourceType\": \"string\",\n  \"resourceId\": \"string\",\n  \"displayName\": \"string\",\n  \"data\": {\n    \"key_0\": 5954.197384218421,\n    \"key_1\": false\n  },\n  \"createdAt\": \"1963-09-07T08:07:18.631Z\",\n  \"updatedAt\": \"2000-12-16T01:27:53.702Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daa13d32-4b46-478a-9115-213f84291626",
+              "name": "Bad request — invalid parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"key_0\": 9868\n  },\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4286d83-b713-4c24-8a49-48b25dc05632",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"key_0\": 9868\n  },\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44fdc7b4-f154-469a-a277-b040076a3abc",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceType\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"data\": {\n    \"key_0\": 9868\n  },\n  \"displayName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fbcb1e0c-a4b7-4443-8056-cd6c395502bd",
+    "name": "Conduct an audit Auditors Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conduct an audit Auditors Resources API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/resources",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)"
+              }
+            ]
+          },
+          "docs": "List all monitored resources in scope for compliance."
+        },
+        {
+          "info": {
+            "name": "List Monitored Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vanta.com/v1/v1/computers",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page (1-100)"
+              },
+              {
+                "name": "pageCursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination — start from the item following this cursor"
+              },
+              {
+                "name": "complianceStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter computers by compliance status"
+              }
+            ]
+          },
+          "docs": "List all monitored computers with compliance status including screenlock, encryption, antivirus, and password management status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

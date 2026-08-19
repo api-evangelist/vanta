@@ -1,0 +1,436 @@
+{
+  "item": [
+    {
+      "id": "4871c3a5-c593-44f2-b6d8-7e97413e18cf",
+      "name": "Resources",
+      "description": {
+        "content": "Monitored resource management and scoping",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b291084f-1a53-41e7-b151-475023883a5d",
+          "name": "List Resources",
+          "request": {
+            "name": "List Resources",
+            "description": {
+              "content": "List all monitored resources in scope for compliance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceType",
+                  "value": "<string>",
+                  "description": "Filter by resource type (e.g., Computer, Repository, CloudResource)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33ef3366-71ce-43ff-9f29-da8211f54857",
+              "name": "Paginated list of resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"ownerId\": \"string\",\n      \"inScope\": false,\n      \"createdAt\": \"1967-01-10T14:40:58.050Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"ownerId\": \"string\",\n      \"inScope\": false,\n      \"createdAt\": \"1980-06-05T22:27:52.865Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 2326,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8ed813a-dad3-448f-9ef6-ba8d0e59dae1",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a8d4377-7d31-4b23-a8d8-7b58f9058ee1",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cc18819-acad-4dca-830f-6854a98f0fb9",
+          "name": "List Monitored Computers",
+          "request": {
+            "name": "List Monitored Computers",
+            "description": {
+              "content": "List all monitored computers with compliance status including screenlock, encryption, antivirus, and password management status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "computers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of items to return per page (1-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageCursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination — start from the item following this cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "complianceStatus",
+                  "value": "<string>",
+                  "description": "Filter computers by compliance status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbbabd4f-1c32-41d9-902a-4322f1d8b1d7",
+              "name": "Paginated list of monitored computers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "computers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "complianceStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"hostname\": \"string\",\n      \"osName\": \"string\",\n      \"osVersion\": \"string\",\n      \"userId\": \"string\",\n      \"screenlockEnabled\": true,\n      \"diskEncryptionEnabled\": false,\n      \"antivirusInstalled\": true,\n      \"passwordManagerInstalled\": true,\n      \"isCompliant\": true,\n      \"lastCheckedAt\": \"1958-09-10T05:35:28.131Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"hostname\": \"string\",\n      \"osName\": \"string\",\n      \"osVersion\": \"string\",\n      \"userId\": \"string\",\n      \"screenlockEnabled\": false,\n      \"diskEncryptionEnabled\": true,\n      \"antivirusInstalled\": true,\n      \"passwordManagerInstalled\": true,\n      \"isCompliant\": false,\n      \"lastCheckedAt\": \"1970-08-20T19:09:49.425Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 4009,\n    \"nextPageCursor\": \"string\",\n    \"hasNextPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51ea3ce3-9745-4ac1-bcc1-a9c4423beac5",
+              "name": "Unauthorized — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "computers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "complianceStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ba18cba-1c5e-4b12-ae2f-ae8b1633a938",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "computers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "pageCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "complianceStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vanta.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4792d2d3-2898-4180-b8ca-bceae9afbefe",
+    "name": "Conduct an audit Auditors Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.\n\nContact Support:\n Name: API Support\n Email: support@vanta.com",
+      "type": "text/plain"
+    }
+  }
+}
