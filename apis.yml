@@ -121,6 +121,8 @@ apis:
   humanURL: https://developer.vanta.com/docs/vanta-api-overview
   baseURL: https://api.vanta.com
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -169,6 +171,8 @@ apis:
   humanURL: https://developer.vanta.com/docs/vanta-api-overview
   baseURL: https://api.vanta.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
