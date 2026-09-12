@@ -227,6 +227,8 @@ apis:
   - type: FAQ
     url: https://developer.vanta.com/docs/faq
 common:
+  - type: Website
+    url: https://www.vanta.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/vanta/overview
   - type: AgenticAccess
