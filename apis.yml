@@ -68,6 +68,8 @@ apis:
   humanURL: https://developer.vanta.com/docs/vanta-api-overview
   baseURL: https://api.vanta.com
   tags:
+  - Audit
+  tags_raw:
   - Audits
   properties:
   - type: OpenAPI
@@ -100,6 +102,8 @@ apis:
   humanURL: https://developer.vanta.com/docs/vanta-api-overview
   baseURL: https://api.vanta.com
   tags:
+  - Control
+  tags_raw:
   - Controls
   properties:
   - type: OpenAPI
