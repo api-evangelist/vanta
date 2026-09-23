@@ -1,17 +1,8 @@
 {
   "provider": "vanta",
   "sources": [
-    "vanta-auditors-api-openapi.yml",
-    "vanta-audits-api-openapi.yml",
-    "vanta-authentication-api-openapi.yml",
-    "vanta-controls-api-openapi.yml",
-    "vanta-documents-api-openapi.yml",
-    "vanta-integrations-api-openapi.yml",
-    "vanta-resources-api-openapi.yml",
-    "vanta-tests-api-openapi.yml",
-    "vanta-users-api-openapi.yml",
-    "vanta-vendors-api-openapi.yml",
-    "vanta-vulnerabilities-api-openapi.yml"
+    "_original/vanta-auditor-openapi.yml",
+    "_original/vanta-openapi.yml"
   ],
   "outputs": [
     "vanta-auditors-api-openapi.yml",
@@ -29,6 +20,25 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vanta-auditor-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "vanta-auditor-openapi.yml: declared missing tag: Auditors",
+    "vanta-auditor-openapi.yml: declared missing tag: Audits",
+    "vanta-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "vanta-auditors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-audits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-controls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-tests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-vendors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vanta-vulnerabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

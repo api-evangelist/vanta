@@ -1,17 +1,20 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Conduct an audit Auditors Authentication API
-  version: 1.0.0
-  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  title: Vanta Authentication API
+  description: The Vanta REST API enables organizations to programmatically manage their security compliance posture. The API supports personnel management, vulnerability monitoring, resource scoping, document and test management, control oversight, vendor management, and custom integrations. Vanta helps automate compliance for SOC 2, ISO 27001, HIPAA, PCI DSS, and GDPR frameworks.
+  version: v1
+  contact:
+    name: Vanta Developer Hub
+    url: https://developer.vanta.com
   termsOfService: https://www.vanta.com/terms
   license:
-    name: UNLICENSED
-  contact:
-    name: API Support
-    url: https://help.vanta.com/
-    email: support@vanta.com
+    name: Proprietary
+    url: https://www.vanta.com/terms
 servers:
-- url: https://api.vanta.com/v1
+- url: https://api.vanta.com
+  description: Vanta API
+security:
+- OAuth2: []
 tags:
 - name: Authentication
   description: OAuth 2.0 token management
@@ -104,17 +107,15 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   securitySchemes:
-    oauth:
+    OAuth2:
       type: oauth2
-      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
       flows:
         clientCredentials:
-          scopes:
-            auditor-api.audit:read: Grant read-only access to your audits
-            auditor-api.audit:write: Grant read-write access to your audits
-            auditor-api.auditor:read: Grant read-only access to your auditors
-            auditor-api.auditor:write: Grant read-write access to your auditors
           tokenUrl: https://api.vanta.com/oauth/token
-    bearerAuth:
-      type: http
-      scheme: bearer
+          scopes:
+            vanta.read: Read access to Vanta data
+            vanta.write: Write access to Vanta data
+            connectors.self:read-resource: Read connector resources
+            connectors.self:write-resource: Write connector resources
+            auditor-api.audit:read: Read audit data
+            auditor-api.auditor:read: Read auditor data

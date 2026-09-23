@@ -1,17 +1,20 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Conduct an audit Auditors Vulnerabilities API
-  version: 1.0.0
-  description: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+  title: Vanta Vulnerabilities API
+  description: The Vanta REST API enables organizations to programmatically manage their security compliance posture. The API supports personnel management, vulnerability monitoring, resource scoping, document and test management, control oversight, vendor management, and custom integrations. Vanta helps automate compliance for SOC 2, ISO 27001, HIPAA, PCI DSS, and GDPR frameworks.
+  version: v1
+  contact:
+    name: Vanta Developer Hub
+    url: https://developer.vanta.com
   termsOfService: https://www.vanta.com/terms
   license:
-    name: UNLICENSED
-  contact:
-    name: API Support
-    url: https://help.vanta.com/
-    email: support@vanta.com
+    name: Proprietary
+    url: https://www.vanta.com/terms
 servers:
-- url: https://api.vanta.com/v1
+- url: https://api.vanta.com
+  description: Vanta API
+security:
+- OAuth2: []
 tags:
 - name: Vulnerabilities
   description: Vulnerability tracking and remediation management
@@ -164,23 +167,16 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
   schemas:
+    VulnerabilityListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
     Vulnerability:
       type: object
       properties:
@@ -235,6 +231,52 @@ components:
           items:
             type: string
           description: List of affected resource IDs
+    SyncResponse:
+      type: object
+      properties:
+        synced:
+          type: integer
+          description: Number of records synced
+        message:
+          type: string
+          description: Sync result message
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    ConnectorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
     ApiEndpointVulnerabilitySync:
       type: object
       properties:
@@ -265,64 +307,25 @@ components:
       required:
       - resourceId
       - vulnerabilities
-    ConnectorListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-    SyncResponse:
-      type: object
-      properties:
-        synced:
-          type: integer
-          description: Number of records synced
-        message:
-          type: string
-          description: Sync result message
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    VulnerabilityListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
   responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
+    RateLimited:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
@@ -333,24 +336,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   securitySchemes:
-    oauth:
+    OAuth2:
       type: oauth2
-      description: Get an oauth token from the token url and use it as a bearer token to access the Vanta API.
       flows:
         clientCredentials:
-          scopes:
-            auditor-api.audit:read: Grant read-only access to your audits
-            auditor-api.audit:write: Grant read-write access to your audits
-            auditor-api.auditor:read: Grant read-only access to your auditors
-            auditor-api.auditor:write: Grant read-write access to your auditors
           tokenUrl: https://api.vanta.com/oauth/token
-    bearerAuth:
-      type: http
-      scheme: bearer
+          scopes:
+            vanta.read: Read access to Vanta data
+            vanta.write: Write access to Vanta data
+            connectors.self:read-resource: Read connector resources
+            connectors.self:write-resource: Write connector resources
+            auditor-api.audit:read: Read audit data
+            auditor-api.auditor:read: Read auditor data

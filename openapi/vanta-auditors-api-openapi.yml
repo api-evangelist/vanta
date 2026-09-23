@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Conduct an audit Auditors API
   version: 1.0.0
@@ -48,6 +48,23 @@ paths:
               $ref: '#/components/schemas/AddAuditorInput'
 components:
   schemas:
+    AddAuditorInput:
+      properties:
+        email:
+          type: string
+          description: Email of the new user.
+        givenName:
+          type: string
+          description: First name of the new user.
+        familyName:
+          type: string
+          description: Last name of the new user.
+      required:
+      - email
+      - givenName
+      - familyName
+      type: object
+      additionalProperties: false
     Auditor:
       properties:
         id:
@@ -67,23 +84,6 @@ components:
       required:
       - id
       - organizationId
-      - email
-      - givenName
-      - familyName
-      type: object
-      additionalProperties: false
-    AddAuditorInput:
-      properties:
-        email:
-          type: string
-          description: Email of the new user.
-        givenName:
-          type: string
-          description: First name of the new user.
-        familyName:
-          type: string
-          description: Last name of the new user.
-      required:
       - email
       - givenName
       - familyName
