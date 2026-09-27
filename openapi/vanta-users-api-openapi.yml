@@ -62,6 +62,19 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Person:
       type: object
@@ -106,19 +119,6 @@ components:
           items:
             type: string
           description: Additional error details
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
     PersonListResponse:
       type: object
       properties:
@@ -160,6 +160,19 @@ components:
           type: string
           format: date-time
           description: Timestamp when user was created
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
   parameters:
     pageSize:
       name: pageSize
@@ -176,19 +189,6 @@ components:
       schema:
         type: string
       description: Cursor for pagination — start from the item following this cursor
-  responses:
-    RateLimited:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     OAuth2:
       type: oauth2

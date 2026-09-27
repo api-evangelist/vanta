@@ -80,25 +80,9 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
   responses:
-    RateLimited:
-      description: Rate limit exceeded
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
       content:
         application/json:
           schema:
@@ -109,49 +93,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
+    RateLimited:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    DocumentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
     Document:
       type: object
       properties:
@@ -182,6 +130,58 @@ components:
           type: string
           format: uri
           description: Temporary URL to download the document
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    DocumentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -63,7 +63,34 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
     AccessToken:
       type: object
       properties:
@@ -79,33 +106,6 @@ components:
         scope:
           type: string
           description: Granted scopes
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     OAuth2:
       type: oauth2

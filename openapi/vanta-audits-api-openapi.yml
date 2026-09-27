@@ -1130,572 +1130,55 @@ paths:
           type: string
 components:
   schemas:
-    EvidenceControl:
+    AddCommentInput:
       properties:
-        name:
+        text:
           type: string
-          description: Name of control associated to this evidence
-        sectionNames:
-          items:
-            type: string
-          type: array
-          description: A list sections associated to the control
-      required:
-      - name
-      - sectionNames
-      type: object
-      additionalProperties: false
-    KeyValuePair:
-      properties:
-        key:
+          description: Text value of the comment
+        email:
           type: string
-          description: Key of key-value pair.
-        value:
-          type: string
-          description: Value of key-value pair.
-      required:
-      - key
-      - value
-      type: object
-      additionalProperties: false
-    VendorRiskLevel:
-      description: 'The risk level of a vendor:
-
-        - CRITICAL: The vendor has a critical security risk
-
-        - HIGH: The vendor has a high security risk
-
-        - MEDIUM: The vendor has a medium security risk
-
-        - LOW: The vendor has a low security risk
-
-        - UNSCORED: The vendor has not been given a risk level'
-      enum:
-      - CRITICAL
-      - HIGH
-      - LOW
-      - MEDIUM
-      - UNSCORED
-      type: string
-    FrameworkSection:
-      properties:
-        frameworkId:
-          anyOf:
-          - $ref: '#/components/schemas/FrameworkId'
-          - type: string
-        sectionId:
-          type: string
-      required:
-      - frameworkId
-      - sectionId
-      type: object
-      additionalProperties: false
-    PageSize:
-      type: integer
-      format: int32
-      default: 10
-      description: Controls the maximum number of items returned in one response from the API.
-      minimum: 1
-      maximum: 100
-    AuditorControl:
-      properties:
-        id:
-          type: string
-          description: The control's unique ID.
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: The control's external ID.
-        name:
-          type: string
-          description: The control's name.
-        description:
-          type: string
-          description: The control's description.
-        source:
-          $ref: '#/components/schemas/ControlSource'
-          description: The control's source, either "VANTA" or "CUSTOM".
-        domains:
-          items:
-            type: string
-          type: array
-          description: The security domains that the control belongs to.
-        owner:
-          allOf:
-          - $ref: '#/components/schemas/Owner'
-          description: The control's owner.
-        role:
-          type:
-          - string
-          - 'null'
-          description: The control's GDPR role, if the control is a GDPR control.
-        customFields:
-          items:
-            $ref: '#/components/schemas/CustomField'
-          type: array
-          description: The control's custom field values, if control custom fields is included in your Vanta instance.
-        framework:
-          type: string
-          description: The report standard framework fulfilled by the control.
-        sections:
-          items:
-            $ref: '#/components/schemas/Section'
-          type: array
-          description: Sections of a framework that this control satisfies
-      required:
-      - id
-      - externalId
-      - name
-      - description
-      - source
-      - domains
-      - owner
-      - customFields
-      - framework
-      - sections
-      type: object
-      additionalProperties: false
-    Section:
-      properties:
-        name:
-          type: string
-          description: The section name
-        framework:
-          type: string
-          description: The section framework
-      required:
-      - name
-      - framework
-      type: object
-      additionalProperties: false
-    CompleteOffboardingCustomTasksTaskSummary:
-      description: Task summary for completing all offboarding custom tasks.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.COMPLETE_CUSTOM_OFFBOARDING_TASKS'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-        incompleteCustomOffboardingTasks:
-          items:
-            $ref: '#/components/schemas/CustomTask'
-          type: array
-          description: Incomplete custom tasks that are relevant given a person's requirements.
-        completedCustomOffboardingTasks:
-          items:
-            $ref: '#/components/schemas/CustomTask'
-          type: array
-          description: Custom tasks that have been completed and are relevant given a person's current requirements.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      - incompleteCustomOffboardingTasks
-      - completedCustomOffboardingTasks
-      type: object
-      additionalProperties: false
-    VulnerableAssetScanner:
-      properties:
-        resourceId:
-          type: string
-          description: The scanned asset's Vanta resource id.
-        integrationId:
-          type: string
-          description: Integration that the the vulnerable asset is scanned by.
-        imageDigest:
-          type:
-          - string
-          - 'null'
-          description: Digest of the scanned container image.
-        imagePushedAtDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Push date of the scanned container image.
-        imageTags:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: Tags of the scanned container image.
-        assetTags:
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
-          type:
-          - array
-          - 'null'
-          description: Tags of the scanned asset.
-        parentAccountOrOrganization:
-          type:
-          - string
-          - 'null'
-          description: The parent account or organization of the scanned asset.
-        biosUuid:
-          type: string
-          description: BIOS UUID of the scanned asset.
-        ipv4s:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: IPV4s of the scanned asset.
-        ipv6s:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: IPV6s of the scanned asset.
-        macAddresses:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: Mac addresses of the scanned asset.
-        hostnames:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: Host names of the scanned asset.
-        fqdns:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: fqdns of the scanned asset.
-        operatingSystems:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-          description: Operating systems of the scanned asset.
-        targetId:
-          type:
-          - string
-          - 'null'
-          description: The asset's identifier code.
-      required:
-      - resourceId
-      - integrationId
-      - imageDigest
-      - imagePushedAtDate
-      - imageTags
-      - assetTags
-      - parentAccountOrOrganization
-      - biosUuid
-      - ipv4s
-      - ipv6s
-      - macAddresses
-      - hostnames
-      - fqdns
-      - operatingSystems
-      - targetId
-      type: object
-      additionalProperties: false
-    CreateCustomEvidenceRequestInput:
-      properties:
-        controlIds:
-          items:
-            type: string
-          type: array
-          description: A set of controls, referenced by id, to map the evidence to
-        title:
-          type: string
-          description: Title for the evidence request
-        description:
-          type: string
-          description: Description for the evidence request
-        cadence:
-          $ref: '#/components/schemas/RecurrenceDuration'
-          description: Renewal cadence
-        reminderWindow:
-          $ref: '#/components/schemas/RecurrenceDuration'
-          description: Duration representing when to send notifications, relative to renewal date
-        isRestricted:
-          type: boolean
-          description: Whether this document contains sensitive data and needs more restrictive read access
-        auditorEmail:
-          type: string
-          description: Email of the auditor who created the custom evidence request.
-      required:
-      - controlIds
-      - title
-      - description
-      - cadence
-      - reminderWindow
-      - isRestricted
-      - auditorEmail
-      type: object
-      additionalProperties: false
-    AcceptPoliciesTaskSummary:
-      description: Policy acceptance details for a person.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.ACCEPT_POLICIES'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-        unacceptedPolicies:
-          items:
-            properties:
-              name:
-                type: string
-            required:
-            - name
-            type: object
-          type: array
-          description: Unaccepted policies that are relevant to the person.
-        acceptedPolicies:
-          items:
-            properties:
-              name:
-                type: string
-            required:
-            - name
-            type: object
-          type: array
-          description: Accepted policies that are relevant to the person.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      - unacceptedPolicies
-      - acceptedPolicies
-      type: object
-      additionalProperties: false
-    ControlSource:
-      enum:
-      - Vanta
-      - Custom
-      type: string
-    RecurrenceDuration:
-      enum:
-      - P0D
-      - P1D
-      - P1W
-      - P1M
-      - P3M
-      - P6M
-      - P1Y
-      type: string
-    ComputerStatus:
-      description: The a status check for a computer. Representation for screenlock, diskEncryption, passwordManager, and antivirusInstallation.
-      properties:
-        outcome:
-          $ref: '#/components/schemas/ComputerStatusOutcome'
-          description: The outcome of the status check.
-      required:
-      - outcome
-      type: object
-      additionalProperties: false
-    CreateCustomControlInput:
-      properties:
-        externalId:
-          type: string
-          description: The external id of the control.
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the control.
-        description:
-          type: string
-          description: The description of the control.
-        effectiveDate:
-          type: string
-          format: date-time
-          description: The effective date of the control.
-        category:
-          $ref: '#/components/schemas/ControlDomain'
-          description: The category of the control. See the ControlDomain enum for possible values.
-        sections:
-          items:
-            $ref: '#/components/schemas/FrameworkSection'
-          type:
-          - array
-          - 'null'
-          description: Framework sections that the control should be mapped to.
-        role:
-          allOf:
-          - $ref: '#/components/schemas/GdprRole'
-          description: 'The GDPR role of the control, which specifies whether the data is being "collected" or "processed". See the GdprRole enum for possible values.
-
-            This field should only be included for controls that are to be mapped to the GDPR framework.'
-      required:
-      - externalId
-      - name
-      - description
-      - effectiveDate
-      - category
-      type: object
-      additionalProperties: false
-    PaginatedResponse_VulnerableAsset_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/VulnerableAsset'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    Audit:
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the audit.
-        customerOrganizationName:
-          type: string
-          description: The domain name of the customer organization being audited (e.g. vanta.com)
-        customerDisplayName:
-          type:
-          - string
-          - 'null'
-          description: The human readable name of the customer organization being audited (e.g. Vanta)
-        customerOrganizationId:
-          type: string
-          description: The uuid of the customer organization being audited
-        auditStartDate:
-          type: string
-          format: date-time
-          description: The start of the audit window. This is also when data collection for audit starts.
-        auditEndDate:
-          type: string
-          format: date-time
-          description: The end of the audit window.
-        earlyAccessStartsAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp at which auditors gain access to the audit. Occurs before the audit window begins
-        framework:
-          type: string
-          description: The name of the framework for the audit
-        allowAuditorEmails:
-          items:
-            type: string
-          type: array
-          description: Emails of auditors with access to audit
-        allowAllAuditors:
-          type: boolean
-          description: Set to true if all auditors in audit firm have access
-        deletionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp when the audit was deleted
+          description: Email of author. Must match an existing Vanta user and the user must exist under the Audit Firm who is making the API request
         creationDate:
           type: string
           format: date-time
-          description: Timestamp when the audit was created
-        modificationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp when the audit was updated
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp when the audit was marked completed, and report was uploaded
-        auditFocus:
-          $ref: '#/components/schemas/AuditFocus'
-          description: The focus of the audit
+          description: When the comment was created in the external system
       required:
-      - id
-      - customerOrganizationName
-      - customerDisplayName
-      - customerOrganizationId
-      - auditStartDate
-      - auditEndDate
-      - earlyAccessStartsAt
-      - framework
-      - allowAuditorEmails
-      - allowAllAuditors
-      - deletionDate
+      - text
+      - email
       - creationDate
-      - modificationDate
-      - completionDate
-      - auditFocus
+      type: object
+      additionalProperties: false
+    Training:
+      description: A person's security training.
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    TaskSummaryDetails:
+      description: All detailed information about a person's tasks, split across task categories.
+      properties:
+        completeTrainings:
+          $ref: '#/components/schemas/CompleteTrainingsTaskSummary'
+        acceptPolicies:
+          $ref: '#/components/schemas/AcceptPoliciesTaskSummary'
+        completeCustomTasks:
+          $ref: '#/components/schemas/CompleteCustomTasksTaskSummary'
+        completeOffboardingCustomTasks:
+          $ref: '#/components/schemas/CompleteOffboardingCustomTasksTaskSummary'
+        installDeviceMonitoring:
+          $ref: '#/components/schemas/InstallDeviceMonitoringTaskSummary'
+        completeBackgroundChecks:
+          $ref: '#/components/schemas/CompleteBackgroundChecksTaskSummary'
+      required:
+      - completeTrainings
+      - acceptPolicies
+      - completeCustomTasks
+      - completeOffboardingCustomTasks
+      - installDeviceMonitoring
+      - completeBackgroundChecks
       type: object
       additionalProperties: false
     PaginatedResponse_EvidenceUrl_:
@@ -1716,6 +1199,44 @@ components:
       - results
       type: object
       additionalProperties: false
+    FrameworkId:
+      enum:
+      - AU_E_8
+      - AWS_FTR
+      - CCPA
+      - CIS_V8
+      - CPS_234
+      - DORA
+      - FEDRAMP
+      - GDPR
+      - HIPAA
+      - HITRUST_E1
+      - ISO_27001
+      - ISO_27001_2022
+      - ISO_27017
+      - ISO_27018
+      - ISO_27701
+      - ISO_42001
+      - ISO_9001
+      - MSFT_SSPA
+      - MVSP
+      - NIS_2D
+      - NIST_171
+      - NIST_53
+      - NIST_AI_RMF
+      - NIST_CSF
+      - NIST_CSF_2
+      - OFDSS
+      - PCI_SAQ_A
+      - PCI_SAQ_A_EP
+      - PCI_SAQ_D_MERCHANT
+      - PCI_SAQ_D_SP
+      - PCI_DDS_4
+      - SOC_2
+      - SOX_ITGC
+      - UK_CYBER_ESSENTIALS
+      - US_DATA_PRIVACY
+      type: string
     CustomField:
       properties:
         label:
@@ -1729,6 +1250,617 @@ components:
       required:
       - label
       - value
+      type: object
+      additionalProperties: false
+    VantaBasedPersonInfoSource:
+      description: The person's information comes from what is set in Vanta.
+      properties:
+        type:
+          $ref: '#/components/schemas/PersonInfoSourceType.VANTA'
+      required:
+      - type
+      type: object
+      additionalProperties: false
+    TaskType:
+      description: 'The type a task summary falls into.
+
+        COMPLETE_TRAININGS: The task summary containing security trainings.
+
+        ACCEPT_POLICIES: The task summary containing policy acceptance.
+
+        COMPLETE_CUSTOM_TASKS: The task summary containing custom tasks.
+
+        INSTALL_DEVICE_MONITORING: The task summary containing device monitoring installation.
+
+        COMPLETE_BACKGROUND_CHECKS: The task summary containing background checks.'
+      enum:
+      - COMPLETE_TRAININGS
+      - ACCEPT_POLICIES
+      - COMPLETE_CUSTOM_TASKS
+      - COMPLETE_CUSTOM_OFFBOARDING_TASKS
+      - INSTALL_DEVICE_MONITORING
+      - COMPLETE_BACKGROUND_CHECKS
+      type: string
+    ListAuditsPageSize:
+      type: integer
+      format: int32
+      default: 10
+      description: 'Controls the maximum number of items returned in one response from the listAudits API.
+
+
+        We have increased the pagination size for this endpoint to enable our upmarket audit firms to
+
+        sync in a timely manner. The rest of the API will use a pagination size of 100.'
+      minimum: 1
+      maximum: 200
+    ExternalFindingSeverityType:
+      type: string
+      enum:
+      - CRITICAL
+      - HIGH
+      - LOW
+      - MEDIUM
+    TaskType.COMPLETE_CUSTOM_OFFBOARDING_TASKS:
+      enum:
+      - COMPLETE_CUSTOM_OFFBOARDING_TASKS
+      type: string
+    AuditFocus:
+      type: string
+      enum:
+      - EXTERNAL
+      - INTERNAL
+    TasksSummaryStatus:
+      description: 'The overall status of a person''s outstanding tasks:
+
+        - NONE: There are no tasks.
+
+        - DUE_SOON: At least one task is due soon.
+
+        - OVERDUE: At least one task is overdue. Has a higher priority than DUE_SOON.
+
+        - COMPLETE: All tasks are complete.
+
+        - PAUSED: All tasks are paused.
+
+        - OFFBOARDING_DUE_SOON: At least one offboarding task is due soon.
+
+        - OFFBOARDING_OVERDUE: At least one offboarding task is overdue. Has a higher priority than OFFBOARDING_DUE_SOON.
+
+        - OFFBOARDING_COMPLETE: All offboarding tasks are complete.'
+      enum:
+      - COMPLETE
+      - DUE_SOON
+      - NONE
+      - OFFBOARDING_COMPLETE
+      - OFFBOARDING_DUE_SOON
+      - OFFBOARDING_OVERDUE
+      - OVERDUE
+      - PAUSED
+      type: string
+    VendorRiskLevel:
+      description: 'The risk level of a vendor:
+
+        - CRITICAL: The vendor has a critical security risk
+
+        - HIGH: The vendor has a high security risk
+
+        - MEDIUM: The vendor has a medium security risk
+
+        - LOW: The vendor has a low security risk
+
+        - UNSCORED: The vendor has not been given a risk level'
+      enum:
+      - CRITICAL
+      - HIGH
+      - LOW
+      - MEDIUM
+      - UNSCORED
+      type: string
+    TaskType.ACCEPT_POLICIES:
+      enum:
+      - ACCEPT_POLICIES
+      type: string
+    PaginatedResponse_MonitoredComputer_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/MonitoredComputer'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    LeaveInfo:
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          description: The start of the person's leave.
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The end of the person's leave. Null endDate implies indefinite leave.
+        status:
+          $ref: '#/components/schemas/LeaveStatus'
+          description: ACTIVE if the leave is currently ongoing. UPCOMING if the startDate is in the future.
+      required:
+      - startDate
+      - endDate
+      - status
+      type: object
+      additionalProperties: false
+    VendorStatus:
+      description: 'The current state of a vendor:
+
+        - MANAGED: The vendor is actively managed.
+
+        - ARCHIVED: The vendor has been archived
+
+        - IN_PROCUREMENT: The vendor is in the procurement process'
+      enum:
+      - MANAGED
+      - ARCHIVED
+      - IN_PROCUREMENT
+      type: string
+    GdprRole:
+      enum:
+      - BOTH
+      - CONTROLLER
+      - PROCESSOR
+      type: string
+    AuditEvidenceState:
+      type: string
+      enum:
+      - Accepted
+      - Flagged
+      - Initialized
+      - NA
+      - Not ready for audit
+      - Ready for audit
+    TaskStatus:
+      description: 'The status of a task.
+
+        - COMPLETE: The task has been completed.
+
+        - DUE_SOON: The task is due soon.
+
+        - OVERDUE: The task is overdue.
+
+        - NONE: The task is not assigned.'
+      enum:
+      - COMPLETE
+      - DUE_SOON
+      - OVERDUE
+      - NONE
+      type: string
+    PersonInfoSourceType.SCIM:
+      enum:
+      - SCIM
+      type: string
+    CompleteTrainingsTaskSummary:
+      description: Task summary for completing all trainings.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.COMPLETE_TRAININGS'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+        incompleteTrainings:
+          items:
+            $ref: '#/components/schemas/Training'
+          type: array
+          description: Incomplete security trainings that are relevant given a person's requirements.
+        completedTrainings:
+          items:
+            $ref: '#/components/schemas/Training'
+          type: array
+          description: Security trainings that have been completed and are relevant given a person's current requirements.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      - incompleteTrainings
+      - completedTrainings
+      type: object
+      additionalProperties: false
+    PaginatedResponse_VulnerabilityRemediation_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/VulnerabilityRemediation'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    PaginatedResponse_Person_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/Person'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    Section:
+      properties:
+        name:
+          type: string
+          description: The section name
+        framework:
+          type: string
+          description: The section framework
+      required:
+      - name
+      - framework
+      type: object
+      additionalProperties: false
+    PageSize:
+      type: integer
+      format: int32
+      default: 10
+      description: Controls the maximum number of items returned in one response from the API.
+      minimum: 1
+      maximum: 100
+    CustomTask:
+      description: A custom task.
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    CompleteBackgroundChecksTaskSummary:
+      description: Task summary for completing background checks.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.COMPLETE_BACKGROUND_CHECKS'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      type: object
+      additionalProperties: false
+    ComputerStatusOutcome:
+      description: 'The possible outcomes of a status check. The outcome can be one of the following:
+
+        FAIL:  The check is failing.
+
+        IN_PROGRESS: The check needs further data from the given computer in order to evaluate. The field(s) needed from a computer to calculate the ComputerStatusOutcome were null.
+
+        NA: The check is not applicable for the given computer.
+
+        PASS: The check is passing.'
+      enum:
+      - FAIL
+      - IN_PROGRESS
+      - NA
+      - PASS
+      type: string
+    TaskType.INSTALL_DEVICE_MONITORING:
+      enum:
+      - INSTALL_DEVICE_MONITORING
+      type: string
+    IntegrationBasedPersonInfoSource:
+      description: The person's information comes from an integration.
+      properties:
+        integrationId:
+          type: string
+        resourceId:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/PersonInfoSourceType.INTEGRATION'
+      required:
+      - integrationId
+      - resourceId
+      - type
+      type: object
+      additionalProperties: false
+    PaginatedResponse_AuditorControl_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/AuditorControl'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    TaskType.COMPLETE_CUSTOM_TASKS:
+      enum:
+      - COMPLETE_CUSTOM_TASKS
+      type: string
+    EvidenceControl:
+      properties:
+        name:
+          type: string
+          description: Name of control associated to this evidence
+        sectionNames:
+          items:
+            type: string
+          type: array
+          description: A list sections associated to the control
+      required:
+      - name
+      - sectionNames
+      type: object
+      additionalProperties: false
+    PersonInfoSourceType.INTEGRATION:
+      enum:
+      - INTEGRATION
+      type: string
+    PaginatedResponse_Vendor_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/Vendor'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    PageInfo:
+      description: Provides information about the pagination of a dataset.
+      properties:
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor that points to the end of the current page, or null if there is no such cursor.
+        hasNextPage:
+          type: boolean
+          description: Indicates if there is another page after the current page.
+        hasPreviousPage:
+          type: boolean
+          description: Indicates if there is a page before the current page.
+        startCursor:
+          type:
+          - string
+          - 'null'
+          description: The cursor that points to the start of the current page, or null if there is no such cursor.
+      required:
+      - endCursor
+      - hasNextPage
+      - hasPreviousPage
+      - startCursor
+      type: object
+      additionalProperties: false
+    PaginatedResponse_Comment_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/Comment'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    EvidenceUrl:
+      properties:
+        id:
+          type: string
+          description: Vanta internal reference to evidence
+        url:
+          type: string
+          description: Pre-signed S3 URL for evidence
+        filename:
+          type: string
+          description: File name of evidence
+        isDownloadable:
+          type: boolean
+          description: Set to true if this is a presigned s3 url. Set to false if this is a customer uploaded link
+      required:
+      - id
+      - url
+      - filename
+      - isDownloadable
+      type: object
+      additionalProperties: false
+    ComputerStatusFilter:
+      description: 'Enum representing computer compliance statuses that can be utilized as a filter. The meanings are as follows:
+
+        AV_NOT_INSTALLED: The computer does not have antivirus software installed.
+
+        HD_NOT_ENCRYPTED: The computer''s harddrive is not encrypted.
+
+        LAST_CHECK_OVER_14_DAYS: No data has been received from computer for over 14 days.
+
+        PWM_NOT_INSTALLED: The computer does not have a password manager installed.
+
+        SCREENLOCK_NOT_CONFIGURED: The computer does not have screenlock configured appropriately.'
+      enum:
+      - PWM_NOT_INSTALLED
+      - HD_NOT_ENCRYPTED
+      - AV_NOT_INSTALLED
+      - SCREENLOCK_NOT_CONFIGURED
+      - LAST_CHECK_OVER_14_DAYS
+      type: string
+    TaskType.COMPLETE_BACKGROUND_CHECKS:
+      enum:
+      - COMPLETE_BACKGROUND_CHECKS
+      type: string
+    CompleteCustomTasksTaskSummary:
+      description: Task summary for completing all custom tasks.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.COMPLETE_CUSTOM_TASKS'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+        incompleteCustomTasks:
+          items:
+            $ref: '#/components/schemas/CustomTask'
+          type: array
+          description: Incomplete custom tasks that are relevant given a person's requirements.
+        completedCustomTasks:
+          items:
+            $ref: '#/components/schemas/CustomTask'
+          type: array
+          description: Custom tasks that have been completed and are relevant given a person's current requirements.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      - incompleteCustomTasks
+      - completedCustomTasks
+      type: object
+      additionalProperties: false
+    VendorContractAmount:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount of the contract.
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: The currency of the contract.
+      required:
+      - amount
+      - currency
       type: object
       additionalProperties: false
     CountryCode:
@@ -1988,114 +2120,19 @@ components:
       - ZMB
       - ZWE
       type: string
-    TaskSummaryDetails:
-      description: All detailed information about a person's tasks, split across task categories.
-      properties:
-        completeTrainings:
-          $ref: '#/components/schemas/CompleteTrainingsTaskSummary'
-        acceptPolicies:
-          $ref: '#/components/schemas/AcceptPoliciesTaskSummary'
-        completeCustomTasks:
-          $ref: '#/components/schemas/CompleteCustomTasksTaskSummary'
-        completeOffboardingCustomTasks:
-          $ref: '#/components/schemas/CompleteOffboardingCustomTasksTaskSummary'
-        installDeviceMonitoring:
-          $ref: '#/components/schemas/InstallDeviceMonitoringTaskSummary'
-        completeBackgroundChecks:
-          $ref: '#/components/schemas/CompleteBackgroundChecksTaskSummary'
-      required:
-      - completeTrainings
-      - acceptPolicies
-      - completeCustomTasks
-      - completeOffboardingCustomTasks
-      - installDeviceMonitoring
-      - completeBackgroundChecks
-      type: object
-      additionalProperties: false
-    InstallDeviceMonitoringTaskSummary:
-      description: Task summary for installing device monitoring.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.INSTALL_DEVICE_MONITORING'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      type: object
-      additionalProperties: false
-    EvidenceUrl:
-      properties:
-        id:
-          type: string
-          description: Vanta internal reference to evidence
-        url:
-          type: string
-          description: Pre-signed S3 URL for evidence
-        filename:
-          type: string
-          description: File name of evidence
-        isDownloadable:
-          type: boolean
-          description: Set to true if this is a presigned s3 url. Set to false if this is a customer uploaded link
-      required:
-      - id
-      - url
-      - filename
-      - isDownloadable
-      type: object
-      additionalProperties: false
-    VendorStatus:
-      description: 'The current state of a vendor:
-
-        - MANAGED: The vendor is actively managed.
-
-        - ARCHIVED: The vendor has been archived
-
-        - IN_PROCUREMENT: The vendor is in the procurement process'
-      enum:
-      - MANAGED
-      - ARCHIVED
-      - IN_PROCUREMENT
+    VulnerabilityType:
       type: string
-    PaginatedResponse_Person_:
+      enum:
+      - CONFIGURATION
+      - COMMON
+      - GROUPED
+    PaginatedResponse_Audit_:
       properties:
         results:
           properties:
             data:
               items:
-                $ref: '#/components/schemas/Person'
+                $ref: '#/components/schemas/Audit'
               type: array
             pageInfo:
               $ref: '#/components/schemas/PageInfo'
@@ -2107,483 +2144,12 @@ components:
       - results
       type: object
       additionalProperties: false
-    OperatingSystem:
-      description: The computer's operating system type and version.
-      properties:
-        type:
-          $ref: '#/components/schemas/OperatingSystemType'
-          description: The type of the operating system.
-        version:
-          type:
-          - string
-          - 'null'
-          description: The version of the operating system.
-      required:
-      - type
-      - version
-      type: object
-      additionalProperties: false
-    MonitoredComputer:
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the monitored computer.
-        integrationId:
-          type: string
-          description: Hard-coded enums for Vanta-built integrations or application IDs for 3rd-party-built integrations.
-        lastCheckDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date of the computer's most recent report.
-        screenlock:
-          $ref: '#/components/schemas/ComputerStatus'
-          description: Whether or not the computer has screenlock enabled.
-        diskEncryption:
-          $ref: '#/components/schemas/ComputerStatus'
-          description: Whether or not the computer's hard drive is encrypted.
-        passwordManager:
-          $ref: '#/components/schemas/ComputerStatus'
-          description: Whether or not the computer has a password manager installed.
-        antivirusInstallation:
-          $ref: '#/components/schemas/ComputerStatus'
-          description: Whether or not the computer has antivirus software installed.
-        operatingSystem:
-          allOf:
-          - $ref: '#/components/schemas/OperatingSystem'
-          description: The computer's operating system name and version.
-        owner:
-          allOf:
-          - $ref: '#/components/schemas/Owner'
-          description: The name, unique identifier, and email address of the computer's owner.
-        serialNumber:
-          type:
-          - string
-          - 'null'
-          description: The serial number of the computer. This value may be null if it is not reported by the device.
-        udid:
-          type:
-          - string
-          - 'null'
-          description: The universal device id of the computer.
-      required:
-      - id
-      - integrationId
-      - lastCheckDate
-      - screenlock
-      - diskEncryption
-      - passwordManager
-      - antivirusInstallation
-      - operatingSystem
-      - owner
-      - serialNumber
-      - udid
-      type: object
-      additionalProperties: false
-    VulnerabilityRemediation:
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the remediation.
-        vulnerabilityId:
-          type: string
-          description: Unique identifier for the vulnerability that the remediation is for.
-        vulnerableAssetId:
-          type: string
-          description: Unique identifier for the vulnerable asset that the remediation is for.
-        severity:
-          type: string
-          description: Severity of the vulnerability.
-        detectedDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date when the vulnerability was first detected.
-        slaDeadlineDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date when the vulnerability should be remediated by.
-        remediationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date when the vulnerability was remediated.
-      required:
-      - id
-      - vulnerabilityId
-      - vulnerableAssetId
-      - severity
-      - detectedDate
-      - slaDeadlineDate
-      - remediationDate
-      type: object
-      additionalProperties: false
-    AuditFocus:
+    AuditEvidenceType:
       type: string
       enum:
-      - EXTERNAL
-      - INTERNAL
-    PaginatedResponse_Vulnerability_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/Vulnerability'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    PaginatedResponse_AuditorControl_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/AuditorControl'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    Evidence:
-      properties:
-        id:
-          type: string
-          description: Vanta internal reference to evidence
-        externalId:
-          type: string
-          description: This is a static UUID to map Audit Firm controls to Vanta controls
-        status:
-          $ref: '#/components/schemas/AuditEvidenceState'
-          description: Vanta internal statuses for audit evidence
-        name:
-          type: string
-          description: Mutable name for evidence. Not guaranteed to be unique.
-        deletionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date this Audit Evidence was deleted
-        creationDate:
-          type: string
-          format: date-time
-          description: The date this Audit Evidence was created
-        statusUpdatedDate:
-          type: string
-          format: date-time
-          description: Point in time that status was last updated
-        testStatus:
-          type:
-          - string
-          - 'null'
-          description: The outcome of the automated test run, for Test-type evidence
-        evidenceType:
-          $ref: '#/components/schemas/AuditEvidenceType'
-          description: The type of Audit Evidence
-        evidenceId:
-          type: string
-          description: Unique identifier for evidence
-        relatedControls:
-          items:
-            $ref: '#/components/schemas/EvidenceControl'
-          type: array
-          description: The controls associated to this evidence
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description for the evidence. It will be set to null if the evidence is deleted
-      required:
-      - id
-      - externalId
-      - status
-      - name
-      - deletionDate
-      - creationDate
-      - statusUpdatedDate
-      - testStatus
-      - evidenceType
-      - evidenceId
-      - relatedControls
-      - description
-      type: object
-      additionalProperties: false
-    PersonInfoSourceType.INTEGRATION:
-      enum:
-      - INTEGRATION
-      type: string
-    ControlDomain:
-      enum:
-      - ARTIFICIAL_&_AUTONOMOUS_TECHNOLOGY
-      - ASSET_MANAGEMENT
-      - BUSINESS_CONTINUITY_&_DISASTER_RECOVERY
-      - CAPACITY_&_PERFORMANCE_PLANNING
-      - CHANGE_MANAGEMENT
-      - CLOUD_SECURITY
-      - COMPLIANCE
-      - CONFIGURATION_MANAGEMENT
-      - CONTINUOUS_MONITORING
-      - CRYPTOGRAPHIC_PROTECTIONS
-      - DATA_CLASSIFICATION_&_HANDLING
-      - EMBEDDED_TECHNOLOGY
-      - ENDPOINT_SECURITY
-      - HUMAN_RESOURCES_SECURITY
-      - IDENTIFICATION_&_AUTHENTICATION
-      - INCIDENT_RESPONSE
-      - INFORMATION_ASSURANCE
-      - MAINTENANCE
-      - MOBILE_DEVICE_MANAGEMENT
-      - NETWORK SECURITY
-      - PHYSICAL_&_ENVIRONMENTAL_SECURITY
-      - PRIVACY
-      - PROJECT_&_RESOURCE MANAGEMENT
-      - RISK_MANAGEMENT
-      - SECURE_ENGINEERING_&_ARCHITECTURE
-      - SECURITY_AWARENESS_&_TRAINING
-      - SECURITY_OPERATIONS
-      - SECURITY_&_PRIVACY_GOVERNANCE
-      - TECHNOLOGY_DEVELOPMENT_&_ACQUISITION
-      - THIRD-PARTY_MANAGEMENT
-      - THREAT_MANAGEMENT
-      - VULNERABILITY_&_PATCH_MANAGEMENT
-      - WEB_SECURITY
-      - ADMINISTRATIVE
-      - PHYSICAL
-      - TECHNICAL
-      - BASIC
-      - DERIVED
-      type: string
-    Training:
-      description: A person's security training.
-      properties:
-        name:
-          type: string
-      required:
-      - name
-      type: object
-      additionalProperties: false
-    PageCursor:
-      type: string
-      description: 'A marker or pointer, telling the API where to start fetching items for the subsequent page in a paginated dataset.
-
-        Note that the requested page will not include the item that corresponds to this cursor but will start from the one immediately
-
-        after this cursor.'
-    PaginatedResponse_Vendor_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/Vendor'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    CustomTask:
-      description: A custom task.
-      properties:
-        name:
-          type: string
-      required:
-      - name
-      type: object
-      additionalProperties: false
-    Owner:
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the person.
-        displayName:
-          type: string
-          description: Name of the person that is shown in product.
-        emailAddress:
-          type: string
-          description: Email address of the person.
-      required:
-      - id
-      - displayName
-      - emailAddress
-      type: object
-      additionalProperties: false
-    CurrencyCode:
-      enum:
-      - ARS
-      - AUD
-      - BRL
-      - CAD
-      - COP
-      - CZK
-      - DKK
-      - EUR
-      - GBP
-      - ILS
-      - INR
-      - JPY
-      - MXN
-      - NOK
-      - NZD
-      - PHP
-      - PKR
-      - PLN
-      - RSD
-      - SEK
-      - SGD
-      - UAH
-      - USD
-      - ZAR
-      type: string
-    ListAuditsPageSize:
-      type: integer
-      format: int32
-      default: 10
-      description: 'Controls the maximum number of items returned in one response from the listAudits API.
-
-
-        We have increased the pagination size for this endpoint to enable our upmarket audit firms to
-
-        sync in a timely manner. The rest of the API will use a pagination size of 100.'
-      minimum: 1
-      maximum: 200
-    FrameworkId:
-      enum:
-      - AU_E_8
-      - AWS_FTR
-      - CCPA
-      - CIS_V8
-      - CPS_234
-      - DORA
-      - FEDRAMP
-      - GDPR
-      - HIPAA
-      - HITRUST_E1
-      - ISO_27001
-      - ISO_27001_2022
-      - ISO_27017
-      - ISO_27018
-      - ISO_27701
-      - ISO_42001
-      - ISO_9001
-      - MSFT_SSPA
-      - MVSP
-      - NIS_2D
-      - NIST_171
-      - NIST_53
-      - NIST_AI_RMF
-      - NIST_CSF
-      - NIST_CSF_2
-      - OFDSS
-      - PCI_SAQ_A
-      - PCI_SAQ_A_EP
-      - PCI_SAQ_D_MERCHANT
-      - PCI_SAQ_D_SP
-      - PCI_DDS_4
-      - SOC_2
-      - SOX_ITGC
-      - UK_CYBER_ESSENTIALS
-      - US_DATA_PRIVACY
-      type: string
-    PaginatedResponse_VulnerabilityRemediation_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/VulnerabilityRemediation'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    VulnerableAsset:
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the vulnerable asset.
-        name:
-          type: string
-          description: Display name of the vulnerable asset.
-        assetType:
-          $ref: '#/components/schemas/VulnerableAssetType'
-          description: 'Type of the vulnerable asset.
-
-            Possible values: CODE_REPOSITORY, CONTAINER_REPOSITORY, CONTAINER_REPOSITORY_IMAGE, MANIFEST_FILE, SERVER, SERVERLESS_FUNCTION, WORKSTATION.'
-        hasBeenScanned:
-          type: boolean
-          description: Whether the vulnerable asset has been scanned.
-        imageScanTag:
-          type:
-          - string
-          - 'null'
-          description: Only relevant for container repositories. This field sets the container image tag that vulnerabilities will be retrieved for. If null, the latest image will be retrieved.
-        scanners:
-          items:
-            $ref: '#/components/schemas/VulnerableAssetScanner'
-          type: array
-          description: The integrations that are scanning this vulnerable asset.
-      required:
-      - id
-      - name
-      - assetType
-      - hasBeenScanned
-      - imageScanTag
-      - scanners
-      type: object
-      additionalProperties: false
-    OperatingSystemType:
-      description: The possible types of the operating system. One of `mac_OS`, `linux`, or `windows`.
-      enum:
-      - macOS
-      - linux
-      - windows
-      type: string
-    VendorContractAmount:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: The amount of the contract.
-        currency:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: The currency of the contract.
-      required:
-      - amount
-      - currency
-      type: object
-      additionalProperties: false
+      - Evidence Request
+      - Policy
+      - Test
     Vendor:
       properties:
         id:
@@ -2769,61 +2335,54 @@ components:
       - customFields
       type: object
       additionalProperties: false
-    VantaBasedPersonInfoSource:
-      description: The person's information comes from what is set in Vanta.
+    VendorAuthenticationMethod:
+      description: 'The authentication method a vendor uses:
+
+        - AUTH_0: The vendor authenticates using Auth0
+
+        - AZURE_AD: The vendor authenticates using Azure Active Directory
+
+        - G_SUITE: The vendor authenticates using Google Workspace
+
+        - O_AUTH: The vendor authenticates using OAuth
+
+        - O365: The vendor authenticates using Office 365
+
+        - OKTA: The vendor authenticates using Okta
+
+        - ONE_LOGIN: The vendor authenticates using OneLogin
+
+        - OWA: The vendor authenticates using OWA
+
+        - SSO: The vendor authenticates using SSO
+
+        - USERNAME_PASSWORD: The vendor authenticates using usernames and passwords'
+      enum:
+      - AUTH_0
+      - AZURE_AD
+      - GOOGLE_WORKSPACE
+      - O_AUTH
+      - O365
+      - OKTA
+      - ONE_LOGIN
+      - OWA
+      - SSO
+      - USERNAME_PASSWORD
+      type: string
+    FrameworkSection:
       properties:
-        type:
-          $ref: '#/components/schemas/PersonInfoSourceType.VANTA'
+        frameworkId:
+          anyOf:
+          - $ref: '#/components/schemas/FrameworkId'
+          - type: string
+        sectionId:
+          type: string
       required:
-      - type
+      - frameworkId
+      - sectionId
       type: object
       additionalProperties: false
-    ComputerStatusFilter:
-      description: 'Enum representing computer compliance statuses that can be utilized as a filter. The meanings are as follows:
-
-        AV_NOT_INSTALLED: The computer does not have antivirus software installed.
-
-        HD_NOT_ENCRYPTED: The computer''s harddrive is not encrypted.
-
-        LAST_CHECK_OVER_14_DAYS: No data has been received from computer for over 14 days.
-
-        PWM_NOT_INSTALLED: The computer does not have a password manager installed.
-
-        SCREENLOCK_NOT_CONFIGURED: The computer does not have screenlock configured appropriately.'
-      enum:
-      - PWM_NOT_INSTALLED
-      - HD_NOT_ENCRYPTED
-      - AV_NOT_INSTALLED
-      - SCREENLOCK_NOT_CONFIGURED
-      - LAST_CHECK_OVER_14_DAYS
-      type: string
-    AddCommentInput:
-      properties:
-        text:
-          type: string
-          description: Text value of the comment
-        email:
-          type: string
-          description: Email of author. Must match an existing Vanta user and the user must exist under the Audit Firm who is making the API request
-        creationDate:
-          type: string
-          format: date-time
-          description: When the comment was created in the external system
-      required:
-      - text
-      - email
-      - creationDate
-      type: object
-      additionalProperties: false
-    ExternalFindingSeverity:
-      description: ExternalFindingSeverity describes the severity of an external finding (Vulnerability or Security Alert)
-      enum:
-      - CRITICAL
-      - HIGH
-      - LOW
-      - MEDIUM
-      type: string
-    Control:
+    AuditorControl:
       properties:
         id:
           type: string
@@ -2861,6 +2420,14 @@ components:
             $ref: '#/components/schemas/CustomField'
           type: array
           description: The control's custom field values, if control custom fields is included in your Vanta instance.
+        framework:
+          type: string
+          description: The report standard framework fulfilled by the control.
+        sections:
+          items:
+            $ref: '#/components/schemas/Section'
+          type: array
+          description: Sections of a framework that this control satisfies
       required:
       - id
       - externalId
@@ -2870,8 +2437,62 @@ components:
       - domains
       - owner
       - customFields
+      - framework
+      - sections
       type: object
       additionalProperties: false
+    PageCursor:
+      type: string
+      description: 'A marker or pointer, telling the API where to start fetching items for the subsequent page in a paginated dataset.
+
+        Note that the requested page will not include the item that corresponds to this cursor but will start from the one immediately
+
+        after this cursor.'
+    RecurrenceDuration:
+      enum:
+      - P0D
+      - P1D
+      - P1W
+      - P1M
+      - P3M
+      - P6M
+      - P1Y
+      type: string
+    ControlSource:
+      enum:
+      - Vanta
+      - Custom
+      type: string
+    PaginatedResponse_Evidence_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/Evidence'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    TaskType.COMPLETE_TRAININGS:
+      enum:
+      - COMPLETE_TRAININGS
+      type: string
+    AuditorEnabledStateTransition:
+      type: string
+      enum:
+      - ACCEPT
+      - MARK_APPLICABLE
+      - FLAG
+      - MARK_NA
+      - READY_FOR_AUDIT
     ScimBasedPersonInfoSource:
       description: The person's information comes from SCIM.
       properties:
@@ -2881,14 +2502,196 @@ components:
       - type
       type: object
       additionalProperties: false
-    PersonInfoSourceType.SCIM:
+    CustomEvidenceRequest:
+      properties:
+        id:
+          type: string
+          description: Internal id of the custom evidence request within Vanta
+        controlIds:
+          items:
+            type: string
+          type: array
+          description: A set of controls, referenced by id, to map the evidence to
+        title:
+          type: string
+          description: Title for the evidence request
+        description:
+          type: string
+          description: Description for the evidence request
+        cadence:
+          $ref: '#/components/schemas/RecurrenceDuration'
+          description: Renewal cadence
+        reminderWindow:
+          $ref: '#/components/schemas/RecurrenceDuration'
+          description: Duration representing when to send notifications, relative to renewal date
+        isRestricted:
+          type: boolean
+          description: Whether this document contains sensitive data and needs more restrictive read access
+      required:
+      - id
+      - controlIds
+      - title
+      - description
+      - cadence
+      - reminderWindow
+      - isRestricted
+      type: object
+      additionalProperties: false
+    OperatingSystemType:
+      description: The possible types of the operating system. One of `mac_OS`, `linux`, or `windows`.
       enum:
-      - SCIM
+      - macOS
+      - linux
+      - windows
       type: string
-    TaskType.ACCEPT_POLICIES:
-      enum:
-      - ACCEPT_POLICIES
-      type: string
+    Audit:
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the audit.
+        customerOrganizationName:
+          type: string
+          description: The domain name of the customer organization being audited (e.g. vanta.com)
+        customerDisplayName:
+          type:
+          - string
+          - 'null'
+          description: The human readable name of the customer organization being audited (e.g. Vanta)
+        customerOrganizationId:
+          type: string
+          description: The uuid of the customer organization being audited
+        auditStartDate:
+          type: string
+          format: date-time
+          description: The start of the audit window. This is also when data collection for audit starts.
+        auditEndDate:
+          type: string
+          format: date-time
+          description: The end of the audit window.
+        earlyAccessStartsAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp at which auditors gain access to the audit. Occurs before the audit window begins
+        framework:
+          type: string
+          description: The name of the framework for the audit
+        allowAuditorEmails:
+          items:
+            type: string
+          type: array
+          description: Emails of auditors with access to audit
+        allowAllAuditors:
+          type: boolean
+          description: Set to true if all auditors in audit firm have access
+        deletionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp when the audit was deleted
+        creationDate:
+          type: string
+          format: date-time
+          description: Timestamp when the audit was created
+        modificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp when the audit was updated
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp when the audit was marked completed, and report was uploaded
+        auditFocus:
+          $ref: '#/components/schemas/AuditFocus'
+          description: The focus of the audit
+      required:
+      - id
+      - customerOrganizationName
+      - customerDisplayName
+      - customerOrganizationId
+      - auditStartDate
+      - auditEndDate
+      - earlyAccessStartsAt
+      - framework
+      - allowAuditorEmails
+      - allowAllAuditors
+      - deletionDate
+      - creationDate
+      - modificationDate
+      - completionDate
+      - auditFocus
+      type: object
+      additionalProperties: false
+    Evidence:
+      properties:
+        id:
+          type: string
+          description: Vanta internal reference to evidence
+        externalId:
+          type: string
+          description: This is a static UUID to map Audit Firm controls to Vanta controls
+        status:
+          $ref: '#/components/schemas/AuditEvidenceState'
+          description: Vanta internal statuses for audit evidence
+        name:
+          type: string
+          description: Mutable name for evidence. Not guaranteed to be unique.
+        deletionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date this Audit Evidence was deleted
+        creationDate:
+          type: string
+          format: date-time
+          description: The date this Audit Evidence was created
+        statusUpdatedDate:
+          type: string
+          format: date-time
+          description: Point in time that status was last updated
+        testStatus:
+          type:
+          - string
+          - 'null'
+          description: The outcome of the automated test run, for Test-type evidence
+        evidenceType:
+          $ref: '#/components/schemas/AuditEvidenceType'
+          description: The type of Audit Evidence
+        evidenceId:
+          type: string
+          description: Unique identifier for evidence
+        relatedControls:
+          items:
+            $ref: '#/components/schemas/EvidenceControl'
+          type: array
+          description: The controls associated to this evidence
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description for the evidence. It will be set to null if the evidence is deleted
+      required:
+      - id
+      - externalId
+      - status
+      - name
+      - deletionDate
+      - creationDate
+      - statusUpdatedDate
+      - testStatus
+      - evidenceType
+      - evidenceId
+      - relatedControls
+      - description
+      type: object
+      additionalProperties: false
     Person:
       properties:
         id:
@@ -3009,535 +2812,6 @@ components:
       - name
       - sources
       - tasksSummary
-      type: object
-      additionalProperties: false
-    TaskType.COMPLETE_CUSTOM_TASKS:
-      enum:
-      - COMPLETE_CUSTOM_TASKS
-      type: string
-    PaginatedResponse_Comment_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/Comment'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    CustomEvidenceRequest:
-      properties:
-        id:
-          type: string
-          description: Internal id of the custom evidence request within Vanta
-        controlIds:
-          items:
-            type: string
-          type: array
-          description: A set of controls, referenced by id, to map the evidence to
-        title:
-          type: string
-          description: Title for the evidence request
-        description:
-          type: string
-          description: Description for the evidence request
-        cadence:
-          $ref: '#/components/schemas/RecurrenceDuration'
-          description: Renewal cadence
-        reminderWindow:
-          $ref: '#/components/schemas/RecurrenceDuration'
-          description: Duration representing when to send notifications, relative to renewal date
-        isRestricted:
-          type: boolean
-          description: Whether this document contains sensitive data and needs more restrictive read access
-      required:
-      - id
-      - controlIds
-      - title
-      - description
-      - cadence
-      - reminderWindow
-      - isRestricted
-      type: object
-      additionalProperties: false
-    PersonInfoSource:
-      anyOf:
-      - $ref: '#/components/schemas/VantaBasedPersonInfoSource'
-      - $ref: '#/components/schemas/ScimBasedPersonInfoSource'
-      - $ref: '#/components/schemas/IntegrationBasedPersonInfoSource'
-      description: The source of the person's information.
-    PersonInfoSourceType.VANTA:
-      enum:
-      - VANTA
-      type: string
-    AuditEvidenceState:
-      type: string
-      enum:
-      - Accepted
-      - Flagged
-      - Initialized
-      - NA
-      - Not ready for audit
-      - Ready for audit
-    TasksSummaryStatus:
-      description: 'The overall status of a person''s outstanding tasks:
-
-        - NONE: There are no tasks.
-
-        - DUE_SOON: At least one task is due soon.
-
-        - OVERDUE: At least one task is overdue. Has a higher priority than DUE_SOON.
-
-        - COMPLETE: All tasks are complete.
-
-        - PAUSED: All tasks are paused.
-
-        - OFFBOARDING_DUE_SOON: At least one offboarding task is due soon.
-
-        - OFFBOARDING_OVERDUE: At least one offboarding task is overdue. Has a higher priority than OFFBOARDING_DUE_SOON.
-
-        - OFFBOARDING_COMPLETE: All offboarding tasks are complete.'
-      enum:
-      - COMPLETE
-      - DUE_SOON
-      - NONE
-      - OFFBOARDING_COMPLETE
-      - OFFBOARDING_DUE_SOON
-      - OFFBOARDING_OVERDUE
-      - OVERDUE
-      - PAUSED
-      type: string
-    GdprRole:
-      enum:
-      - BOTH
-      - CONTROLLER
-      - PROCESSOR
-      type: string
-    CompleteTrainingsTaskSummary:
-      description: Task summary for completing all trainings.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.COMPLETE_TRAININGS'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-        incompleteTrainings:
-          items:
-            $ref: '#/components/schemas/Training'
-          type: array
-          description: Incomplete security trainings that are relevant given a person's requirements.
-        completedTrainings:
-          items:
-            $ref: '#/components/schemas/Training'
-          type: array
-          description: Security trainings that have been completed and are relevant given a person's current requirements.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      - incompleteTrainings
-      - completedTrainings
-      type: object
-      additionalProperties: false
-    PaginatedResponse_Audit_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/Audit'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    AuditorEnabledStateTransition:
-      type: string
-      enum:
-      - ACCEPT
-      - MARK_APPLICABLE
-      - FLAG
-      - MARK_NA
-      - READY_FOR_AUDIT
-    TaskType.COMPLETE_TRAININGS:
-      enum:
-      - COMPLETE_TRAININGS
-      type: string
-    TaskType.COMPLETE_BACKGROUND_CHECKS:
-      enum:
-      - COMPLETE_BACKGROUND_CHECKS
-      type: string
-    ComputerStatusOutcome:
-      description: 'The possible outcomes of a status check. The outcome can be one of the following:
-
-        FAIL:  The check is failing.
-
-        IN_PROGRESS: The check needs further data from the given computer in order to evaluate. The field(s) needed from a computer to calculate the ComputerStatusOutcome were null.
-
-        NA: The check is not applicable for the given computer.
-
-        PASS: The check is passing.'
-      enum:
-      - FAIL
-      - IN_PROGRESS
-      - NA
-      - PASS
-      type: string
-    IntegrationBasedPersonInfoSource:
-      description: The person's information comes from an integration.
-      properties:
-        integrationId:
-          type: string
-        resourceId:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/PersonInfoSourceType.INTEGRATION'
-      required:
-      - integrationId
-      - resourceId
-      - type
-      type: object
-      additionalProperties: false
-    AuditEvidenceType:
-      type: string
-      enum:
-      - Evidence Request
-      - Policy
-      - Test
-    TaskType.COMPLETE_CUSTOM_OFFBOARDING_TASKS:
-      enum:
-      - COMPLETE_CUSTOM_OFFBOARDING_TASKS
-      type: string
-    CompleteCustomTasksTaskSummary:
-      description: Task summary for completing all custom tasks.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.COMPLETE_CUSTOM_TASKS'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-        incompleteCustomTasks:
-          items:
-            $ref: '#/components/schemas/CustomTask'
-          type: array
-          description: Incomplete custom tasks that are relevant given a person's requirements.
-        completedCustomTasks:
-          items:
-            $ref: '#/components/schemas/CustomTask'
-          type: array
-          description: Custom tasks that have been completed and are relevant given a person's current requirements.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      - incompleteCustomTasks
-      - completedCustomTasks
-      type: object
-      additionalProperties: false
-    TaskStatus:
-      description: 'The status of a task.
-
-        - COMPLETE: The task has been completed.
-
-        - DUE_SOON: The task is due soon.
-
-        - OVERDUE: The task is overdue.
-
-        - NONE: The task is not assigned.'
-      enum:
-      - COMPLETE
-      - DUE_SOON
-      - OVERDUE
-      - NONE
-      type: string
-    TaskType.INSTALL_DEVICE_MONITORING:
-      enum:
-      - INSTALL_DEVICE_MONITORING
-      type: string
-    AuditEvidenceUpdateInput:
-      properties:
-        statusUpdate:
-          properties:
-            auditorEmail:
-              type: string
-              description: Email of the auditor who changed the state
-            stateTransition:
-              $ref: '#/components/schemas/AuditorEnabledStateTransition'
-              description: State change for audit evidence
-          required:
-          - auditorEmail
-          - stateTransition
-          type: object
-      type: object
-      additionalProperties: false
-    TaskType:
-      description: 'The type a task summary falls into.
-
-        COMPLETE_TRAININGS: The task summary containing security trainings.
-
-        ACCEPT_POLICIES: The task summary containing policy acceptance.
-
-        COMPLETE_CUSTOM_TASKS: The task summary containing custom tasks.
-
-        INSTALL_DEVICE_MONITORING: The task summary containing device monitoring installation.
-
-        COMPLETE_BACKGROUND_CHECKS: The task summary containing background checks.'
-      enum:
-      - COMPLETE_TRAININGS
-      - ACCEPT_POLICIES
-      - COMPLETE_CUSTOM_TASKS
-      - COMPLETE_CUSTOM_OFFBOARDING_TASKS
-      - INSTALL_DEVICE_MONITORING
-      - COMPLETE_BACKGROUND_CHECKS
-      type: string
-    LeaveInfo:
-      properties:
-        startDate:
-          type: string
-          format: date-time
-          description: The start of the person's leave.
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The end of the person's leave. Null endDate implies indefinite leave.
-        status:
-          $ref: '#/components/schemas/LeaveStatus'
-          description: ACTIVE if the leave is currently ongoing. UPCOMING if the startDate is in the future.
-      required:
-      - startDate
-      - endDate
-      - status
-      type: object
-      additionalProperties: false
-    VulnerabilityType:
-      type: string
-      enum:
-      - CONFIGURATION
-      - COMMON
-      - GROUPED
-    CompleteBackgroundChecksTaskSummary:
-      description: Task summary for completing background checks.
-      properties:
-        taskType:
-          $ref: '#/components/schemas/TaskType.COMPLETE_BACKGROUND_CHECKS'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The due date of the task.
-        completionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date the task was completed.
-        disabled:
-          properties:
-            date:
-              type: string
-              format: date-time
-            reason:
-              type:
-              - string
-              - 'null'
-          required:
-          - date
-          - reason
-          type:
-          - object
-          - 'null'
-          description: If the task is disabled, the reason and date when it was disabled.
-      required:
-      - taskType
-      - status
-      - dueDate
-      - completionDate
-      - disabled
-      type: object
-      additionalProperties: false
-    PaginatedResponse_MonitoredComputer_:
-      properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/MonitoredComputer'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    VendorAuthenticationMethod:
-      description: 'The authentication method a vendor uses:
-
-        - AUTH_0: The vendor authenticates using Auth0
-
-        - AZURE_AD: The vendor authenticates using Azure Active Directory
-
-        - G_SUITE: The vendor authenticates using Google Workspace
-
-        - O_AUTH: The vendor authenticates using OAuth
-
-        - O365: The vendor authenticates using Office 365
-
-        - OKTA: The vendor authenticates using Okta
-
-        - ONE_LOGIN: The vendor authenticates using OneLogin
-
-        - OWA: The vendor authenticates using OWA
-
-        - SSO: The vendor authenticates using SSO
-
-        - USERNAME_PASSWORD: The vendor authenticates using usernames and passwords'
-      enum:
-      - AUTH_0
-      - AZURE_AD
-      - GOOGLE_WORKSPACE
-      - O_AUTH
-      - O365
-      - OKTA
-      - ONE_LOGIN
-      - OWA
-      - SSO
-      - USERNAME_PASSWORD
-      type: string
-    VulnerableAssetType:
-      type: string
-      enum:
-      - SERVER
-      - SERVERLESS_FUNCTION
-      - CONTAINER
-      - CONTAINER_REPOSITORY
-      - CONTAINER_REPOSITORY_IMAGE
-      - CODE_REPOSITORY
-      - MANIFEST_FILE
-      - WORKSTATION
-      description: VulnerableAssetType describes the types of assets a vulnerability is on.
-    Comment:
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the comment
-        auditEvidenceId:
-          type: string
-          description: The unique identifier for the audit evidence related to the comment.
-        text:
-          type: string
-          description: The comment message
-        creationDate:
-          type: string
-          format: date-time
-          description: When the comment was created
-        modificationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the comment was updated
-        deletionDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the comment was deleted
-        email:
-          type:
-          - string
-          - 'null'
-          description: The email of the comment author. This acts as a unique identifier to map users between Vanta and external systems.
-      required:
-      - id
-      - auditEvidenceId
-      - text
-      - creationDate
-      - modificationDate
-      - deletionDate
-      - email
       type: object
       additionalProperties: false
     Vulnerability:
@@ -3682,63 +2956,460 @@ components:
       - deactivateMetadata
       type: object
       additionalProperties: false
-    LeaveStatus:
-      description: User can be active or upcoming leave period
-      enum:
-      - ACTIVE
-      - UPCOMING
-      type: string
-    PaginatedResponse_Evidence_:
+    KeyValuePair:
       properties:
-        results:
-          properties:
-            data:
-              items:
-                $ref: '#/components/schemas/Evidence'
-              type: array
-            pageInfo:
-              $ref: '#/components/schemas/PageInfo'
-          required:
-          - data
-          - pageInfo
-          type: object
+        key:
+          type: string
+          description: Key of key-value pair.
+        value:
+          type: string
+          description: Value of key-value pair.
       required:
-      - results
+      - key
+      - value
       type: object
       additionalProperties: false
-    PageInfo:
-      description: Provides information about the pagination of a dataset.
+    VulnerabilityRemediation:
       properties:
-        endCursor:
+        id:
+          type: string
+          description: Unique identifier for the remediation.
+        vulnerabilityId:
+          type: string
+          description: Unique identifier for the vulnerability that the remediation is for.
+        vulnerableAssetId:
+          type: string
+          description: Unique identifier for the vulnerable asset that the remediation is for.
+        severity:
+          type: string
+          description: Severity of the vulnerability.
+        detectedDate:
           type:
           - string
           - 'null'
-          description: The cursor that points to the end of the current page, or null if there is no such cursor.
-        hasNextPage:
-          type: boolean
-          description: Indicates if there is another page after the current page.
-        hasPreviousPage:
-          type: boolean
-          description: Indicates if there is a page before the current page.
-        startCursor:
+          format: date-time
+          description: Date when the vulnerability was first detected.
+        slaDeadlineDate:
           type:
           - string
           - 'null'
-          description: The cursor that points to the start of the current page, or null if there is no such cursor.
+          format: date-time
+          description: Date when the vulnerability should be remediated by.
+        remediationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date when the vulnerability was remediated.
       required:
-      - endCursor
-      - hasNextPage
-      - hasPreviousPage
-      - startCursor
+      - id
+      - vulnerabilityId
+      - vulnerableAssetId
+      - severity
+      - detectedDate
+      - slaDeadlineDate
+      - remediationDate
       type: object
       additionalProperties: false
-    ExternalFindingSeverityType:
-      type: string
+    Comment:
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the comment
+        auditEvidenceId:
+          type: string
+          description: The unique identifier for the audit evidence related to the comment.
+        text:
+          type: string
+          description: The comment message
+        creationDate:
+          type: string
+          format: date-time
+          description: When the comment was created
+        modificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the comment was updated
+        deletionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the comment was deleted
+        email:
+          type:
+          - string
+          - 'null'
+          description: The email of the comment author. This acts as a unique identifier to map users between Vanta and external systems.
+      required:
+      - id
+      - auditEvidenceId
+      - text
+      - creationDate
+      - modificationDate
+      - deletionDate
+      - email
+      type: object
+      additionalProperties: false
+    ExternalFindingSeverity:
+      description: ExternalFindingSeverity describes the severity of an external finding (Vulnerability or Security Alert)
       enum:
       - CRITICAL
       - HIGH
       - LOW
       - MEDIUM
+      type: string
+    AcceptPoliciesTaskSummary:
+      description: Policy acceptance details for a person.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.ACCEPT_POLICIES'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+        unacceptedPolicies:
+          items:
+            properties:
+              name:
+                type: string
+            required:
+            - name
+            type: object
+          type: array
+          description: Unaccepted policies that are relevant to the person.
+        acceptedPolicies:
+          items:
+            properties:
+              name:
+                type: string
+            required:
+            - name
+            type: object
+          type: array
+          description: Accepted policies that are relevant to the person.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      - unacceptedPolicies
+      - acceptedPolicies
+      type: object
+      additionalProperties: false
+    Control:
+      properties:
+        id:
+          type: string
+          description: The control's unique ID.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: The control's external ID.
+        name:
+          type: string
+          description: The control's name.
+        description:
+          type: string
+          description: The control's description.
+        source:
+          $ref: '#/components/schemas/ControlSource'
+          description: The control's source, either "VANTA" or "CUSTOM".
+        domains:
+          items:
+            type: string
+          type: array
+          description: The security domains that the control belongs to.
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/Owner'
+          description: The control's owner.
+        role:
+          type:
+          - string
+          - 'null'
+          description: The control's GDPR role, if the control is a GDPR control.
+        customFields:
+          items:
+            $ref: '#/components/schemas/CustomField'
+          type: array
+          description: The control's custom field values, if control custom fields is included in your Vanta instance.
+      required:
+      - id
+      - externalId
+      - name
+      - description
+      - source
+      - domains
+      - owner
+      - customFields
+      type: object
+      additionalProperties: false
+    OperatingSystem:
+      description: The computer's operating system type and version.
+      properties:
+        type:
+          $ref: '#/components/schemas/OperatingSystemType'
+          description: The type of the operating system.
+        version:
+          type:
+          - string
+          - 'null'
+          description: The version of the operating system.
+      required:
+      - type
+      - version
+      type: object
+      additionalProperties: false
+    InstallDeviceMonitoringTaskSummary:
+      description: Task summary for installing device monitoring.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.INSTALL_DEVICE_MONITORING'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      type: object
+      additionalProperties: false
+    Owner:
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the person.
+        displayName:
+          type: string
+          description: Name of the person that is shown in product.
+        emailAddress:
+          type: string
+          description: Email address of the person.
+      required:
+      - id
+      - displayName
+      - emailAddress
+      type: object
+      additionalProperties: false
+    CurrencyCode:
+      enum:
+      - ARS
+      - AUD
+      - BRL
+      - CAD
+      - COP
+      - CZK
+      - DKK
+      - EUR
+      - GBP
+      - ILS
+      - INR
+      - JPY
+      - MXN
+      - NOK
+      - NZD
+      - PHP
+      - PKR
+      - PLN
+      - RSD
+      - SEK
+      - SGD
+      - UAH
+      - USD
+      - ZAR
+      type: string
+    AuditEvidenceUpdateInput:
+      properties:
+        statusUpdate:
+          properties:
+            auditorEmail:
+              type: string
+              description: Email of the auditor who changed the state
+            stateTransition:
+              $ref: '#/components/schemas/AuditorEnabledStateTransition'
+              description: State change for audit evidence
+          required:
+          - auditorEmail
+          - stateTransition
+          type: object
+      type: object
+      additionalProperties: false
+    CompleteOffboardingCustomTasksTaskSummary:
+      description: Task summary for completing all offboarding custom tasks.
+      properties:
+        taskType:
+          $ref: '#/components/schemas/TaskType.COMPLETE_CUSTOM_OFFBOARDING_TASKS'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the task.
+        completionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the task was completed.
+        disabled:
+          properties:
+            date:
+              type: string
+              format: date-time
+            reason:
+              type:
+              - string
+              - 'null'
+          required:
+          - date
+          - reason
+          type:
+          - object
+          - 'null'
+          description: If the task is disabled, the reason and date when it was disabled.
+        incompleteCustomOffboardingTasks:
+          items:
+            $ref: '#/components/schemas/CustomTask'
+          type: array
+          description: Incomplete custom tasks that are relevant given a person's requirements.
+        completedCustomOffboardingTasks:
+          items:
+            $ref: '#/components/schemas/CustomTask'
+          type: array
+          description: Custom tasks that have been completed and are relevant given a person's current requirements.
+      required:
+      - taskType
+      - status
+      - dueDate
+      - completionDate
+      - disabled
+      - incompleteCustomOffboardingTasks
+      - completedCustomOffboardingTasks
+      type: object
+      additionalProperties: false
+    ComputerStatus:
+      description: The a status check for a computer. Representation for screenlock, diskEncryption, passwordManager, and antivirusInstallation.
+      properties:
+        outcome:
+          $ref: '#/components/schemas/ComputerStatusOutcome'
+          description: The outcome of the status check.
+      required:
+      - outcome
+      type: object
+      additionalProperties: false
+    PersonInfoSourceType.VANTA:
+      enum:
+      - VANTA
+      type: string
+    VulnerableAsset:
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the vulnerable asset.
+        name:
+          type: string
+          description: Display name of the vulnerable asset.
+        assetType:
+          $ref: '#/components/schemas/VulnerableAssetType'
+          description: 'Type of the vulnerable asset.
+
+            Possible values: CODE_REPOSITORY, CONTAINER_REPOSITORY, CONTAINER_REPOSITORY_IMAGE, MANIFEST_FILE, SERVER, SERVERLESS_FUNCTION, WORKSTATION.'
+        hasBeenScanned:
+          type: boolean
+          description: Whether the vulnerable asset has been scanned.
+        imageScanTag:
+          type:
+          - string
+          - 'null'
+          description: Only relevant for container repositories. This field sets the container image tag that vulnerabilities will be retrieved for. If null, the latest image will be retrieved.
+        scanners:
+          items:
+            $ref: '#/components/schemas/VulnerableAssetScanner'
+          type: array
+          description: The integrations that are scanning this vulnerable asset.
+      required:
+      - id
+      - name
+      - assetType
+      - hasBeenScanned
+      - imageScanTag
+      - scanners
+      type: object
+      additionalProperties: false
+    VulnerableAssetType:
+      type: string
+      enum:
+      - SERVER
+      - SERVERLESS_FUNCTION
+      - CONTAINER
+      - CONTAINER_REPOSITORY
+      - CONTAINER_REPOSITORY_IMAGE
+      - CODE_REPOSITORY
+      - MANIFEST_FILE
+      - WORKSTATION
+      description: VulnerableAssetType describes the types of assets a vulnerability is on.
     EmploymentStatus:
       description: 'The employment status of a person:
 
@@ -3757,6 +3428,335 @@ components:
       - ON_LEAVE
       - INACTIVE
       - FORMER
+      type: string
+    MonitoredComputer:
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the monitored computer.
+        integrationId:
+          type: string
+          description: Hard-coded enums for Vanta-built integrations or application IDs for 3rd-party-built integrations.
+        lastCheckDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date of the computer's most recent report.
+        screenlock:
+          $ref: '#/components/schemas/ComputerStatus'
+          description: Whether or not the computer has screenlock enabled.
+        diskEncryption:
+          $ref: '#/components/schemas/ComputerStatus'
+          description: Whether or not the computer's hard drive is encrypted.
+        passwordManager:
+          $ref: '#/components/schemas/ComputerStatus'
+          description: Whether or not the computer has a password manager installed.
+        antivirusInstallation:
+          $ref: '#/components/schemas/ComputerStatus'
+          description: Whether or not the computer has antivirus software installed.
+        operatingSystem:
+          allOf:
+          - $ref: '#/components/schemas/OperatingSystem'
+          description: The computer's operating system name and version.
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/Owner'
+          description: The name, unique identifier, and email address of the computer's owner.
+        serialNumber:
+          type:
+          - string
+          - 'null'
+          description: The serial number of the computer. This value may be null if it is not reported by the device.
+        udid:
+          type:
+          - string
+          - 'null'
+          description: The universal device id of the computer.
+      required:
+      - id
+      - integrationId
+      - lastCheckDate
+      - screenlock
+      - diskEncryption
+      - passwordManager
+      - antivirusInstallation
+      - operatingSystem
+      - owner
+      - serialNumber
+      - udid
+      type: object
+      additionalProperties: false
+    CreateCustomEvidenceRequestInput:
+      properties:
+        controlIds:
+          items:
+            type: string
+          type: array
+          description: A set of controls, referenced by id, to map the evidence to
+        title:
+          type: string
+          description: Title for the evidence request
+        description:
+          type: string
+          description: Description for the evidence request
+        cadence:
+          $ref: '#/components/schemas/RecurrenceDuration'
+          description: Renewal cadence
+        reminderWindow:
+          $ref: '#/components/schemas/RecurrenceDuration'
+          description: Duration representing when to send notifications, relative to renewal date
+        isRestricted:
+          type: boolean
+          description: Whether this document contains sensitive data and needs more restrictive read access
+        auditorEmail:
+          type: string
+          description: Email of the auditor who created the custom evidence request.
+      required:
+      - controlIds
+      - title
+      - description
+      - cadence
+      - reminderWindow
+      - isRestricted
+      - auditorEmail
+      type: object
+      additionalProperties: false
+    CreateCustomControlInput:
+      properties:
+        externalId:
+          type: string
+          description: The external id of the control.
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the control.
+        description:
+          type: string
+          description: The description of the control.
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The effective date of the control.
+        category:
+          $ref: '#/components/schemas/ControlDomain'
+          description: The category of the control. See the ControlDomain enum for possible values.
+        sections:
+          items:
+            $ref: '#/components/schemas/FrameworkSection'
+          type:
+          - array
+          - 'null'
+          description: Framework sections that the control should be mapped to.
+        role:
+          allOf:
+          - $ref: '#/components/schemas/GdprRole'
+          description: 'The GDPR role of the control, which specifies whether the data is being "collected" or "processed". See the GdprRole enum for possible values.
+
+            This field should only be included for controls that are to be mapped to the GDPR framework.'
+      required:
+      - externalId
+      - name
+      - description
+      - effectiveDate
+      - category
+      type: object
+      additionalProperties: false
+    VulnerableAssetScanner:
+      properties:
+        resourceId:
+          type: string
+          description: The scanned asset's Vanta resource id.
+        integrationId:
+          type: string
+          description: Integration that the the vulnerable asset is scanned by.
+        imageDigest:
+          type:
+          - string
+          - 'null'
+          description: Digest of the scanned container image.
+        imagePushedAtDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Push date of the scanned container image.
+        imageTags:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: Tags of the scanned container image.
+        assetTags:
+          items:
+            $ref: '#/components/schemas/KeyValuePair'
+          type:
+          - array
+          - 'null'
+          description: Tags of the scanned asset.
+        parentAccountOrOrganization:
+          type:
+          - string
+          - 'null'
+          description: The parent account or organization of the scanned asset.
+        biosUuid:
+          type: string
+          description: BIOS UUID of the scanned asset.
+        ipv4s:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: IPV4s of the scanned asset.
+        ipv6s:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: IPV6s of the scanned asset.
+        macAddresses:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: Mac addresses of the scanned asset.
+        hostnames:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: Host names of the scanned asset.
+        fqdns:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: fqdns of the scanned asset.
+        operatingSystems:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+          description: Operating systems of the scanned asset.
+        targetId:
+          type:
+          - string
+          - 'null'
+          description: The asset's identifier code.
+      required:
+      - resourceId
+      - integrationId
+      - imageDigest
+      - imagePushedAtDate
+      - imageTags
+      - assetTags
+      - parentAccountOrOrganization
+      - biosUuid
+      - ipv4s
+      - ipv6s
+      - macAddresses
+      - hostnames
+      - fqdns
+      - operatingSystems
+      - targetId
+      type: object
+      additionalProperties: false
+    PaginatedResponse_VulnerableAsset_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/VulnerableAsset'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    PersonInfoSource:
+      anyOf:
+      - $ref: '#/components/schemas/VantaBasedPersonInfoSource'
+      - $ref: '#/components/schemas/ScimBasedPersonInfoSource'
+      - $ref: '#/components/schemas/IntegrationBasedPersonInfoSource'
+      description: The source of the person's information.
+    PaginatedResponse_Vulnerability_:
+      properties:
+        results:
+          properties:
+            data:
+              items:
+                $ref: '#/components/schemas/Vulnerability'
+              type: array
+            pageInfo:
+              $ref: '#/components/schemas/PageInfo'
+          required:
+          - data
+          - pageInfo
+          type: object
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    ControlDomain:
+      enum:
+      - ARTIFICIAL_&_AUTONOMOUS_TECHNOLOGY
+      - ASSET_MANAGEMENT
+      - BUSINESS_CONTINUITY_&_DISASTER_RECOVERY
+      - CAPACITY_&_PERFORMANCE_PLANNING
+      - CHANGE_MANAGEMENT
+      - CLOUD_SECURITY
+      - COMPLIANCE
+      - CONFIGURATION_MANAGEMENT
+      - CONTINUOUS_MONITORING
+      - CRYPTOGRAPHIC_PROTECTIONS
+      - DATA_CLASSIFICATION_&_HANDLING
+      - EMBEDDED_TECHNOLOGY
+      - ENDPOINT_SECURITY
+      - HUMAN_RESOURCES_SECURITY
+      - IDENTIFICATION_&_AUTHENTICATION
+      - INCIDENT_RESPONSE
+      - INFORMATION_ASSURANCE
+      - MAINTENANCE
+      - MOBILE_DEVICE_MANAGEMENT
+      - NETWORK SECURITY
+      - PHYSICAL_&_ENVIRONMENTAL_SECURITY
+      - PRIVACY
+      - PROJECT_&_RESOURCE MANAGEMENT
+      - RISK_MANAGEMENT
+      - SECURE_ENGINEERING_&_ARCHITECTURE
+      - SECURITY_AWARENESS_&_TRAINING
+      - SECURITY_OPERATIONS
+      - SECURITY_&_PRIVACY_GOVERNANCE
+      - TECHNOLOGY_DEVELOPMENT_&_ACQUISITION
+      - THIRD-PARTY_MANAGEMENT
+      - THREAT_MANAGEMENT
+      - VULNERABILITY_&_PATCH_MANAGEMENT
+      - WEB_SECURITY
+      - ADMINISTRATIVE
+      - PHYSICAL
+      - TECHNICAL
+      - BASIC
+      - DERIVED
+      type: string
+    LeaveStatus:
+      description: User can be active or upcoming leave period
+      enum:
+      - ACTIVE
+      - UPCOMING
       type: string
   securitySchemes:
     oauth:

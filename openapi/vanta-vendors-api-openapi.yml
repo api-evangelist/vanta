@@ -137,69 +137,32 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    VendorListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vendor'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-    UpdateVendorRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Vendor company name
-        url:
-          type: string
-          format: uri
-          description: Vendor website URL
-        riskLevel:
-          type: string
-          enum:
-          - CRITICAL
-          - HIGH
-          - MEDIUM
-          - LOW
-          description: Inherent risk level
-        reviewStatus:
-          type: string
-          enum:
-          - NOT_STARTED
-          - IN_PROGRESS
-          - APPROVED
-          - REJECTED
-          description: Security review status
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
     Vendor:
       type: object
       properties:
@@ -254,6 +217,46 @@ components:
           format: date
           nullable: true
           description: Date of next scheduled security review
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    UpdateVendorRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Vendor company name
+        url:
+          type: string
+          format: uri
+          description: Vendor website URL
+        riskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          description: Inherent risk level
+        reviewStatus:
+          type: string
+          enum:
+          - NOT_STARTED
+          - IN_PROGRESS
+          - APPROVED
+          - REJECTED
+          description: Security review status
     CreateVendorRequest:
       type: object
       required:
@@ -278,31 +281,28 @@ components:
         description:
           type: string
           description: Vendor description and use case
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    VendorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
   parameters:
     pageSize:
       name: pageSize

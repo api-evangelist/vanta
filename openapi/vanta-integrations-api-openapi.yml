@@ -67,16 +67,70 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    IntegrationListResponse:
+    CreateCustomResourceRequest:
+      type: object
+      required:
+      - resourceType
+      - resourceId
+      - data
+      properties:
+        resourceType:
+          type: string
+          description: Custom resource type identifier
+        resourceId:
+          type: string
+          description: Unique identifier for this resource instance
+        data:
+          type: object
+          additionalProperties: true
+          description: Resource-type-specific data fields
+        displayName:
+          type: string
+          description: Human-readable name for the resource
+    Integration:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
+        id:
+          type: string
+          description: Unique integration identifier
+        name:
+          type: string
+          description: Integration name
+        type:
+          type: string
+          description: Integration type (GitHub, AWS, GCP, Jira, etc.)
+        status:
+          type: string
+          enum:
+          - CONNECTED
+          - DISCONNECTED
+          - ERROR
+          description: Current connection status
+        lastSyncAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Last successful sync timestamp
     Error:
       type: object
       properties:
@@ -91,19 +145,6 @@ components:
           items:
             type: string
           description: Additional error details
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
     CustomResource:
       type: object
       properties:
@@ -132,50 +173,28 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    Integration:
+    IntegrationListResponse:
       type: object
       properties:
-        id:
-          type: string
-          description: Unique integration identifier
-        name:
-          type: string
-          description: Integration name
-        type:
-          type: string
-          description: Integration type (GitHub, AWS, GCP, Jira, etc.)
-        status:
-          type: string
-          enum:
-          - CONNECTED
-          - DISCONNECTED
-          - ERROR
-          description: Current connection status
-        lastSyncAt:
-          type: string
-          format: date-time
-          nullable: true
-          description: Last successful sync timestamp
-    CreateCustomResourceRequest:
-      type: object
-      required:
-      - resourceType
-      - resourceId
-      - data
-      properties:
-        resourceType:
-          type: string
-          description: Custom resource type identifier
-        resourceId:
-          type: string
-          description: Unique identifier for this resource instance
         data:
-          type: object
-          additionalProperties: true
-          description: Resource-type-specific data fields
-        displayName:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
           type: string
-          description: Human-readable name for the resource
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
   parameters:
     pageSize:
       name: pageSize
@@ -192,25 +211,6 @@ components:
       schema:
         type: string
       description: Cursor for pagination — start from the item following this cursor
-  responses:
-    RateLimited:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     OAuth2:
       type: oauth2
