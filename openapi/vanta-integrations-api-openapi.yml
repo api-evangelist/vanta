@@ -67,26 +67,71 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    CustomResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Vanta-generated resource identifier
+        resourceType:
+          type: string
+          description: Custom resource type
+        resourceId:
+          type: string
+          description: External resource identifier
+        displayName:
+          type: string
+          nullable: true
+          description: Human-readable resource name
+        data:
+          type: object
+          additionalProperties: true
+          description: Resource data fields
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    IntegrationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
     CreateCustomResourceRequest:
       type: object
       required:
@@ -131,71 +176,32 @@ components:
           format: date-time
           nullable: true
           description: Last successful sync timestamp
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    CustomResource:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Vanta-generated resource identifier
-        resourceType:
-          type: string
-          description: Custom resource type
-        resourceId:
-          type: string
-          description: External resource identifier
-        displayName:
-          type: string
-          nullable: true
-          description: Human-readable resource name
-        data:
-          type: object
-          additionalProperties: true
-          description: Resource data fields
-        createdAt:
-          type: string
-          format: date-time
-          description: Creation timestamp
-        updatedAt:
-          type: string
-          format: date-time
-          description: Last update timestamp
-    IntegrationListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
     pageSize:
       name: pageSize
       in: query
@@ -205,12 +211,6 @@ components:
         maximum: 100
         default: 10
       description: Number of items to return per page (1-100)
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
   securitySchemes:
     OAuth2:
       type: oauth2
