@@ -68,6 +68,59 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique integration identifier
+        name:
+          type: string
+          description: Integration name
+        type:
+          type: string
+          description: Integration type (GitHub, AWS, GCP, Jira, etc.)
+        status:
+          type: string
+          enum:
+          - CONNECTED
+          - DISCONNECTED
+          - ERROR
+          description: Current connection status
+        lastSyncAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Last successful sync timestamp
+    IntegrationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    CreateCustomResourceRequest:
+      type: object
+      required:
+      - resourceType
+      - resourceId
+      - data
+      properties:
+        resourceType:
+          type: string
+          description: Custom resource type identifier
+        resourceId:
+          type: string
+          description: Unique identifier for this resource instance
+        data:
+          type: object
+          additionalProperties: true
+          description: Resource-type-specific data fields
+        displayName:
+          type: string
+          description: Human-readable name for the resource
     PageInfo:
       type: object
       properties:
@@ -109,15 +162,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    IntegrationListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
     Error:
       type: object
       properties:
@@ -132,59 +176,25 @@ components:
           items:
             type: string
           description: Additional error details
-    CreateCustomResourceRequest:
-      type: object
-      required:
-      - resourceType
-      - resourceId
-      - data
-      properties:
-        resourceType:
-          type: string
-          description: Custom resource type identifier
-        resourceId:
-          type: string
-          description: Unique identifier for this resource instance
-        data:
-          type: object
-          additionalProperties: true
-          description: Resource-type-specific data fields
-        displayName:
-          type: string
-          description: Human-readable name for the resource
-    Integration:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique integration identifier
-        name:
-          type: string
-          description: Integration name
-        type:
-          type: string
-          description: Integration type (GitHub, AWS, GCP, Jira, etc.)
-        status:
-          type: string
-          enum:
-          - CONNECTED
-          - DISCONNECTED
-          - ERROR
-          description: Current connection status
-        lastSyncAt:
-          type: string
-          format: date-time
-          nullable: true
-          description: Last successful sync timestamp
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
   responses:
     BadRequest:
       description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
       content:
         application/json:
           schema:
@@ -195,22 +205,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     OAuth2:
       type: oauth2

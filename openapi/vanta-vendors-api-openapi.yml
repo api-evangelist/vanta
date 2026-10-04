@@ -137,7 +137,56 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
   schemas:
+    CreateVendorRequest:
+      type: object
+      required:
+      - name
+      - riskLevel
+      properties:
+        name:
+          type: string
+          description: Vendor company name
+        url:
+          type: string
+          format: uri
+          description: Vendor website URL
+        riskLevel:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+          description: Inherent risk level
+        description:
+          type: string
+          description: Vendor description and use case
+    VendorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       type: object
       properties:
@@ -151,29 +200,6 @@ components:
         hasNextPage:
           type: boolean
           description: Whether there are more items after this page
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    VendorListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vendor'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
     UpdateVendorRequest:
       type: object
       properties:
@@ -200,30 +226,20 @@ components:
           - APPROVED
           - REJECTED
           description: Security review status
-    CreateVendorRequest:
+    Error:
       type: object
-      required:
-      - name
-      - riskLevel
       properties:
-        name:
+        error:
           type: string
-          description: Vendor company name
-        url:
+          description: Error code
+        message:
           type: string
-          format: uri
-          description: Vendor website URL
-        riskLevel:
-          type: string
-          enum:
-          - CRITICAL
-          - HIGH
-          - MEDIUM
-          - LOW
-          description: Inherent risk level
-        description:
-          type: string
-          description: Vendor description and use case
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
     Vendor:
       type: object
       properties:
@@ -285,8 +301,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
       content:
         application/json:
           schema:
@@ -297,28 +313,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
+    RateLimited:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
   securitySchemes:
     OAuth2:
       type: oauth2
