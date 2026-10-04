@@ -231,6 +231,9 @@ apis:
   - type: FAQ
     url: https://developer.vanta.com/docs/faq
 common:
+  - type: CapabilityMap
+    url: capabilities/vanta-capability-edges.yml
+    name: Vanta Business Capability Map
   - type: Website
     url: https://www.vanta.com/
   - type: PostmanWorkspace

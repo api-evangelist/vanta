@@ -1,0 +1,46 @@
+slug: vanta
+provider: Vanta
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Vulnerabilities
+  spec_file: vanta-vulnerabilities-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.95
+  evidence: '"GET /v1/vulnerabilities  listVulnerabilities  Get Vulnerabilities"; "List Package Vulnerabilities";
+    "List Vulnerable Components"'
+  reason: Operations enumerate and sync vulnerabilities across endpoints, packages and components — unambiguously
+    Vulnerability Management.
+- tag: Audits
+  spec_file: vanta-audits-api-openapi.yml
+  capability_id: BC-4290.10
+  capability_id_l1: BC-4290
+  capability_name: Service Attestation Management
+  confidence: 0.7
+  evidence: GET /audits/{auditId}/evidence  ListAuditEvidence; GET /audits/{auditId}/controls  ListAuditControls;
+    CreateCustomEvidenceRequest  Create a custom evidence request for an audit
+  reason: Runs the external compliance audit workflow (evidence requests, controls, scope of people/vendors/remediations)
+    for frameworks like SOC 2 and ISO 27001, i.e. coordination of service attestations for the SaaS offering.
+    Some ambiguity with BC-140.20 Audit Execution Management, hence 0.7.
+- tag: Controls
+  spec_file: vanta-controls-api-openapi.yml
+  capability_id: BC-620.10
+  capability_id_l1: BC-620
+  capability_name: Security Strategy & Governance Management
+  confidence: 0.7
+  evidence: GET /v1/controls  listControls; GET /v1/frameworks  listFrameworks; schemas Control, Framework
+  reason: Exposes the security control set and the compliance frameworks (SOC 2, ISO 27001, HIPAA, PCI
+    DSS) they map to — security governance/GRC. Could alternatively sit under general regulatory compliance,
+    so 0.7.
