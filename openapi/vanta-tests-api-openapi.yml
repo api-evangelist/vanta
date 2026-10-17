@@ -57,37 +57,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Test:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique test identifier
-        name:
-          type: string
-          description: Test name
-        description:
-          type: string
-          description: What this test checks
-        status:
-          type: string
-          enum:
-          - PASS
-          - FAIL
-          - DISABLED
-          - NA
-          description: Current test status
-        controlId:
-          type: string
-          description: Associated control identifier
-        frameworkId:
-          type: string
-          description: Associated framework identifier
-        lastRunAt:
-          type: string
-          format: date-time
-          nullable: true
-          description: When this test was last executed
     TestListResponse:
       type: object
       properties:
@@ -124,6 +93,50 @@ components:
           items:
             type: string
           description: Additional error details
+    Test:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique test identifier
+        name:
+          type: string
+          description: Test name
+        description:
+          type: string
+          description: What this test checks
+        status:
+          type: string
+          enum:
+          - PASS
+          - FAIL
+          - DISABLED
+          - NA
+          description: Current test status
+        controlId:
+          type: string
+          description: Associated control identifier
+        frameworkId:
+          type: string
+          description: Associated framework identifier
+        lastRunAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: When this test was last executed
+  responses:
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     pageSize:
       name: pageSize
@@ -140,19 +153,6 @@ components:
       schema:
         type: string
       description: Cursor for pagination — start from the item following this cursor
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     OAuth2:
       type: oauth2

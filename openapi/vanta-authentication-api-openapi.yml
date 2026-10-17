@@ -94,14 +94,14 @@ components:
             type: string
           description: Additional error details
   responses:
-    BadRequest:
-      description: Bad request — invalid parameters or request body
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
+    BadRequest:
+      description: Bad request — invalid parameters or request body
       content:
         application/json:
           schema:

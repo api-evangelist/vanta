@@ -77,6 +77,22 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  parameters:
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
   schemas:
     Framework:
       type: object
@@ -103,15 +119,33 @@ components:
         passingControlCount:
           type: integer
           description: Number of passing controls
-    ControlListResponse:
+    PageInfo:
       type: object
       properties:
-        data:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
           type: array
           items:
-            $ref: '#/components/schemas/Control'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
+            type: string
+          description: Additional error details
     Control:
       type: object
       properties:
@@ -145,19 +179,15 @@ components:
         passingTestCount:
           type: integer
           description: Number of passing tests
-    PageInfo:
+    ControlListResponse:
       type: object
       properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Control'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
     FrameworkListResponse:
       type: object
       properties:
@@ -167,45 +197,15 @@ components:
             $ref: '#/components/schemas/Framework'
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-  parameters:
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
   responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid access token
+    RateLimited:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
+    Unauthorized:
+      description: Unauthorized — missing or invalid access token
       content:
         application/json:
           schema:

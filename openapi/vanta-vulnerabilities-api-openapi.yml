@@ -167,22 +167,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-      description: Number of items to return per page (1-100)
-    pageCursor:
-      name: pageCursor
-      in: query
-      schema:
-        type: string
-      description: Cursor for pagination — start from the item following this cursor
   schemas:
     Vulnerability:
       type: object
@@ -238,61 +222,6 @@ components:
           items:
             type: string
           description: List of affected resource IDs
-    SyncResponse:
-      type: object
-      properties:
-        synced:
-          type: integer
-          description: Number of records synced
-        message:
-          type: string
-          description: Sync result message
-    PageInfo:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items returned
-        nextPageCursor:
-          type: string
-          nullable: true
-          description: Cursor for the next page of results
-        hasNextPage:
-          type: boolean
-          description: Whether there are more items after this page
-    VulnerabilityListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error description
-        details:
-          type: array
-          items:
-            type: string
-          description: Additional error details
-    ConnectorListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
     ApiEndpointVulnerabilitySync:
       type: object
       properties:
@@ -323,9 +252,64 @@ components:
       required:
       - resourceId
       - vulnerabilities
+    SyncResponse:
+      type: object
+      properties:
+        synced:
+          type: integer
+          description: Number of records synced
+        message:
+          type: string
+          description: Sync result message
+    ConnectorListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items returned
+        nextPageCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page of results
+        hasNextPage:
+          type: boolean
+          description: Whether there are more items after this page
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error description
+        details:
+          type: array
+          items:
+            type: string
+          description: Additional error details
+    VulnerabilityListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
   responses:
-    BadRequest:
-      description: Bad request — invalid parameters or request body
+    RateLimited:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
@@ -336,12 +320,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded
+    BadRequest:
+      description: Bad request — invalid parameters or request body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of items to return per page (1-100)
+    pageCursor:
+      name: pageCursor
+      in: query
+      schema:
+        type: string
+      description: Cursor for pagination — start from the item following this cursor
   securitySchemes:
     OAuth2:
       type: oauth2
