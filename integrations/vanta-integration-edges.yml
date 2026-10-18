@@ -2,7 +2,9 @@ generated: '2026-10-14'
 method: searched
 checked:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - okta/integrations/okta-integration-edges.yml
+- zoom/integrations/zoom-integration-edges.yml
 source:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
 - okta/integrations/okta-integration-edges.yml
@@ -47,3 +49,39 @@ edges:
   - DEACTIVATE
   - SAML
   - UPDATE
+- partner_name: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200005544
+  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+  apps:
+  - Vanta
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Microsoft Teams app
+  publisher_verified:
+  - Microsoft 365 Publisher Attestation
+- partner_name: Zoom (own)
+  partner: zoom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.zoom.us/apps/HYWjTIi-SfSV_JcmNb4ZvQ
+  mirror_of: zoom/integrations/zoom-integration-edges.yml
+  apps:
+  - Vanta
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Zoom app
