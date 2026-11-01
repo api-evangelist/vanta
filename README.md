@@ -1,4 +1,4 @@
-# Vanta (vanta)
+# Vanta
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,100 +66,207 @@
 
 Vanta is a trust management platform that automates security compliance for frameworks including SOC 2, ISO 27001, HIPAA, PCI DSS, and GDPR. The Vanta API enables organizations to programmatically manage their compliance posture, automate security monitoring, manage vulnerabilities, track controls, manage vendors, and integrate with existing tools and workflows.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/apis.yml)
+**Areas:** Cybersecurity · Compliance · Security · Governance · Risk Management
 
-## Scope
+## Vanta on APIs.io
 
-- **Access:** 3rd-Party
+Everything profiled for Vanta is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/vanta/](https://apis.io/providers/vanta/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Cybersecurity
-- Compliance
-- Security
-- Governance
-- Risk Management
+- [Vanta Auditors API](https://apis.io/apis/vanta/vanta-auditors-api/) — The Auditors API from Vanta — 1 operation(s) for auditors.
+- [Vanta Audits API](https://apis.io/apis/vanta/vanta-audits-api/) — The Audits API from Vanta — 15 operation(s) for audits.
+- [Vanta Authentication API](https://apis.io/apis/vanta/vanta-authentication-api/) — OAuth 2.0 token management
+- [Vanta Controls API](https://apis.io/apis/vanta/vanta-controls-api/) — Compliance controls and framework management
+- [Vanta Documents API](https://apis.io/apis/vanta/vanta-documents-api/) — Compliance evidence document management
+- [Vanta Integrations API](https://apis.io/apis/vanta/vanta-integrations-api/) — Integration configuration and status management
+- [Vanta Resources API](https://apis.io/apis/vanta/vanta-resources-api/) — Monitored resource management and scoping
+- [Vanta Tests API](https://apis.io/apis/vanta/vanta-tests-api/) — Automated test results and evidence
+- [Vanta Users API](https://apis.io/apis/vanta/vanta-users-api/) — User and personnel management
+- [Vanta Vendors API](https://apis.io/apis/vanta/vanta-vendors-api/) — Third-party vendor security review management
+- [Vanta Vulnerabilities API](https://apis.io/apis/vanta/vanta-vulnerabilities-api/) — Vulnerability tracking and remediation management
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-14
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Vanta API
+Model Context Protocol servers that expose the API to agents.
 
-The Vanta REST API enables programmatic access to compliance, security monitoring, vulnerability management, personnel management, vendor management, and custom integration capabilities. The API uses OAuth 2.0 authentication and returns JSON responses. Rate limits range from 5 to 250 requests per minute depending on endpoint category.
+- [vanta](https://apis.io/servers/vanta/vanta/)
 
-- **Human URL:** [https://developer.vanta.com/docs/vanta-api-overview](https://developer.vanta.com/docs/vanta-api-overview)
-- **Base URL:** `https://api.vanta.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Cybersecurity
-- Compliance
-- Security
-- Governance
-- Risk Management
+- [Vanta Agentic Access](https://apis.io/agentic-access/vanta/vanta-agentic-access/)
 
-#### Properties
+#### JSON Schema (3)
 
-- [Documentation](https://developer.vanta.com/docs/vanta-api-overview)
-- [Authentication](https://developer.vanta.com/docs/api-access-setup)
-- [F A Q](https://developer.vanta.com/docs/faq)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vanta-auditor.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vanta-auditor.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/vanta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vanta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-### Vanta Auditor API
+- [Vanta Control](https://apis.io/schemas/vanta/vanta-control/)
+- [Vanta Vendor](https://apis.io/schemas/vanta/vanta-vendor/)
+- [Vanta Vulnerability](https://apis.io/schemas/vanta/vanta-vulnerability/)
 
-The Vanta Auditor API provides external audit firms programmatic access to customer compliance data. Auditors can query audits, vendors, monitored computers, people, vulnerabilities, evidence, controls, and comments during audit engagements.
+#### JSON Structure (2)
 
-- **Human URL:** [https://developer.vanta.com/docs/vanta-api-overview](https://developer.vanta.com/docs/vanta-api-overview)
-- **Base URL:** `https://api.vanta.com`
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Vanta Vendor Structure](https://apis.io/json-structure/vanta/vanta-vendor-structure/)
+- [Vanta Vulnerability Structure](https://apis.io/json-structure/vanta/vanta-vulnerability-structure/)
 
-- Cybersecurity
-- Compliance
-- Audit
-- Security
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://developer.vanta.com/docs/vanta-api-overview)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vanta-auditor.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vanta-auditor.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/vanta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vanta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Vanta Context](https://apis.io/jsonld/vanta/vanta-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-- [LinkedIn](https://www.linkedin.com/company/vanta-security)
-- [Portal](https://developer.vanta.com/docs/vanta-api-overview)
-- [Authentication](https://developer.vanta.com/docs/api-access-setup)
-- [Getting Started](https://developer.vanta.com/docs/vanta-first-api-request)
-- [Postman Collection](https://developer.vanta.com/docs/vanta-postman-setup) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [F A Q](https://developer.vanta.com/docs/faq)
+The provider's domain terms, defined.
+
+- [Vanta Compliance Vocabulary](https://apis.io/vocabularies/vanta/vanta-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Vanta Create Vendor Example](https://apis.io/examples/vanta/vanta-create-vendor-example/)
+- [Vanta List Computers Example](https://apis.io/examples/vanta/vanta-list-computers-example/)
+- [Vanta List Controls Example](https://apis.io/examples/vanta/vanta-list-controls-example/)
+- [Vanta List Vulnerabilities Example](https://apis.io/examples/vanta/vanta-list-vulnerabilities-example/)
+
+#### Collections (24)
+
+Postman and Open Collection request collections.
+
+- [Vanta API](https://apis.io/collections/vanta/open-vanta/)
+- [Conduct an audit](https://apis.io/collections/vanta/open-vanta-auditor/)
+- [Conduct an audit Auditors API](https://apis.io/collections/vanta/open-vanta-auditors-api/)
+- [Conduct an audit Auditors Audits API](https://apis.io/collections/vanta/open-vanta-audits-api/)
+- [Conduct an audit Auditors Authentication API](https://apis.io/collections/vanta/open-vanta-authentication-api/)
+- [Conduct an audit Auditors Controls API](https://apis.io/collections/vanta/open-vanta-controls-api/)
+- [Conduct an audit Auditors Documents API](https://apis.io/collections/vanta/open-vanta-documents-api/)
+- [Conduct an audit Auditors Integrations API](https://apis.io/collections/vanta/open-vanta-integrations-api/)
+- [Conduct an audit Auditors Resources API](https://apis.io/collections/vanta/open-vanta-resources-api/)
+- [Conduct an audit Auditors Tests API](https://apis.io/collections/vanta/open-vanta-tests-api/)
+- [Conduct an audit Auditors Users API](https://apis.io/collections/vanta/open-vanta-users-api/)
+- [Conduct an audit Auditors Vendors API](https://apis.io/collections/vanta/open-vanta-vendors-api/)
+- [Conduct an audit Auditors Vulnerabilities API](https://apis.io/collections/vanta/open-vanta-vulnerabilities-api/)
+- [Conduct an audit Auditors API](https://apis.io/collections/vanta/postman-vanta-auditors-api/)
+- [Conduct an audit Auditors Audits API](https://apis.io/collections/vanta/postman-vanta-audits-api/)
+- [Conduct an audit Auditors Authentication API](https://apis.io/collections/vanta/postman-vanta-authentication-api/)
+- [Conduct an audit Auditors Controls API](https://apis.io/collections/vanta/postman-vanta-controls-api/)
+- [Conduct an audit Auditors Documents API](https://apis.io/collections/vanta/postman-vanta-documents-api/)
+- [Conduct an audit Auditors Integrations API](https://apis.io/collections/vanta/postman-vanta-integrations-api/)
+- [Conduct an audit Auditors Resources API](https://apis.io/collections/vanta/postman-vanta-resources-api/)
+- [Conduct an audit Auditors Tests API](https://apis.io/collections/vanta/postman-vanta-tests-api/)
+- [Conduct an audit Auditors Users API](https://apis.io/collections/vanta/postman-vanta-users-api/)
+- [Conduct an audit Auditors Vendors API](https://apis.io/collections/vanta/postman-vanta-vendors-api/)
+- [Conduct an audit Auditors Vulnerabilities API](https://apis.io/collections/vanta/postman-vanta-vulnerabilities-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Vanta — jsonschema rules](https://apis.io/rules/vanta/vanta-jsonschema-spectral-rules/)
+- [Vanta API Rules](https://apis.io/rules/vanta/vanta-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Vanta Authentication](https://apis.io/security/vanta/vanta-authentication/)
+- [Vanta Domain Security](https://apis.io/security/vanta/vanta-domain-security/)
+- [Vanta Vulnerability Disclosure](https://apis.io/security/vanta/vanta-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Vanta Scopes](https://apis.io/scopes/vanta/vanta-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Vanta Plans Pricing](https://apis.io/plans/vanta/vanta-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Vanta Rate Limits](https://apis.io/rate-limits/vanta/vanta-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Vanta Finops](https://apis.io/finops/vanta/vanta-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.vanta.com/)
 - [Documentation](https://developer.vanta.com/docs/build-integrations)
-- [Documentation](https://developer.vanta.com/docs/manage-vendors)
-- [Blog](https://www.vanta.com/resources/introducing-vantas-connectors-api)
-- [Product](https://www.vanta.com/products/vanta-api)
-- [SDK](https://github.com/VantaInc/vanta-auditor-api-sdk-typescript)
-- [SDK](https://github.com/VantaInc/vanta-auditor-api-sdk-java)
-- [SDK](https://github.com/VantaInc/vanta-mcp-server)
-- [SDK](https://github.com/VantaInc/eslint-plugin-vanta)
-- [Schema](https://github.com/VantaInc/vanta-control-set)
-- [Integration](https://www.vanta.com/integrations/github)
+- [Getting started](https://developer.vanta.com/docs/vanta-first-api-request)
 - [Changelog](https://www.vanta.com/resources/new-in-vanta-april-2026)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vanta/refs/heads/main/openapi/vanta-auditor-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [L L Ms Txt](https://developer.vanta.com/llms.txt)
+- [Blog](https://www.vanta.com/resources/introducing-vantas-connectors-api)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 48.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 61.9 |
+| Contract governance | 13.6 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 66.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 39.0** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 32.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/vanta/](https://apis.io/providers/vanta/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Vanta: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/vanta/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
